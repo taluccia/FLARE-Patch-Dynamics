@@ -1,0 +1,137 @@
+---
+title: "UField  Data"
+author: "Anna Talucci"
+date: "6/3/2021"
+output: html_document
+---
+
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Overview
+
+
+## Details from xml document
+### Roots
+roots_2018_2019.csv
+When possible we measured adventitious roots to quantify the amount of SOL burned during a given fire. We did so by measuring the distance to the SOL from 1-3 adventitious roots (adventitious root height, ARH) located on each of five burned trees within each plot. In unburned plots, we measured the depth from the top of the green moss to the closest adventitious root on one to three adventitious roots per tree. In the older burn areas, we were unable to obtain ARH because the fire scar was too old and the adventitious roots were rotten and difficult to locate.
+
+**measurement**
+Adventitious root number
+Three adventitious roots were measured per tree, when possible. Measurement refers to the number of the adventitious root on a given tree.
+
+**depth_cm**
+Adventitious root depth (cm)
+In burned plots (plots with positive values), depth refers to the distance (cm) between the SOL and the adventitious roots. In unburned plots (plots with negative values), depth refers to the distance (cm) between the top of the green moss to the nearest adventitious root.
+
+
+# Pakcages
+```{r}
+library(tidyr)
+library(dplyr)
+library(stringr)
+```
+
+# Functions
+
+```{r}
+numextract <- function(string){ 
+  str_extract(string, "\\-*\\d+\\.*\\d*")
+} 
+
+
+```
+
+# Data
+
+## Sites
+```{r}
+sites = read.csv("../data/field/site_info_2018-2019.csv")
+```
+
+```{r}
+head(sites)
+```
+
+## Roots
+```{r}
+roots = read.csv("../data/field/roots_2018_2019.csv")
+```
+
+```{r}
+head(roots)
+```
+
+# Subset 
+
+## Sites
+### Create a unique ID for each point
+```{r}
+sites1 = sites %>% 
+  mutate(ID =  paste(site, burn_year, transect, plot, sep = '_')) %>%
+  dplyr::select(ID, longitude:elevation, region:plot, slope:char_percent) %>%
+  filter(burn_year>2000)
+sites1
+```
+
+
+
+##  Roots
+```{r}
+roots1 = roots %>% 
+  mutate(ID =  paste(site, burn_year, transect, plot, sep = '_')) %>%
+  filter(burn_year>2000) %>%
+  dplyr::select(ID, region:plot, burn:tree_number, measurement:depth_cm)
+
+roots1
+```
+
+
+
+### Merge data frames
+
+
+```{r}
+data = left_join(x=roots1, y=sites1, by=c("ID","region", "site", "burn_year", "transect", "plot"))
+data
+```
+
+##  Remove NA
+```{r}
+data %>% summarise_all(funs(sum(is.na(.))))
+```
+
+
+```{r}
+dplyr::filter(data,is.na(latitude)) 
+```
+
+```{r}
+data1 = data %>% 
+  drop_na(latitude)  %>%
+  filter(depth_cm!="absent") %>%
+  group_by(ID, region, site,  burn_year, transect, plot, burn, longitude, latitude) %>%
+  mutate_at(vars(depth_cm),function(x) as.numeric(as.character(x))) %>%
+  summarise(burn_depth = mean(depth_cm))
+
+data1
+```
+
+
+
+```{r}
+str(data1)
+```
+
+
+
+```{r eval=FALSE, include=FALSE}
+write.csv(data1,"../outputs/FieldSubset/Roots.csv", row.names = FALSE)
+```
+
+
+
+

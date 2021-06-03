@@ -1,0 +1,52 @@
+---
+title: "Select-Fires"
+author: "Anna Talucci"
+date: "5/27/2021"
+output: html_document
+---
+
+
+# Overview
+
+Combine all fires year shapefiles into one
+
+# Packages
+
+```{r include=FALSE}
+
+library(sf)
+library(rgdal) # geospatial data
+
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+library(dplyr)
+library(tidyr)
+
+```
+
+
+# Data
+
+```{r}
+data = st_read("../data/fires/SiberiaFires2001-2020.shp", "SiberiaFires2001-2020") 
+```
+
+```{r}
+head(data)
+```
+# Select
+
+```{r}
+select1 = data %>% filter(FireYr==2019) %>%
+  filter(EcoCode=="NST" | EcoCode=="CKMT") %>%
+  dplyr::select(IDobj, FID, FireYr, EcoCode, FireId, SizeHa_1)
+
+select1
+```
+
+
+# Write to shapefile
+```{r eval=FALSE, include=FALSE}
+st_write(select1, "../outputs/SelectFires/FiresNstCkmt2019.shp", driver="ESRI Shapefile") 
+```
+

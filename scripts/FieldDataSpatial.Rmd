@@ -1,0 +1,85 @@
+---
+title: "Field Data Spatial"
+author: "Anna Talucci"
+date: "6/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Overview
+
+# Packacges
+```{r, include=FALSE}
+library(sp) # spatial data
+library(rgdal) # geospatial data
+library(raster) # deals with rasters
+library(ggplot2)
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+library(tidyr)
+library(dplyr)
+library(latticeExtra)
+library(sf)
+```
+
+# Projections
+
+WGS 84 need for gee
+```{r}
+wgs_proj =  "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs "
+
+```
+
+Equal Area projection for russia need for buffering hotspot data
+https://gis.stackexchange.com/questions/264093/projection-for-russia-map
+
++proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs 
++proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+
+```{r}
+ea_ru = "+proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 "
+```
+
+
+# Field data
+
+```{r}
+roots = read.csv("../data/FieldSubset/Roots.csv")
+```
+
+
+# Define coordinates
+```{r}
+rt_cords = cbind(roots$longitude, roots$latitude)
+```
+
+# Create  Points  Data Frame
+```{r}
+data_pt <- SpatialPointsDataFrame(rt_cords, proj4string = CRS(wgs_proj), data = roots)
+```
+
+# Transform to Equal area projection
+```{r}
+data_pt_ea <- spTransform(data_pt, CRS(ea_ru))
+```
+
+# Convert from sp to sf
+```{r}
+data_pt_ea_sf = st_as_sf(data_pt_ea)
+```
+
+## Write to shape file
+
+Points
+```{r eval=FALSE, include=FALSE}
+st_write(data_pt_ea_sf, "../outputs/FieldSpatial/RootsPoints.shp", driver="ESRI Shapefile") 
+```
