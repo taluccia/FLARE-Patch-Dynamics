@@ -1,0 +1,89 @@
+---
+title: "Field Spatial"
+author: "Anna Talucci"
+date: "6/16/2021"
+output: html_document
+---
+
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Overview
+
+# Packacges
+```{r, include=FALSE}
+library(sp) # spatial data
+library(rgdal) # geospatial data
+library(raster) # deals with rasters
+library(ggplot2)
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+library(tidyr)
+library(dplyr)
+library(latticeExtra)
+library(sf)
+```
+
+
+Points
+```{r eval=FALSE, include=FALSE}
+roots = st_read("../data/FieldSpatial/RootsPoints.shp", "RootsPoints") 
+```
+
+
+```{r}
+head(roots)
+```
+
+```{r}
+
+roots$burn_year
+
+```
+
+# Create separate shapefiles for each year
+
+```{r}
+roots2001 = roots %>% 
+  filter(burn_year == "2001")
+
+roots2001
+```
+
+```{r}
+roots2002 = roots %>% 
+  filter(burn_year == "2002")
+
+roots2002
+```
+
+
+```{r}
+roots2003 = roots %>% 
+  filter(burn_year == "2003")
+
+roots2003
+```
+
+```{r}
+roots2015 = roots %>% 
+  filter(burn_year == "2015")
+
+roots2015
+```
+
+## Write to shapefile
+
+Points
+```{r eval=FALSE, include=FALSE}
+st_write(roots2001, "../outputs/FieldSpatial/RootsPoints2001.shp", driver="ESRI Shapefile") 
+st_write(roots2002, "../outputs/FieldSpatial/RootsPoints2002.shp", driver="ESRI Shapefile") 
+st_write(roots2003, "../outputs/FieldSpatial/RootsPoints2003.shp", driver="ESRI Shapefile") 
+st_write(roots2015, "../outputs/FieldSpatial/RootsPoints2015.shp", driver="ESRI Shapefile") 
+
+```
+
+**THE END**

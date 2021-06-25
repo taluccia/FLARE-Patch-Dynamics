@@ -1,0 +1,89 @@
+---
+title: "Roots dNBR"
+author: "Anna Talucci"
+date: "6/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Pakcages
+```{r}
+library(tidyr)
+library(dplyr)
+library(stringr)
+```
+
+
+# Data
+
+## Sites
+```{r}
+rt01 = read.csv("../data/RootsdNBR/2021-06-16_dNBRRoots2001.csv")
+rt02 = read.csv("../data/RootsdNBR/2021-06-16_dNBRRoots2002.csv")
+rt03 = read.csv("../data/RootsdNBR/2021-06-16_dNBRRoots2003.csv")
+rt15 = read.csv("../data/RootsdNBR/2021-06-16_dNBRRoots2015.csv")
+```
+
+
+```{r}
+head(rt01)
+```
+
+```{r}
+str(rt01)
+str(rt02)
+str(rt03)
+str(rt15)
+
+```
+
+
+# Select Columns
+Drop plot column because some are a factors and some are integers
+
+```{r}
+sub_rt01 = rt01 %>%dplyr::select(ID:longitude, rdnbr:transect)
+sub_rt02 = rt02 %>%dplyr::select(ID:longitude, rdnbr:transect)
+sub_rt03 = rt03 %>%dplyr::select(ID:longitude, rdnbr:transect)
+sub_rt15 = rt15 %>%dplyr::select(ID:longitude, rdnbr:transect)
+
+```
+
+# Combine Dataframes
+```{r}
+data = bind_rows(sub_rt01, sub_rt02, sub_rt03, sub_rt15) 
+
+data
+
+```
+
+# Plot
+```{r fig.height=4, fig.width=6}
+plot1 = ggplot(data = data, aes(x = burn_depth, y = dnbr, color = burn)) + 
+  geom_smooth(method="lm", se=TRUE, alpha=0.1) +
+  geom_point(size = 1) +
+  theme_bw() 
+
+plot1
+```
+```{r}
+ggsave("../figures/RootsBurnSeverity/RootsdNBR.png", plot = plot1, width = 6, height = 4, units = c("in"), dpi = 600)
+```
+
+```{r fig.height=4, fig.width=6}
+plot2 = ggplot(data = data, aes(x = burn_depth, y = rdnbr, color = burn)) + 
+  geom_smooth(method="lm", se=TRUE, alpha=0.1) +
+  geom_point(size = 1) +
+  theme_bw() 
+
+plot2
+```
+
+```{r}
+ggsave("../figures/RootsBurnSeverity/RootsRdNBR.png", plot = plot2, width = 6, height = 4, units = c("in"), dpi = 600)
+```
+**THE END**
