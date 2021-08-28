@@ -5,26 +5,58 @@ date: "8/28/2021"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+
+# Overview
+
+
+# Packages
+
+```{r include=FALSE}
+library(sp)
+library(sf)
+library(rgdal) # geospatial data
+library(raster)
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+library(dplyr)
+library(tidyr)
+library(spatialEco)
+library(ggplot2)
+library(lubridate)
+library(forcats)
 ```
 
-## R Markdown
+# Data
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+fires = st_read("../data/SiberiaFires/SiberiaFires2001-2020.shp", "SiberiaFires2001-2020") 
+```
+```{r}
+head(fires)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+# Select NST and CKMT
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+ne_fires = fires %>%
+  filter(EcoCode =="NST" | EcoCode =="CKMT")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+ne_fires2020 = fires %>%
+  filter(EcoCode =="NST" | EcoCode =="CKMT") %>%
+  filter(FireYr==2020)
+```
+
+# write to shapefile
+
+```{r}
+st_write(ne_fires, "../outputs/NESiberiaFires/NESiberiaFires2001-2020.shp", driver="ESRI Shapefile") 
+```
+
+```{r}
+st_write(ne_fires2020, "../outputs/NESiberiaFires/NESiberiaFires2020.shp", driver="ESRI Shapefile") 
+```
