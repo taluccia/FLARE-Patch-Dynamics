@@ -24,7 +24,40 @@ library(purrr)
 library(lubridate)
 library(ggplot2)
 ```
+# Define graph Theme and color Palette 
 
+##Themes
+```{r}
+lb_theme = theme_bw() + theme(legend.position = "bottom") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+
+```{r}
+comp_theme = theme_bw() + theme(legend.position = "none") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+
+```{r}
+bar_theme = theme_bw() + 
+  theme(legend.position = "none", legend.title = element_blank()) +
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black")) 
+```
+
+```{r}
+ecoPalette <- c("#b5b35c", "#556b2f")
+```
 
 # Data
 ```{r}
@@ -55,9 +88,51 @@ dplyr::mutate(unburn_m2 = as.numeric(round(count*pixArea,1))) %>%
   dplyr::mutate(unburn_ha = as.numeric(round(unburn_m2*0.0001, 1))) %>% 
   dplyr::mutate(propUnburn = as.numeric(round(unburn_ha/SIZEha, 1))) %>% 
   dplyr::select(FireYr, IDobj, EcoCode, SIZEha, count, unburn_m2, unburn_ha, propUnburn) %>%
+  mutate(SizeHa = round(SIZEha, 0)) %>% 
+  mutate(SizeKm2 = round(SIZEha/100, 1)) %>%
+  mutate(Class = ifelse(SizeHa %in% 200:499, "1",
+                  ifelse(SizeHa %in% 500:999, "2",
+                   ifelse(SizeHa %in% 1000:1999, "3",
+                       ifelse(SizeHa %in% 2000:4999, "4",
+                         ifelse(SizeHa %in% 5000:9999, "5",
+                            ifelse(SizeHa %in% 10000:19999, "6",
+                              ifelse(SizeHa %in% 20000:49999, "7",
+                                ifelse(SizeHa %in% 50000:99999, "8", "9"))))))))) %>%
+
   bind_rows(.) 
 
 data1
+```
+
+```{r}
+ggplot(data1, aes(x=EcoCode, y=propUnburn)) + 
+    geom_boxplot(fill="slateblue", alpha=0.2) + 
+    xlab("Ecozone")
+
+```
+
+```{r fig.height=4, fig.width=6}
+
+fig1 = ggplot(data1, aes(x=as.factor(Class), y=propUnburn, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("Fire Size Class") +
+      ylab("Proportion of Unburned") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+
+fig1
+```
+
+```{r}
+ggsave("../figures/PropUnburned.png", plot = fig1, width = 6, height = 4, units = c("in"), dpi = 600)
 ```
 
 
