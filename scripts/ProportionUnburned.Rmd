@@ -1,0 +1,71 @@
+---
+title: "Proportion unburned"
+author: "Anna Talucci"
+date: "9/14/2021"
+output: html_document
+---
+
+
+# Overview
+
+Calculate proportion of unburned per fire
+
+Based on 30 m pixel (900 squared meters)
+
+From GEE code
+
+
+# Packages
+```{r include=FALSE}
+library(sf)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(lubridate)
+library(ggplot2)
+```
+
+
+# Data
+```{r}
+data = read.csv(file = "../data/UnburnedCt/unburned_ct.csv")
+```
+
+## look at headers
+```{r}
+head(data)
+```
+
+# Define pixel variables 
+
+```{r}
+pixScale = 30
+
+pixArea = pixScale^2
+
+pixArea
+```
+
+
+# Convert from count to area
+
+```{r}
+data1 = data %>%
+dplyr::mutate(unburn_m2 = as.numeric(round(count*pixArea,1))) %>% 
+  dplyr::mutate(unburn_ha = as.numeric(round(unburn_m2*0.0001, 1))) %>% 
+  dplyr::mutate(propUnburn = as.numeric(round(unburn_ha/SIZEha, 1))) %>% 
+  dplyr::select(FireYr, IDobj, EcoCode, SIZEha, count, unburn_m2, unburn_ha, propUnburn) %>%
+  bind_rows(.) 
+
+data1
+```
+
+
+```{r }
+ggplot(data = data1, aes(x = SIZEha, y = propUnburn)) + 
+  geom_smooth(method="lm", se=TRUE, alpha=0.1) +
+  geom_point(size = 1) +
+  theme_bw() 
+
+
+```

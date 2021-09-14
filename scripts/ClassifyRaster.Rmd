@@ -1,0 +1,119 @@
+---
+title: "Reclassify Raster to Binary"
+author: "Anna Talucci"
+date: "9/10/2021"
+output: html_document
+---
+
+# Package
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+```
+
+# Projections
+RussiaEqual Area projection for russia need for buffering hotspot data
+
++proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs 
+
+```{r}
+ea_russia = "+proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs "
+```
+
+
+# Rasters
+
+```{r}
+r1 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-1.tif")
+r2 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-2.tif")
+r3 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-3.tif")
+r4 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-4.tif")
+```
+
+
+```{r}
+fires = readOGR("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+
+# Mosaic
+```{r}
+x = list(r1, r2, r3, r4)
+mosaic = do.call(merge, x)
+```
+```{r}
+mosaic1 = as.integer(mosaic)
+mosaic1
+```
+
+# Histogram
+
+```{r}
+hist(mosaic1,
+     xlim = c(-500, 2000),
+     ylim = c(0, 10000),
+     breaks = 200,
+     main = "Histogram of dNBR Pixel Values",
+     col = "springgreen",
+     xlab = "Pixel value")
+```
+
+# Classify
+
+## create classification matrix
+```{r}
+reclass_df <- c(-1841, -500, 1,
+                -500, -100, 2,
+                -100, 100, 3,
+              100, 1924, 4)
+
+reclass_df
+
+reclass_m <- matrix(reclass_df,
+                ncol = 3,
+                byrow = TRUE)
+
+reclass_m
+```
+
+```{r}
+classified <- reclassify(mosaic1,
+                     reclass_m)
+```
+
+```{r}
+barplot(classified,
+        main = "Number of pixels in each class")
+```
+
+```{r}
+plot(classified)
+plot(fires, add=TRUE)
+```
+
+```{r}
+mask = mask(classified, fires)
+```
+
+```{r}
+plot(mask)
+```
+
+```{r}
+e <- extract(classified, fires) 
+```
+
+```{r}
+class.counts <- lapply(e, table) 
+class.prop <- lapply(e, FUN = function(x) { prop.table(table(x)) }) 
+```
+
+```{r}
+class.counts
+class.prop
+```
+
+```{r}
+
+```

@@ -1,0 +1,62 @@
+---
+title: "dNBR 2020 NE"
+author: "Anna Talucci"
+date: "9/10/2021"
+output: html_document
+---
+
+````{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+```
+
+
+```{r}
+r1 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-1.tif")
+r2 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-2.tif")
+r3 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-3.tif")
+r4 <- raster("../data/NESiberia-dNBR/dnbrNESiberia2020-4.tif")
+
+```
+
+
+```{r}
+r1
+```
+```{r}
+fires = readOGR("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+
+
+```{r}
+x = list(r1, r2, r3, r4)
+mosaic = do.call(merge, x)
+```
+```{r}
+mosaic
+```
+
+
+https://stackoverflow.com/questions/15876591/merging-multiple-rasters-in-r
+mosaic_rasters(gdalfile=all_my_rasts,dst_dataset="MyBigNastyRasty.tif",of="GTiff")
+gdalinfo("MyBigNastyRasty.tif")
+```{r}
+my_window <- extent(1020150, 2610990, 1077570, 2624280)
+```
+1020150, 2003190, 1641240, 2624280  (xmin, xmax, ymin, ymax)
+```{r}
+plot(my_window, col=NA)
+plot(mosaic,
+     breaks = c(-100, 100, 269, 439, 659), 
+     col = c("green", "yellow","darkgoldenrod1", "orange", "red"), add=TRUE)
+plot(fires, add=TRUE)
+```
+
+**THE END**

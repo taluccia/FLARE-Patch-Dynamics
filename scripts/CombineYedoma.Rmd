@@ -1,0 +1,66 @@
+---
+title: "Yedoma"
+author: "Anna Talucci"
+date: "9/13/2021"
+output: html_document
+---
+
+# Packages
+```{r}
+library(rgdal)
+library(raster)
+library(ggplot2)
+library(maptools)
+library(rgeos)
+library(sp)
+library(mapproj)
+library(sf)
+library(RStoolbox)
+library(ggspatial)
+library(cowplot)
+library(dplyr)
+library(RColorBrewer)
+```
+
+
+# Projections 
+
+Russia Equal area projection
+
+```{r}
+ea_ru = "+proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs "
+```
+
+
+# Data
+
+## World map
+https://datacatalog.worldbank.org/dataset/world-bank-official-boundaries
+
+
+## Yedoma
+```{r}
+yedoma1 = st_read("../data/IRYP_v1_shapefiles/QG1000k_yedoma_russia.shp", "QG1000k_yedoma_russia") 
+yedoma2 = st_read("../data/IRYP_v1_shapefiles/QG2500k_yedoma_russia.shp", "QG2500k_yedoma_russia") 
+yedoma3 = st_read("../data/IRYP_v1_shapefiles/SG500k_yedoma_russia.shp", "SG500k_yedoma_russia") 
+```
+
+
+
+```{r}
+yedoma = dplyr::bind_rows(yedoma1, yedoma2, yedoma3)
+```
+
+```{r}
+yedoma
+```
+
+```{r}
+yedoma_ea = st_transform(yedoma, crs = ea_ru) 
+```
+
+# Write Shapefile
+
+```{r}
+st_write(yedoma_ea, "../outputs/Yedoma/Yedoma.shp", driver="ESRI Shapefile") 
+```
