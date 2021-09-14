@@ -19,10 +19,10 @@ library(ggplot2)
 
 
 ```{r}
-r1 <- raster("../data/dnbr/dnbrHarmEA_2019-1.tif")
-r2 <- raster("../data/dnbr/dnbrHarmEA_2019-2.tif")
-r3 <- raster("../data/dnbr/dnbrHarmEA_2019-3.tif")
-r4 <- raster("../data/dnbr/dnbrHarmEA_2019-4.tif")
+r1 <- raster("../data/dnbr-image/dnbrHarmEA_2019-1.tif")
+r2 <- raster("../data/dnbr-image/dnbrHarmEA_2019-2.tif")
+r3 <- raster("../data/dnbr-image/dnbrHarmEA_2019-3.tif")
+r4 <- raster("../data/dnbr-image/dnbrHarmEA_2019-4.tif")
 
 ```
 
