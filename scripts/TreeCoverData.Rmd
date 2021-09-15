@@ -1,0 +1,117 @@
+---
+title: "TTE Data"
+author: "Anna Talucci"
+date: "9/15/2021"
+output: html_document
+---
+
+# Overview
+ Taiga Tundra Tree data
+ 
+ 
+https://daac.ornl.gov/VEGETATION/guides/Taiga_Tundra_Ecotone_Tree_Cover.html
+
+
+# Packages
+
+```{r include=FALSE}
+library(sp)
+library(sf)
+library(rgdal) # geospatial data
+library(raster)
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+library(dplyr)
+library(tidyr)
+library(spatialEco)
+library(ggplot2)
+library(lubridate)
+library(forcats)
+```
+
+# Projections 
+
+Russia Equal area projection
+
+```{r}
+ea_ru = "+proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs "
+```
+
+
+# Data
+## Ecozones
+```{r}
+eco = st_read("../data/ecozones/ne_siberia_ecozones9_ee.shp", "ne_siberia_ecozones9_ee")
+```
+
+```{r}
+head(eco)
+```
+
+
+```{r}
+trees = st_read("../data/TTE_map_distrib.v1/TTE_published.shp", "TTE_published") 
+```
+
+```{r}
+head(trees)
+```
+
+
+# Filter ecozones
+```{r}
+eco
+```
+
+```{r}
+ckmt = eco %>% filter(eco_code == "CKMT")
+nst = eco %>% filter(eco_code=="NST")
+eco = eco %>% filter(eco_code=="NST" | eco_code=="CKMT")
+```
+
+# Reproject
+
+```{r}
+tr_ea = st_transform(trees, crs = ea_ru)
+eco_ea = st_transform(eco, crs = ea_ru)
+```
+
+## Plot
+```{r}
+plot(st_geometry(eco_ea), border = 'grey', 
+     axes = TRUE)
+plot(st_geometry(tr_ea), border = 'red', add = TRUE)
+```
+
+# Intersection 
+Subset tree data to ecozones of interest
+
+```{r}
+tree1 = st_intersection(tr_ea, eco_ea)
+
+```
+
+## Plot
+```{r}
+plot(st_geometry(eco_ea), border = 'grey', 
+     axes = TRUE)
+plot(st_geometry(tree1), border = 'red', add = TRUE)
+```
+
+```{r}
+
+tree2 = tree1 %>% dplyr::select(Mean_TC_pc:Shape_Area, geometry)
+
+tree2
+```
+
+# Write to shapefile
+```{r}
+st_write(tree2, "../outputs/TreeCoverData/NESiberiaTreeCover.shp", driver="ESRI Shapefile") 
+```
+
+
+
+
+
+
