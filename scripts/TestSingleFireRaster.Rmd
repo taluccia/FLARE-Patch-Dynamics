@@ -37,6 +37,10 @@ r1
 fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
 ```
 
+```{r}
+data.frame(unique(fires$IDobj)) %>% 
+  write.csv(., '../outputs/UniqueFireIDobj.csv',  row.names = FALSE)
+```
 
 ```{r}
 fire1 = fires %>%
@@ -45,21 +49,25 @@ fire1 = fires %>%
 fire1
 
 ```
+```{r}
+crop_r1 = mask(r1, fire1)
+crop_r2 = mask(r2, fire1)
+```
 
 ```{r}
-plot(r1)
+plot(crop_r1)
 plot(st_geometry(fire1), add=TRUE)
 
 ```
 
 ```{r}
-plot(r2)
+plot(crop_r2)
 plot(st_geometry(fire1), add=TRUE)
 
 ```
 
 ```{r}
-landscape = r2
+landscape = crop_r2
 ```
 ```{r}
 check_landscape(landscape)
@@ -92,4 +100,29 @@ Patch core area
 ```{r}
 lsm_p_core(landscape, directions = 8, consider_boundary = FALSE, edge_depth = 1)
 
+```
+
+```{r}
+all_patch_metrics = calculate_lsm(landscape, level = "patch", full_name = TRUE)
+```
+
+```{r}
+landscape %>% 
+  calculate_lsm(., level = "patch", full_name = TRUE) %>% 
+  mutate(IDobj = 2770) %>% 
+  write.csv(., '../outputs/PatchSummary/PatchFire2770.csv',  row.names = FALSE)
+```
+
+```{r}
+landscape %>% 
+  calculate_lsm(., level = "landscape", full_name = TRUE) %>% 
+  mutate(IDobj = 2770) %>% 
+  write.csv(., '../outputs/PatchSummary/LandscapeFire2770.csv',  row.names = FALSE)
+```
+
+```{r}
+landscape %>% 
+  calculate_lsm(., level = "class", full_name = TRUE) %>% 
+  mutate(IDobj = 2770) %>% 
+  write.csv(., '../outputs/PatchSummary/ClassFire2770.csv',  row.names = FALSE)
 ```
