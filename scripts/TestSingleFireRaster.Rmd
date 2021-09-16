@@ -67,6 +67,12 @@ check_landscape(landscape)
 ```
 
 ```{r}
+show_patches(landscape) 
+show_cores(landscape)
+
+```
+
+```{r}
 
 lsm_p_perim(landscape)
 ```
