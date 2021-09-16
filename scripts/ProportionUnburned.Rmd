@@ -86,7 +86,7 @@ pixArea
 data1 = data %>%
 dplyr::mutate(unburn_m2 = as.numeric(round(count*pixArea,1))) %>% 
   dplyr::mutate(unburn_ha = as.numeric(round(unburn_m2*0.0001, 1))) %>% 
-  dplyr::mutate(propUnburn = as.numeric(round(unburn_ha/SIZEha, 1))) %>% 
+  dplyr::mutate(propUnburn = as.numeric(round(unburn_ha/SIZEha, 3))) %>% 
   dplyr::select(FireYr, IDobj, EcoCode, SIZEha, count, unburn_m2, unburn_ha, propUnburn) %>%
   mutate(SizeHa = round(SIZEha, 0)) %>% 
   mutate(SizeKm2 = round(SIZEha/100, 1)) %>%
@@ -98,6 +98,7 @@ dplyr::mutate(unburn_m2 = as.numeric(round(count*pixArea,1))) %>%
                             ifelse(SizeHa %in% 10000:19999, "6",
                               ifelse(SizeHa %in% 20000:49999, "7",
                                 ifelse(SizeHa %in% 50000:99999, "8", "9"))))))))) %>%
+  mutate(logHa = log(SizeHa)) %>%
 
   bind_rows(.) 
 
@@ -137,10 +138,18 @@ ggsave("../figures/PropUnburned.png", plot = fig1, width = 6, height = 4, units 
 
 
 ```{r }
-ggplot(data = data1, aes(x = SIZEha, y = propUnburn)) + 
+ggplot(data = data1, aes(x = logHa, y = propUnburn, color=EcoCode)) + 
   geom_smooth(method="lm", se=TRUE, alpha=0.1) +
   geom_point(size = 1) +
-  theme_bw() 
+  theme_bw() +
+   scale_color_manual(values = ecoPalette, name="Ecozone") +
+    xlab("Log area within fire perimeter (ha)") +
+      ylab("Proportion of Unburned") 
 
 
+```
+
+
+```{r}
+ggsave("../figures/PropUnburned.png", plot = fig1, width = 6, height = 4, units = c("in"), dpi = 600)
 ```
