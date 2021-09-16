@@ -1,0 +1,89 @@
+---
+title: "Class Patch Metrics by fire"
+author: "Anna Talucci"
+date: "9/16/2021"
+output: html_document
+---
+
+
+
+# Overview
+
+This script process landscape/patch statistics by class burned/unburned for the 2020 fires in Northeastern Siberia. Fires are processed individually.
+
+
+[Landscapemetrics package details](https://cran.r-project.org/web/packages/landscapemetrics/landscapemetrics.pdf)
+
+## Fire IDobj
+Change for each iteration 
+
+IDobj=314
+
+#Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+```
+
+# Data
+```{r}
+r1 <- raster("../data/dNBRSingleFireBinary/IMG_Binary314.tif")
+```
+
+```{r}
+r1
+```
+
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+
+
+
+# Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==314)
+
+fire1
+```
+
+# Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+# Plot
+```{r}
+plot(crop_r1)
+plot(st_geometry(fire1), add=TRUE)
+```
+
+# Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+# Check Landscape for processing
+```{r}
+check_landscape(landscape)
+```
+
+# Visualize landscape
+```{r}
+show_patches(landscape) 
+show_cores(landscape)
+```
+
+
+# Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(., level = "class", full_name = TRUE) %>% 
+  mutate(IDobj = 314) %>% 
+  write.csv(., '../outputs/PatchSummary/ClassFire314.csv',  row.names = FALSE)
+```
