@@ -1,0 +1,89 @@
+---
+title: "Test Single image per fire option"
+author: "Anna Talucci"
+date: "9/15/2021"
+output: html_document
+---
+
+# Overview
+
+https://cran.r-project.org/web/packages/landscapemetrics/landscapemetrics.pdf
+
+
+
+#Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+```
+
+
+```{r}
+r1 <- raster("../data/SingleFiredNBR/IMG_NAME2770.tif")
+r2 <- raster("../data/SingleFiredNBR/IMG_Binary2770.tif")
+
+```
+
+
+```{r}
+r1
+```
+
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+
+
+```{r}
+fire1 = fires %>%
+  filter(IDobj==2770)
+
+fire1
+
+```
+
+```{r}
+plot(r1)
+plot(st_geometry(fire1), add=TRUE)
+
+```
+
+```{r}
+plot(r2)
+plot(st_geometry(fire1), add=TRUE)
+
+```
+
+```{r}
+landscape = r2
+```
+```{r}
+check_landscape(landscape)
+
+```
+
+```{r}
+
+lsm_p_perim(landscape)
+```
+
+Coefficient of variation of patch area (Area and edge metric)
+
+```{r}
+lsm_c_area_cv(landscape, directions = 8)
+
+```
+
+```{r}
+lsm_c_area_mn(landscape)
+```
+
+Patch core area
+```{r}
+lsm_p_core(landscape, directions = 8, consider_boundary = FALSE, edge_depth = 1)
+
+```
