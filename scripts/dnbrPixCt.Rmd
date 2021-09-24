@@ -1,0 +1,76 @@
+---
+title: "dnbr Pixel Count"
+author: "Anna Talucci"
+date: "9/22/2021"
+output: html_document
+---
+
+# Overview
+
+# Packages
+
+```{r}
+library(tidyverse)
+```
+
+
+# Data
+```{r}
+pix = read.csv("../data/dnbrPixCt/dnbrCt.csv") 
+```
+
+
+# View Dataframe
+
+```{r}
+
+pix
+```
+
+```{r}
+pix1 = pix %>%
+   mutate(HaRnd = round(SIZEha, 0)) %>% 
+   mutate(SizeCl = ifelse(HaRnd %in% 200:499, "1",
+                  ifelse(HaRnd %in% 500:999, "2",
+                   ifelse(HaRnd %in% 1000:1999, "3",
+                       ifelse(HaRnd %in% 2000:4999, "4",
+                         ifelse(HaRnd %in% 5000:9999, "5",
+                            ifelse(HaRnd %in% 10000:19999, "6",
+                              ifelse(HaRnd %in% 20000:49999, "7",
+                                ifelse(HaRnd %in% 50000:99999, "8", "9")))))))))
+```
+
+# Sum Pixel Counts
+```{r}
+pix %>%
+  summarise(across(count, sum))
+```
+```{r}
+pix %>%
+  summarise(across(count, min))
+```
+
+```{r}
+pix %>%
+  summarise(across(count, max))
+```
+
+```{r}
+pix1 %>%
+  group_by(SizeCl) %>%
+  summarise(across(count, max)) 
+```
+
+```{r}
+pix1 %>%
+  group_by(SizeCl) %>%
+  summarise(across(count, min)) 
+```
+
+```{r}
+pix1 %>%
+  group_by(SizeCl) %>%
+  summarise(across(count, mean)) %>%
+  mutate(prct5 = round((count*.05), 0)) %>%
+   write.csv(., '../outputs/PixCtSummary/PixCt5Percent.csv',  row.names = FALSE)
+```

@@ -1,0 +1,39 @@
+---
+title: "Summarize NE Siberia 2020"
+author: "Anna Talucci"
+date: "9/23/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Overview
+
+# Packagaes
+```{r}
+library(tidyverse)
+```
+
+# Data
+```{r}
+fires = read.csv(file = "../data/NESiberiaFires/NESiberiaFires2020.csv")
+```
+
+# Summaries
+```{r}
+fires %>% 
+  group_by(EcoCode, ArcSub) %>%
+  summarise(
+    totalHa = sum(SizeHa),
+    medianHa = median(SizeHa),
+    meanHa = mean(SizeHa),
+    sd = sd(SizeHa),
+    n = n(),
+    se = sd / sqrt(n)
+  ) %>%
+  write.csv(., '../outputs/NEFireSummary/EcoArcSummaryHa.csv',  row.names = FALSE)
+  
+
+```
+

@@ -1,0 +1,97 @@
+---
+title: "Raster to Point Sample"
+author: "Anna Talucci"
+date: "9/23/2021"
+output: html_document
+---
+
+# Overview
+
+Convert dnbr raster to points and sample 5% of points for each individual fire, minus the ones removed for scanline error.
+
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Packages
+
+```{r include=FALSE}
+library(sp)
+library(sf)
+library(rgdal) # geospatial data
+library(raster)
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+```
+
+# Data
+## Rasters
+```{r}
+r1 = raster("../data/dNBRSingleFire/dNBRimg_1250.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+
+# Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1250)
+
+fire1
+```
+
+# Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+
+# Plot to Check
+```{r}
+plot(crop_r1)
+plot(st_geometry(fire1), add=TRUE)
+```
+
+# Raster to point
+```{r}
+point = rasterToPoints(crop_r1, fun=NULL, spatial=TRUE)
+point
+```
+
+
+## Convert to sf object
+```{r}
+point_sf = st_as_sf(point)
+point_sf
+```
+
+# Sampling
+
+```{r}
+set.seed(101)
+samplePt = point_sf %>% 
+  rename(dnbr=dNBRimg_1250) %>%
+  mutate(IDobj=1250) %>%
+  sample_frac(0.05)
+samplePt
+```
+
+
+```{r}
+ggplot(samplePt, aes(x=dnbr)) + geom_histogram() 
+```
+
+
+
+## Write  to Shapefile
+```{r}
+st_write(samplePt, "../outputs/RasterToPoint/Points1250.shp", driver="ESRI Shapefile") 
+```
+
+
+
