@@ -4,6 +4,11 @@ author: "Anna Talucci"
 date: "9/16/2021"
 output: html_document
 ---
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
 
 
 
@@ -17,7 +22,7 @@ This script process landscape/patch statistics by class burned/unburned for the 
 ## Fire IDobj
 Change for each iteration 
 
-IDobj=314
+IDobj=944
 
 #Packages
 ```{r}
@@ -27,11 +32,12 @@ library(rgdal)
 library(ggplot2)
 library(sf)
 library(landscapemetrics)
+library(dplyr)
 ```
 
 # Data
 ```{r}
-r1 <- raster("../data/dNBRSingleFireBinary/IMG_Binary314.tif")
+r1 <- raster("../data/dNBRSingleFireBinary/IMG_Binary944.tif")
 ```
 
 ```{r}
@@ -47,7 +53,7 @@ fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires
 # Select fire perimeter
 ```{r}
 fire1 = fires %>%
-  filter(IDobj==314)
+  filter(IDobj==944)
 
 fire1
 ```
@@ -84,6 +90,6 @@ show_cores(landscape)
 ```{r}
 landscape %>% 
   calculate_lsm(., level = "class", full_name = TRUE) %>% 
-  mutate(IDobj = 314) %>% 
-  write.csv(., '../outputs/PatchSummary/ClassFire314.csv',  row.names = FALSE)
+  mutate(IDobj = 944) %>% 
+  write.csv(., '../outputs/PatchSummary/ClassFire944.csv',  row.names = FALSE)
 ```
