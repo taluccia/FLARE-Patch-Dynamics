@@ -30,33 +30,108 @@ library(forcats)
 # Data
 
 ```{r}
-fires = st_read("../data/SiberiaFires/SiberiaFires2001-2020.shp", "SiberiaFires2001-2020") 
+fires = st_read("../data/SiberiaFires2001-2020/SiberiaFires2001-2020.shp", "SiberiaFires2001-2020") 
 ```
 ```{r}
-head(fires)
+fires
 ```
 
 
 # Select NST and CKMT
 
 ```{r}
-ne_fires = fires %>%
-  filter(EcoCode =="NST" | EcoCode =="CKMT")
+target_eco = c("NST", "CKMT")
 ```
 
 
 ```{r}
 ne_fires2020 = fires %>%
-  filter(EcoCode =="NST" | EcoCode =="CKMT") %>%
-  filter(FireYr==2020)
+  filter(EcoCode %in% target_eco) %>%
+  filter(FireYr==2020) %>% 
+  mutate(HaRnd = round(SizeHa, 0)) %>% 
+  mutate(SizeKm2 = round(SizeHa/100, 1)) %>%
+  mutate(SizeCl = ifelse(HaRnd %in% 200:499, "1",
+                  ifelse(HaRnd %in% 500:999, "2",
+                   ifelse(HaRnd %in% 1000:1999, "3",
+                       ifelse(HaRnd %in% 2000:4999, "4",
+                         ifelse(HaRnd %in% 5000:9999, "5",
+                            ifelse(HaRnd %in% 10000:19999, "6",
+                              ifelse(HaRnd %in% 20000:49999, "7",
+                                ifelse(HaRnd %in% 50000:99999, "8", "9"))))))))) %>%
+  dplyr::select(IDobj:FireId, SizeKm2, HaRnd, SizeCl, geometry)
 ```
 
+
+```{r}
+ne_fires2020
+```
+
+```{r}
+ne_fires_all = fires %>%
+  filter(EcoCode %in% target_eco) %>%
+  mutate(HaRnd = round(SizeHa, 0)) %>% 
+  mutate(SizeKm2 = round(SizeHa/100, 1)) %>%
+  mutate(SizeCl = ifelse(HaRnd %in% 200:499, "1",
+                  ifelse(HaRnd %in% 500:999, "2",
+                   ifelse(HaRnd %in% 1000:1999, "3",
+                       ifelse(HaRnd %in% 2000:4999, "4",
+                         ifelse(HaRnd %in% 5000:9999, "5",
+                            ifelse(HaRnd %in% 10000:19999, "6",
+                              ifelse(HaRnd %in% 20000:49999, "7",
+                                ifelse(HaRnd %in% 50000:99999, "8", "9"))))))))) %>%
+  dplyr::select(IDobj:FireId, SizeKm2, HaRnd, SizeCl, geometry)
+```
+
+
+```{r}
+ne_fires_all
+```
 # write to shapefile
 
-```{r}
-st_write(ne_fires, "../outputs/NESiberiaFires/NESiberiaFires2001-2020.shp", driver="ESRI Shapefile") 
+```{r eval=FALSE, include=FALSE}
+st_write(ne_fires_all, "../outputs/NESiberiaFires/NESiberiaFires2001-2020.shp", driver="ESRI Shapefile") 
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 st_write(ne_fires2020, "../outputs/NESiberiaFires/NESiberiaFires2020.shp", driver="ESRI Shapefile") 
 ```
+
+# Write to CSV
+
+```{r}
+ne_fires2020 %>% 
+  st_set_geometry(NULL) %>% 
+        write.csv(., '../outputs/NESiberiaFires/NESiberiaFires2020.csv',  row.names = FALSE)
+  
+```
+
+# Subset by fire size class
+
+```{r}
+size1 = ne_fires2020 %>% filter(SizeCl==1)
+size2 = ne_fires2020 %>% filter(SizeCl==2)
+size3 = ne_fires2020 %>% filter(SizeCl==3)
+size4 = ne_fires2020 %>% filter(SizeCl==4)
+size5 = ne_fires2020 %>% filter(SizeCl==5)
+size6 = ne_fires2020 %>% filter(SizeCl==6)
+size7 = ne_fires2020 %>% filter(SizeCl==7)
+size8 = ne_fires2020 %>% filter(SizeCl==8)
+size9 = ne_fires2020 %>% filter(SizeCl==9)
+```
+
+
+```{r eval=FALSE, include=FALSE}
+st_write(size1, "../outputs/NESiberiaFiresSize/Size1.shp", driver="ESRI Shapefile") 
+st_write(size2, "../outputs/NESiberiaFiresSize/Size2.shp", driver="ESRI Shapefile") 
+st_write(size3, "../outputs/NESiberiaFiresSize/Size3.shp", driver="ESRI Shapefile") 
+st_write(size4, "../outputs/NESiberiaFiresSize/Size4.shp", driver="ESRI Shapefile") 
+st_write(size5, "../outputs/NESiberiaFiresSize/Size5.shp", driver="ESRI Shapefile") 
+st_write(size6, "../outputs/NESiberiaFiresSize/Size6.shp", driver="ESRI Shapefile") 
+st_write(size7, "../outputs/NESiberiaFiresSize/Size7.shp", driver="ESRI Shapefile") 
+st_write(size8, "../outputs/NESiberiaFiresSize/Size8.shp", driver="ESRI Shapefile") 
+st_write(size9, "../outputs/NESiberiaFiresSize/Size9.shp", driver="ESRI Shapefile") 
+```
+
+
+# References
+Stocks, B. J., J. A. Mason, J. B. Todd, E. M. Bosch, B. M. Wotton, B. D. Amiro, M. D. Flannigan, K. G. Hirsch, K. A. Logan, D. L. Martell, and W. R. Skinner. 2002. Large forest fires in Canada, 1959–1997. Journal of Geophysical Research 108:8149.
