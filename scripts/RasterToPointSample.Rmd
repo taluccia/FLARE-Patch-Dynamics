@@ -29,7 +29,7 @@ library(foreign) # deals with dbf files
 # Data
 ## Rasters
 ```{r}
-r1 = raster("../data/dNBRSingleFire/dNBRimg_1250.tif")
+r1 = raster("../data/dNBRSingleFire/dNBRimg_4148.tif")
 ```
 
 ## Fire perimeters 
@@ -40,7 +40,7 @@ fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires
 # Select fire perimeter
 ```{r}
 fire1 = fires %>%
-  filter(IDobj==1250)
+  filter(IDobj==4148)
 
 fire1
 ```
@@ -75,8 +75,8 @@ point_sf
 ```{r}
 set.seed(101)
 samplePt = point_sf %>% 
-  rename(dnbr=dNBRimg_1250) %>%
-  mutate(IDobj=1250) %>%
+  rename(dnbr=dNBRimg_4148) %>%
+  mutate(IDobj=4148) %>%
   sample_frac(0.05)
 samplePt
 ```
@@ -90,7 +90,7 @@ ggplot(samplePt, aes(x=dnbr)) + geom_histogram()
 
 ## Write  to Shapefile
 ```{r}
-st_write(samplePt, "../outputs/RasterToPoint/Points1250.shp", driver="ESRI Shapefile") 
+st_write(samplePt, "../outputs/RasterToPoint/Points4148.shp", driver="ESRI Shapefile") 
 ```
 
 
