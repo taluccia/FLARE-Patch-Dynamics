@@ -1,0 +1,92 @@
+---
+title: "Combine sample points into one file"
+author: "Anna Talucci"
+date: "9/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+# Packages
+```{r}
+library(tidyverse)
+library(sf)
+library(mapedit)
+```
+
+
+
+# Define folder and file details
+```{r}
+poly_folder <- "../data/RasterToPoint" 
+
+    #--store shapefile names as a list
+poly_shp_files <- list.files(poly_folder, pattern = "\\.shp$")
+```
+
+```{r}
+poly_shp_files
+
+```
+
+
+
+```{r}
+# Reads in all shapefiles from Directory that include the string "_CDs".
+poly_files <- list.files(poly_folder , pattern="\\.shp$", full.names=TRUE)
+```
+
+```{r}
+poly_files
+```
+
+# Function to read all shapefiles into list
+```{r}
+
+st_read_poly_shp <- function(shp_list) {
+
+      layer_name <- as.character(gsub(".shp","",shp_list))
+
+      shp_st_read <-st_read(dsn = poly_folder, layer = layer_name)
+
+
+    }
+```
+
+
+
+```{r}
+shp_list=poly_shp_files[[1]]
+shp_list
+```
+
+```{r}
+layer_name <- as.character(gsub(".shp","",shp_list))
+
+st_read(dsn = poly_folder, layer = layer_name)
+```
+
+```{r}
+ poly_shp_list <- lapply(poly_shp_files, st_read_poly_shp)
+```
+
+# Take list and combine into single shapefile
+```{r}
+all_data <- sf::st_as_sf(data.table::rbindlist(poly_shp_list))
+```
+
+
+# Check data
+```{r}
+all_data
+```
+
+
+# Write to Shapefile
+```{r}
+st_write(all_data, "../outputs/SamplePoints/Sample5PerctPoints.shp", driver="ESRI Shapefile") 
+```
