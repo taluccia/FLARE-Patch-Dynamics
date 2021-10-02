@@ -29,18 +29,21 @@ library(foreign) # deals with dbf files
 # Data
 ## Rasters
 ```{r}
-r1 = raster("../data/dNBRSingleFire/dNBRimg_4148.tif")
+r1 = raster("../data/UTMImages/dnbr/UTM51/dNBRimg_3880.tif")
 ```
 
+```{r}
+r2 = raster("../data/UTMImages/dnbr/dNBRimg_3880.tif")
+```
 ## Fire perimeters 
 ```{r}
-fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+fires = st_read("../data/FiresUTM/FiresUTM51.shp", "FiresUTM51")
 ```
 
 # Select fire perimeter
 ```{r}
 fire1 = fires %>%
-  filter(IDobj==4148)
+  filter(IDobj==3880)
 
 fire1
 ```
@@ -50,10 +53,18 @@ fire1
 crop_r1 = mask(r1, fire1)
 ```
 
-
+```{r}
+crop_r2 = mask(r2, fire1)
+```
 # Plot to Check
 ```{r}
 plot(crop_r1)
+plot(st_geometry(fire1), add=TRUE)
+```
+
+
+```{r}
+plot(crop_r2)
 plot(st_geometry(fire1), add=TRUE)
 ```
 
