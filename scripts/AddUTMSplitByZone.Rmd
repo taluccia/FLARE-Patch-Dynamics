@@ -1,0 +1,135 @@
+---
+title: "Add UTM Zone and Split data"
+author: "Anna Talucci"
+date: "10/1/2021"
+output: html_document
+---
+
+
+# Overview
+
+https://geocompr.robinlovelace.net/reproj-geo-data.html
+#Packages
+```{r}
+
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(gfcanalysis)
+library(dplyr)
+```
+
+# Projections
+
+WGS 84 need for gee
+```{r}
+wgs_proj =  "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs "
+
+```
+
+# Data
+
+
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+
+```{r}
+utm = read.csv(file = "../data/UTMZone/IDobjUTMZone.csv")
+```
+
+```{r}
+head(utm)
+```
+
+# Combine Dataframes
+```{r}
+data1 = merge(fires, utm, by=("IDobj"))
+data1
+```
+
+```{r}
+Palette <- c("red", "blue", "orange", "green", "pink", "yellow", "gray", "purple")
+```
+
+```{r}
+ggplot() +
+    geom_sf(data = data1,  aes(fill=as.factor(UTMZone)), colour = NA) +
+  scale_fill_manual(values=Palette) +
+  coord_sf(xlim = c(-1334205, 3333752), ylim = c(-522562, 3293703)) +
+  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", 
+        size = 0.5), 
+        panel.background = element_rect(fill = "#C5D8D7")) +
+  theme(legend.title = element_blank(), 
+        legend.position = c(.25, .06), 
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0)),
+         axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(), 
+        axis.text.y=element_blank(), 
+        axis.ticks.y=element_blank()) +
+  guides(fill=guide_legend(ncol=2,byrow=FALSE))
+
+```
+
+
+# Split shapefile by UTM Zone
+```{r}
+utm51 = data1 %>% filter(UTMZone==51)
+utm52 = data1 %>% filter(UTMZone==52)
+utm53 = data1 %>% filter(UTMZone==53)
+utm54 = data1 %>% filter(UTMZone==54)
+utm55 = data1 %>% filter(UTMZone==55)
+utm56 = data1 %>% filter(UTMZone==56)
+utm57 = data1 %>% filter(UTMZone==57)
+utm58 = data1 %>% filter(UTMZone==58)
+```
+
+# Define UTM Projections
+```{r}
+utm51proj = "+proj=utm +zone=51 +datum=WGS84 +units=m +no_defs"
+utm52proj = "+proj=utm +zone=52 +datum=WGS84 +units=m +no_defs"
+utm53proj = "+proj=utm +zone=53 +datum=WGS84 +units=m +no_defs"
+utm54proj = "+proj=utm +zone=54 +datum=WGS84 +units=m +no_defs"
+utm55proj = "+proj=utm +zone=55 +datum=WGS84 +units=m +no_defs"
+utm56proj = "+proj=utm +zone=56 +datum=WGS84 +units=m +no_defs"
+utm57proj = "+proj=utm +zone=57 +datum=WGS84 +units=m +no_defs"
+utm58proj = "+proj=utm +zone=58 +datum=WGS84 +units=m +no_defs"
+```
+
+# Reproject to UTM Zone
+```{r}
+firesutm51 = st_transform(utm51, crs=utm51proj)
+firesutm52 = st_transform(utm52, crs=utm52proj)
+firesutm53 = st_transform(utm53, crs=utm53proj)
+firesutm54 = st_transform(utm54, crs=utm54proj)
+firesutm55 = st_transform(utm55, crs=utm55proj)
+firesutm56 = st_transform(utm56, crs=utm56proj)
+firesutm57 = st_transform(utm57, crs=utm57proj)
+firesutm58 = st_transform(utm58, crs=utm58proj)
+```
+
+# Map
+
+
+# Write to shapefile
+```{r}
+
+st_write(firesutm51, "../outputs/FiresUTM/FiresUTM51.shp", driver="ESRI Shapefile") 
+
+st_write(firesutm52, "../outputs/FiresUTM/FiresUTM52.shp", driver="ESRI Shapefile") 
+
+st_write(firesutm53, "../outputs/FiresUTM/FiresUTM53.shp", driver="ESRI Shapefile") 
+
+st_write(firesutm54, "../outputs/FiresUTM/FiresUTM54.shp", driver="ESRI Shapefile") 
+
+st_write(firesutm55, "../outputs/FiresUTM/FiresUTM55.shp", driver="ESRI Shapefile") 
+
+st_write(firesutm56, "../outputs/FiresUTM/FiresUTM56.shp", driver="ESRI Shapefile") 
+
+st_write(firesutm57, "../outputs/FiresUTM/FiresUTM57.shp", driver="ESRI Shapefile") 
+
+st_write(firesutm58, "../outputs/FiresUTM/FiresUTM58.shp", driver="ESRI Shapefile") 
+```

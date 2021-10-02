@@ -1,0 +1,181 @@
+---
+title: "UTM zone?"
+author: "Anna Talucci"
+date: "9/30/2021"
+output: html_document
+---
+
+# Overview
+
+https://geocompr.robinlovelace.net/reproj-geo-data.html
+#Packages
+```{r}
+
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(gfcanalysis)
+library(dplyr)
+```
+
+# Projections
+
+WGS 84 need for gee
+```{r}
+wgs_proj =  "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs "
+
+```
+
+# Data
+
+
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+```{r}
+fire1 = fires %>%
+  filter(IDobj==452)
+```
+
+# Reproject
+```{r}
+fire1_wgs = st_transform(fire1, crs=wgs_proj)
+```
+
+```{r}
+fires_wgs = st_transform(fires, crs=wgs_proj)
+```
+
+# Function
+```{r}
+lonlat2UTM = function(lonlat) {
+  utm = (floor((lonlat[1] + 180) / 6) %% 60) + 1
+  if(lonlat[2] > 0) {
+    utm + 32600
+  } else{
+    utm + 32700
+  }
+}
+```
+
+
+
+```{r}
+epsg_utm = lonlat2UTM(st_coordinates(fires_wgs))
+st_crs(epsg_utm)$proj4string
+st_crs(epsg_utm)$epsg
+```
+
+```{r}
+st_crs(lonlat2UTM(st_coordinates(fires_wgs)))$epsg
+```
+```{r}
+fires_sp <- as(fires_wgs, Class = "Spatial")
+```
+
+
+```{r}
+
+utm_zone(fires_sp)
+```
+
+
+#Working on complete function
+```{r}
+lonlat2UTM = function(lonlat) {
+  utm = (floor((lonlat[1] + 180) / 6) %% 60) + 1
+  if(lonlat[2] > 0) {
+    utm + 32600
+  } else{
+    utm + 32700
+  }
+}
+```
+
+```{r}
+polygon <- st_sfc(fires_wgs)
+```
+
+```{r}
+epsg_func = function(x){
+  polygon <- st_sfc(x)
+  st_crs(lonlat2UTM(st_coordinates(polygon)))$epsg
+}
+```
+
+```{r}
+epsg_func = function(x){
+  x %>%
+    st_sfc(.) %>%
+    mutate(epsg = st_crs(lonlat2UTM(st_coordinates(polygon)))$epsg) %>%
+    mutate(IDobj = IDobj) ->x
+  return(x)
+}
+```
+
+```{r}
+
+map    <- purrr::map(st_geometry(fires_wgs), epsg_func) 
+```
+```{r}
+fires_wgs %>% purrr::set_names(IDobj) %>% purrr::map(st_geometry(.), epsg_func)
+```
+```{r}
+names(map) <- names(fires_wgs$IDobj)
+list(map)
+```
+```{r}
+df <- data.frame(matrix(unlist(map), nrow=length(map), byrow=TRUE))
+df
+```
+
+```{r}
+map
+```
+
+```{r}
+library(purrr)
+
+distance.func_lapply <- function(polygon){
+  polygon <- st_sfc(polygon)
+  max(st_distance(st_cast(polygon, "POINT"), st_centroid(polygon)))
+}
+
+dist_lapply <- lapply(st_geometry(nc),  distance.func_lapply)
+dist_map    <- purrr::map(st_geometry(nc), distance.func_lapply)
+
+all.equal(dist, dist_lapply)
+# [1] TRUE
+all.equal(dist, dist_map)
+```
+
+```{r eval=FALSE, include=FALSE}
+fires_wgs %>%
+  dplyr::select(IDobj, geometry) %>%
+  group_by(IDobj) %>%
+
+  mutate(epsg = map_df(st_crs(lonlat2UTM(st_coordinates((fires_wgs))))$epsg)) 
+
+
+```
+
+```{r eval=FALSE, include=FALSE}
+library(rnaturalearth)
+st_as_sf(ne_countries()[1:5,]) %>% 
+  mutate(bb = split(., 1:5) %>% purrr::map(st_bbox))
+````
+
+```{r}
+library(broom)
+library(dplyr)
+library(purrr)
+library(tidyr)
+
+mtcars %>%
+  group_by(cyl) %>%
+  nest() %>%
+  mutate(model = map(data, lm, formula = mpg ~ disp + hp),
+         results = map(model, tidy)) %>%
+  unnest(results)
+```

@@ -1,0 +1,71 @@
+---
+title: "UTM zone?"
+author: "Anna Talucci"
+date: "9/30/2021"
+output: html_document
+---
+
+# Overview
+
+https://geocompr.robinlovelace.net/reproj-geo-data.html
+#Packages
+```{r}
+
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(gfcanalysis)
+library(dplyr)
+```
+
+# Projections
+
+WGS 84 need for gee
+```{r}
+wgs_proj =  "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs "
+
+```
+
+# Data
+
+
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+```{r}
+fire1 = fires %>% filter(IDobj==4148) 
+```
+# Reproject
+```{r}
+fires_wgs = st_transform(fire1, crs=wgs_proj)
+```
+# Function
+```{r}
+lonlat2UTM = function(lonlat) {
+  utm = (floor((lonlat[1] + 180) / 6) %% 60) + 1
+  if(lonlat[2] > 0) {
+    utm + 32600
+  } else{
+    utm + 32700
+  }
+}
+```
+```{r}
+epsg_utm = lonlat2UTM(st_coordinates(fires_wgs))
+st_crs(epsg_utm)$proj4string
+st_crs(epsg_utm)$epsg
+```
+
+
+```{r}
+st_crs(lonlat2UTM(st_coordinates(fires_wgs)))$epsg
+```
+```{r}
+fires_sp <- as(fires_wgs, Class = "Spatial")
+```
+
+```{r}
+utm_zone(fires_sp)
+```
+

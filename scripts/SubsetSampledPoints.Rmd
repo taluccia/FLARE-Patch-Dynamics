@@ -1,0 +1,111 @@
+---
+title: "Subset sampled points"
+author: "Anna Talucci"
+date: "9/27/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Overview
+Subset Sampled data, because it is to large for GEE
+
+# Packages
+```{r}
+library(tidyverse)
+library(sp)
+library(sf)
+library(rgdal) # geospatial data
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+```
+
+# Define Projections
+
+[Equal Area projection for Russia](https://gis.stackexchange.com/questions/264093/projection-for-russia-map)
+
++proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs 
+
+```{r}
+ea_russia = "+proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs "
+```
+
+
+# Data
+```{r}
+eco = st_read("../data/EcozonesNE/NstCkmtEcozones.shp", "NstCkmtEcozones") 
+```
+```{r}
+points = st_read("../data/SamplePoints/Sample5PerctPoints.shp", "Sample5PerctPoints") 
+```
+
+```{r}
+points
+```
+
+
+```{r}
+points1 = points %>%
+  mutate(BurnUnburn = ifelse(between(dnbr, -100, 0), "unburned", 
+                      ifelse(between(dnbr,0, 100), "unburned", "burned"))) %>%
+  dplyr::select(dnbr, IDobj, BurnUnburn, geometry)
+
+points1
+```
+
+# Sampling
+
+```{r}
+set.seed(101)
+samplePt = points1 %>% 
+  group_by(BurnUnburn, IDobj) %>%
+  sample_frac(0.02)
+samplePt
+```
+
+```{r}
+plot(st_geometry(eco))
+plot(st_geometry(samplePt), add=TRUE)
+```
+
+```{r}
+eco_crs = st_crs(eco)
+pt_crs = st_crs(samplePt)
+
+```
+
+```{r}
+eco_crs
+```
+
+```{r}
+pt_crs
+```
+
+## Transform perimeters to Landsat Imagery  projection
+```{r}
+samplePtEa = st_transform(samplePt, crs=pt_crs)
+```
+
+```{r}
+samplePtSf = st_as_sf(samplePtEa)
+samplePtSf
+```
+
+```{r}
+plot(st_geometry(eco))
+plot(st_geometry(samplePtSf), add=TRUE)
+```
+## Write  to Shapefile
+```{r}
+st_write(samplePtSf, "../outputs/SamplePoints/Sample2PerctPoints.shp", driver="ESRI Shapefile") 
+```
+
+**THE END**
