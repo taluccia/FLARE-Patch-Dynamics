@@ -102,6 +102,7 @@ ne_subset
 
 ```{r}
 head(ne_subset)
+tail(ne_subset)
 ```
 ```{r}
 ne_subset$eco_code
