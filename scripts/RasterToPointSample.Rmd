@@ -29,22 +29,12 @@ library(foreign) # deals with dbf files
 # Data
 ## Rasters
 ```{r}
-r1 = raster("../data/UTMImagesTest/dnbr/UTM51/dNBRimg_3880.tif")
-```
-
-```{r}
-r2 = raster("../data/UTMImagesTest/dnbr/dNBRimg_3880.tif")
+r1 = raster("../data/UTMImagesTest/dnbr/UTM51/dNBRimg_3902.tif")
 ```
 
 
-```{r}
-r3 = raster("../data/dnbrSingleFire/dNBRimg_3880.tif")
-```
 
 ## Fire perimeters 
-```{r}
-firesEA = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
-```
 
 ```{r}
 fires = st_read("../data/FiresUTM/FiresUTM51.shp", "FiresUTM51")
@@ -53,14 +43,14 @@ fires = st_read("../data/FiresUTM/FiresUTM51.shp", "FiresUTM51")
 # Select fire perimeter
 ```{r}
 fire1 = fires %>%
-  filter(IDobj==3880)
+  filter(IDobj==3902)
 
 fire1
 ```
 
 ```{r}
 fire2 = firesEA %>%
-  filter(IDobj==3880)
+  filter(IDobj==3902)
 
 fire2
 ```
@@ -70,13 +60,7 @@ fire2
 crop_r1 = mask(r1, fire1)
 ```
 
-```{r}
-crop_r2 = mask(r2, fire1)
-```
 
-```{r}
-crop_r3 = mask(r3, fire2)
-```
 
 # Plot to Check
 ```{r}
@@ -85,15 +69,6 @@ plot(st_geometry(fire1), add=TRUE)
 ```
 
 
-```{r}
-plot(crop_r2)
-plot(st_geometry(fire1), add=TRUE)
-```
-
-```{r}
-plot(crop_r3)
-plot(st_geometry(fire2), add=TRUE)
-```
 
 # Raster to point
 ```{r}
@@ -113,8 +88,8 @@ point_sf
 ```{r}
 set.seed(101)
 samplePt = point_sf %>% 
-  rename(dnbr=dNBRimg_4148) %>%
-  mutate(IDobj=4148) %>%
+  rename(dnbr=dNBRimg_3902) %>%
+  mutate(IDobj=3902) %>%
   sample_frac(0.05)
 samplePt
 ```
@@ -128,7 +103,7 @@ ggplot(samplePt, aes(x=dnbr)) + geom_histogram()
 
 ## Write  to Shapefile
 ```{r}
-st_write(samplePt, "../outputs/RasterToPoint/Points4148.shp", driver="ESRI Shapefile") 
+st_write(samplePt, "../outputs/RasterToPointUTM/Points3902.shp", driver="ESRI Shapefile") 
 ```
 
 
