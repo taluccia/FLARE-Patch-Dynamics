@@ -29,13 +29,23 @@ library(foreign) # deals with dbf files
 # Data
 ## Rasters
 ```{r}
-r1 = raster("../data/UTMImages/dnbr/UTM51/dNBRimg_3880.tif")
+r1 = raster("../data/UTMImagesTest/dnbr/UTM51/dNBRimg_3880.tif")
 ```
 
 ```{r}
-r2 = raster("../data/UTMImages/dnbr/dNBRimg_3880.tif")
+r2 = raster("../data/UTMImagesTest/dnbr/dNBRimg_3880.tif")
 ```
+
+
+```{r}
+r3 = raster("../data/dnbrSingleFire/dNBRimg_3880.tif")
+```
+
 ## Fire perimeters 
+```{r}
+firesEA = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+```
+
 ```{r}
 fires = st_read("../data/FiresUTM/FiresUTM51.shp", "FiresUTM51")
 ```
@@ -48,6 +58,13 @@ fire1 = fires %>%
 fire1
 ```
 
+```{r}
+fire2 = firesEA %>%
+  filter(IDobj==3880)
+
+fire2
+```
+
 # Limit Raster to Fire perimeter
 ```{r}
 crop_r1 = mask(r1, fire1)
@@ -56,6 +73,11 @@ crop_r1 = mask(r1, fire1)
 ```{r}
 crop_r2 = mask(r2, fire1)
 ```
+
+```{r}
+crop_r3 = mask(r3, fire2)
+```
+
 # Plot to Check
 ```{r}
 plot(crop_r1)
@@ -66,6 +88,11 @@ plot(st_geometry(fire1), add=TRUE)
 ```{r}
 plot(crop_r2)
 plot(st_geometry(fire1), add=TRUE)
+```
+
+```{r}
+plot(crop_r3)
+plot(st_geometry(fire2), add=TRUE)
 ```
 
 # Raster to point
