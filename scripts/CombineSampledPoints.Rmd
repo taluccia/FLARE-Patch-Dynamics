@@ -97,3 +97,19 @@ df1
 df2 = merge(df1, df_yedoma, by=c("ID", "IDobj", "UTMZone", "dnbr"), all.x = TRUE, all.y = TRUE)
 df2
 ```
+
+# Replace NA for Yedoma
+```{r}
+
+df3 = df2 %>%  
+  mutate(across(yedoma, ~replace_na(.x, 0))) %>%
+  mutate(across(yedoma, ~1 * (. > 0)))
+
+df3
+```
+
+# Write to csv
+
+```{r}
+write.csv(df3, '../outputs/CombinedSampledPoints/SampledPoints.csv',  row.names = FALSE)
+```
