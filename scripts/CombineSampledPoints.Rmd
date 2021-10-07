@@ -1,0 +1,99 @@
+---
+title: "Combine Sampled Points"
+author: "Anna Talucci"
+date: "10/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+# Packages
+
+```{r}
+library(tidyverse)
+```
+
+
+# Data
+
+## Terrain
+```{r}
+csv_terrain = list.files(path = '../data/GeeSampledPoints/terrain', pattern = "csv$", full.names = TRUE)
+```
+
+```{r}
+stacked_terrain <- map_dfr(csv_terrain, read_csv)
+```
+
+```{r}
+head(stacked_terrain)
+tail(stacked_terrain)
+```
+
+## yedoma
+```{r}
+csv_yedoma = list.files(path = '../data/GeeSampledPoints/yedoma', pattern = "csv$", full.names = TRUE)
+```
+
+```{r}
+stacked_yedoma <- map_dfr(csv_yedoma, read_csv)
+```
+
+```{r}
+head(stacked_yedoma)
+tail(stacked_yedoma)
+```
+
+## Tree Cover
+
+```{r}
+csv_trees = list.files(path = '../data/GeeSampledPoints/trees', pattern = "csv$", full.names = TRUE)
+```
+
+```{r}
+stacked_trees <- map_dfr(csv_trees, read_csv)
+```
+
+```{r}
+head(stacked_trees)
+tail(stacked_trees)
+```
+
+# Remove unneeded colums
+```{r}
+df_terrain = stacked_terrain %>%
+  dplyr::select(BurnUnburn:dnbrs)
+
+df_terrain
+```
+
+```{r}
+df_yedoma = stacked_yedoma %>%
+  dplyr::select(ID:dnbr, yedoma)
+
+df_yedoma
+```
+
+```{r}
+df_trees = stacked_trees %>%
+  dplyr::select(ID:dnbr, treecover2000)
+
+df_trees
+```
+
+# Combine
+
+```{r}
+
+df1 = merge(df_terrain, df_trees, by=c("ID", "IDobj", "UTMZone", "dnbr"))
+df1
+```
+
+```{r}
+df2 = merge(df1, df_yedoma, by=c("ID", "IDobj", "UTMZone", "dnbr"), all.x = TRUE, all.y = TRUE)
+df2
+```

@@ -1,0 +1,123 @@
+---
+title: "Sample Size"
+author: "Anna Talucci"
+date: "10/6/2021"
+output: html_document
+---
+
+
+
+# Packages
+```{r}
+library(tidyverse)
+library(sf)
+library(mapedit)
+```
+
+
+```{r}
+point51 = st_read("../data/SamplePoints/Sample5of5UTM51.shp", "Sample5of5UTM51")
+point52 = st_read("../data/SamplePoints/Sample5of5UTM52.shp", "Sample5of5UTM52")
+point53 = st_read("../data/SamplePoints/Sample5of5UTM53.shp", "Sample5of5UTM53")
+point54 = st_read("../data/SamplePoints/Sample5of5UTM54.shp", "Sample5of5UTM54")
+point55 = st_read("../data/SamplePoints/Sample5of5UTM55.shp", "Sample5of5UTM55")
+point56 = st_read("../data/SamplePoints/Sample5of5UTM56.shp", "Sample5of5UTM56")
+point57 = st_read("../data/SamplePoints/Sample5of5UTM57.shp", "Sample5of5UTM57")
+point58 = st_read("../data/SamplePoints/Sample5of5UTM58.shp", "Sample5of5UTM58")
+```
+
+```{r}
+point51 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point51 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```
+
+```{r}
+point52 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point52 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```
+
+```{r}
+point53 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point53 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```
+
+```{r}
+point54 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point54 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```
+
+```{r}
+point55 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point55 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```
+
+```{r}
+point56 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point56 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```
+
+```{r}
+point57 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point57 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```
+
+```{r}
+point58 %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
+```{r}
+point58 %>% 
+  group_by(UTMZone) %>%
+  summarise(n=n())
+```

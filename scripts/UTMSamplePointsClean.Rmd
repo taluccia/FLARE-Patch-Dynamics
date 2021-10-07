@@ -1,0 +1,144 @@
+---
+title: "UTM Sample Points add UTM and Split"
+author: "Anna Talucci"
+date: "10/5/2021"
+output: html_document
+---
+
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Overview
+
+
+# Define UTM Projections
+```{r}
+utm51proj = "+proj=utm +zone=51 +datum=WGS84 +units=m +no_defs"
+utm52proj = "+proj=utm +zone=52 +datum=WGS84 +units=m +no_defs"
+utm53proj = "+proj=utm +zone=53 +datum=WGS84 +units=m +no_defs"
+utm54proj = "+proj=utm +zone=54 +datum=WGS84 +units=m +no_defs"
+utm55proj = "+proj=utm +zone=55 +datum=WGS84 +units=m +no_defs"
+utm56proj = "+proj=utm +zone=56 +datum=WGS84 +units=m +no_defs"
+utm57proj = "+proj=utm +zone=57 +datum=WGS84 +units=m +no_defs"
+utm58proj = "+proj=utm +zone=58 +datum=WGS84 +units=m +no_defs"
+```
+
+
+# Data
+```{r}
+fires51 = st_read("../data/FiresUTM/FiresUTM51.shp", "FiresUTM51")
+```
+All points
+```{r}
+points = st_read("../data/SamplePoints/UTMSample5PerctPoints.shp", "UTMSample5PerctPoints")
+```
+
+```{r}
+utm = read.csv(file = "../data/UTMZone/IDobjUTMZone.csv")
+```
+
+```{r}
+head(utm)
+```
+
+# Combine Dataframes
+```{r}
+df = merge(points, utm, by=("IDobj"))
+df
+```
+
+# Remove scanline by IDobj
+```{r}
+target = c(471, 516, 585, 705, 793, 826, 931, 941, 977, 1014, 1042, 1145, 1217, 1238, 1239, 1289, 1290, 1333, 1451, 1529, 1619, 1672, 1693, 1704, 1744, 1970, 2050, 2104, 2134, 2205, 2239, 2592, 2866, 3144, 3880, 3902)
+```
+
+```{r}
+df1 = df %>% 
+  filter(!IDobj %in% target) %>%
+  mutate(BurnUnburn = ifelse(between(dnbr, -100, 0), "unburned", 
+                      ifelse(between(dnbr,0, 100), "unburned", "burned"))) %>%
+  dplyr::select(IDobj, UTMZone, dnbr, BurnUnburn, geometry)
+  
+```
+
+```{r}
+df1
+```
+```{r}
+2820385*.05
+```
+# Sample size in each UTM group
+```{r}
+df1 %>%
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+
+```
+
+# Reduce Sample size
+
+```{r}
+set.seed(101)
+samplePt = df1 %>% 
+  group_by(BurnUnburn, IDobj) %>%
+  sample_frac(0.05)
+
+```
+
+```{r}
+samplePt
+```
+
+```{r}
+samplePt %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+# Split by UTM
+```{r}
+points_utm51 = samplePt %>% filter(UTMZone == 51)
+points_utm52 = samplePt %>% filter(UTMZone == 52)
+points_utm53 = samplePt %>% filter(UTMZone == 53)
+points_utm54 = samplePt %>% filter(UTMZone == 54)
+points_utm55 = samplePt %>% filter(UTMZone == 55)
+points_utm56 = samplePt %>% filter(UTMZone == 56)
+points_utm57 = samplePt %>% filter(UTMZone == 57)
+points_utm58 = samplePt %>% filter(UTMZone == 58)
+```
+
+
+# Project by UTM
+```{r}
+UtmPt_51 = st_transform(points_utm51, crs=utm51proj)
+UtmPt_52 = st_transform(points_utm52, crs=utm52proj)
+UtmPt_53 = st_transform(points_utm53, crs=utm53proj)
+UtmPt_54 = st_transform(points_utm54, crs=utm54proj)
+UtmPt_55 = st_transform(points_utm55, crs=utm55proj)
+UtmPt_56 = st_transform(points_utm56, crs=utm56proj)
+UtmPt_57 = st_transform(points_utm57, crs=utm57proj)
+UtmPt_58 = st_transform(points_utm58, crs=utm58proj)
+```
+
+
+# Write to shapefile
+```{r eval=FALSE, include=FALSE}
+
+st_write(UtmPt_51, "../outputs/PointSamplingUTM/pointsUTM51.shp", driver="ESRI Shapefile") 
+
+st_write(UtmPt_52, "../outputs/PointSamplingUTM/pointsUTM52.shp", driver="ESRI Shapefile") 
+
+st_write(UtmPt_53, "../outputs/PointSamplingUTM/pointsUTM53.shp", driver="ESRI Shapefile") 
+
+st_write(UtmPt_54, "../outputs/PointSamplingUTM/pointsUTM54.shp", driver="ESRI Shapefile") 
+
+st_write(UtmPt_55, "../outputs/PointSamplingUTM/pointsUTM55.shp", driver="ESRI Shapefile") 
+
+st_write(UtmPt_56, "../outputs/PointSamplingUTM/pointsUTM56.shp", driver="ESRI Shapefile") 
+
+st_write(UtmPt_57, "../outputs/PointSamplingUTM/pointsUTM57.shp", driver="ESRI Shapefile") 
+
+st_write(UtmPt_58, "../outputs/PointSamplingUTM/pointsUTM58.shp", driver="ESRI Shapefile") 
+```
