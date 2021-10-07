@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overview
 
+Combine sampled data points from Raster to Point conversion. Points are grouped by UTM zone. Combine points form same UTM zone and add Row ID column, to distinguish each point. Add UTM zone column as well. 
 # Packages
 ```{r}
 library(tidyverse)
@@ -22,7 +23,7 @@ library(mapedit)
 
 # Define folder and file details
 ```{r}
-poly_folder <- "../data/RasterToPoint" 
+poly_folder <- "../data/RasterToPointUTM/UTM58" 
 
     #--store shapefile names as a list
 poly_shp_files <- list.files(poly_folder, pattern = "\\.shp$")
@@ -85,8 +86,53 @@ all_data <- sf::st_as_sf(data.table::rbindlist(poly_shp_list))
 all_data
 ```
 
+# Add atributes
+# Remove scanline by IDobj
+```{r}
+target = c(471, 516, 585, 705, 793, 826, 931, 941, 977, 1014, 1042, 1145, 1217, 1238, 1239, 1289, 1290, 1333, 1451, 1529, 1619, 1672, 1693, 1704, 1744, 1970, 2050, 2104, 2134, 2205, 2239, 2592, 2866, 3144, 3880, 3902)
+```
+
+
+```{r}
+df1 = all_data %>% 
+  filter(!IDobj %in% target) %>%
+  mutate(BurnUnburn = ifelse(between(dnbr, -100, 0), "unburned", 
+                      ifelse(between(dnbr,0, 100), "unburned", "burned"))) %>%
+  mutate(UTMZone = 58) %>%
+  tibble::rowid_to_column(., "ID") %>% 
+  dplyr::select(ID, IDobj, UTMZone, dnbr, BurnUnburn, geometry)
+
+df1
+  
+```
+
+
+# Sample size in each UTM group
+```{r}
+df1 %>%
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+
+```
+
+# Reduce Sample size
+
+```{r}
+set.seed(101)
+samplePt = df1 %>% 
+  group_by(BurnUnburn, IDobj) %>%
+  sample_frac(0.05)
+
+```
+
+```{r}
+samplePt %>% 
+  group_by(UTMZone,BurnUnburn) %>%
+  summarise(n=n())
+```
+
 
 # Write to Shapefile
 ```{r}
-st_write(all_data, "../outputs/SamplePoints/Sample5PerctPoints.shp", driver="ESRI Shapefile") 
+st_write(samplePt, "../outputs/SamplePoints/Sample5of5UTM58.shp", driver="ESRI Shapefile") 
 ```

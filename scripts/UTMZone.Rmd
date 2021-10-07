@@ -34,7 +34,7 @@ wgs_proj =  "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs "
 fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
 ```
 ```{r}
-fire1 = fires %>% filter(IDobj==4148) 
+fire1 = fires %>% filter(IDobj==388) 
 ```
 # Reproject
 ```{r}
