@@ -1,0 +1,294 @@
+---
+title: "difference test"
+author: "Anna Talucci"
+date: "10/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+
+# Pakcages
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(lme4)
+library(cowplot)
+library(lme4)
+library(lsmeans)
+library(DHARMa)
+library(multcomp)
+library(car)
+library(grid)
+library(gtable)
+library(gridExtra)
+library(gmodels)
+```
+
+
+# Data
+
+```{r}
+refugia = read.csv("../data/ClassPatchSummary/Refugia.csv") 
+```
+
+
+# Define graph Theme and color Palette 
+
+```{r}
+comp_theme = theme_bw() + theme(legend.position = "none") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+ 
+```{r}
+
+reg_theme = theme_bw() + theme(legend.position = "none") +
+  theme(plot.margin = unit(c(t = 0.3, r = 0.3, b = 0.3, l = 0.1), "cm")) +
+  theme(axis.title.x = element_text(size = 11, hjust = 0.5, vjust = -0.1),
+        axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+
+```
+
+```{r}
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```
+
+# Summary stats
+```{r}
+refugia %>% 
+  group_by(ArcSub, FireSize) %>% 
+  summarise(n = n(),
+            mean=mean(area_mn), 
+            sd=sd(area_mn), 
+            min=min(area_mn), 
+            max=max(area_mn))
+```
+
+```{r}
+refugia = refugia %>%
+  mutate(FireSize2 = factor(FireSize, levels = c("small", "moderate", "large")))
+```
+
+# Analysis
+
+## Patch Size Large vs medium, vs small fires
+```{r}
+fit2 = lm(area_mn ~ FireSize2, data = refugia)
+```
+
+#### Residuals
+```{r}
+# Get the fitted value for each observation
+refugia$fit2 = fitted(fit2)
+# Get the residuals of the model
+refugia$res2 = residuals(fit2)
+```
+
+```{r}
+qplot(x = fit2, y = res2, data = refugia,
+main = "Residuals vs Fitted Values")
+```
+
+```{r}
+qplot(x = FireSize, y = res2, data = refugia,
+xlab = "size class group",
+ylab = "Residuals",
+main = "Residuals vs burn/unburn")
+```
+```{r}
+qplot(x = factor(1), y = res2, data = refugia, geom = "boxplot")
+```
+
+```{r}
+qqnorm(refugia$res2, main = "Normal QQ Plot of Residuals")
+qqline(refugia$res2) # add reference line to the qq plot
+```
+
+```{r}
+plot(fit2, which = 1) # residual vs fitted values
+```
+
+```{r}
+plot(fit2, which = 2) # qqnorm plot of residuals
+```
+
+#### Summary
+```{r}
+summary(fit2)
+```
+```{r}
+anova(fit2)
+```
+
+
+```{r}
+# All the coefficients
+coef(fit2)
+```
+
+```{r}
+# All the confidence intervals for the coefficients
+confint(fit2)
+```
+
+```{r}
+small = c(1, 0, 0) 
+medium = c(1, 1, 0) 
+large = c(1, 0, 1)
+```
+
+```{r}
+# Create vectors for treatment comparisons with subtraction
+small_large = small-large
+medium_large = medium-large
+small_medium = small-medium
+```
+
+```{r}
+ # Stack the differences in means vectors together
+(diffest2 = rbind(small_large, medium_large, small_medium) )
+```
+
+```{r}
+( estdiffdate2 = estimable(fit2, diffest2, conf.int = .983) )
+```
+```{r}
+estdiffdate2$group = factor(rownames(estdiffdate2),
+levels = c("small_large", "medium_large", "small_medium"),
+labels = c("Small vs Large", "Medium vs Large", "Small vs Medium"))
+```
+
+```{r}
+write.csv(estdiffdate2, '../outputs/Analysis/FireSizeDifference.csv',  row.names = FALSE)
+```
+
+```{r fig.height=4, fig.width=6}
+( g1 = ggplot(estdiffdate2, aes(x = group, y = Estimate) ) + # Set axes
+geom_errorbar(width = .1, lwd = .75, aes(ymin = Lower.CI, ymax = Upper.CI)) + # Add error bars geom_point(size = 3) + # Add point estimate, change point size
+geom_hline(yintercept = 0, color="grey34") + # Add horizontal line at 0
+geom_hline(yintercept = c(.25, -.25), color = "grey34", lty = 4) + # Add horiz line at +/-.25 theme_bw() + # change graph to black and white for printing
+xlab(NULL) + ylab("Patch size (ha)") + # Change axis labels
+theme(panel.grid.major.x = element_blank() ) )
+
+
+```
+
+```{r fig.height=4, fig.width=6}
+(g2 = ggplot(estdiffdate2, aes(x = Estimate, y = group) ) +
+
+   geom_errorbarh(height = .1, lwd = .75, aes(xmin = Lower.CI, xmax = Upper.CI)) + 
+  geom_point(size = 3) + 
+
+  geom_vline(xintercept = 0, lty = 2) + 
+
+  geom_rect(alpha = .05, aes(xmin = -1, xmax = 1, ymin = 0, ymax = 4) ) +
+
+theme_bw() +
+ylab("") + xlab("Mean patch size (ha)") + 
+theme(axis.ticks.y = element_blank(),
+axis.text.y = element_blank() ) + 
+  theme(panel.grid.major.y = element_blank() ) + 
+  geom_text(aes(x = Estimate, y = as.numeric(group) + .15,
+label = group), size = 5) + 
+  annotate("text", x = 0, y = .25, label = "Zone of\nno difference", size = 4) )
+
+```
+
+
+```{r}
+ggsave("../figures/FireSizeDifference.png", plot = g2, width = 6, height = 4, units = c("in"), dpi = 600)
+```
+
+
+## Linear modelPatch Density by mean patch size
+
+```{r}
+fit3 = lm(pd ~ Logarea_mn, data = refugia)
+```
+
+```{r}
+linear.model <-lm(pd ~ area_mn, data = refugia)
+log.model <-lm(log(pd) ~ Logarea_mn, data = refugia)
+exp.model <-lm(pd ~ exp(area_mn), data = refugia)
+```
+
+
+```{r}
+
+summary(log.model)
+```
+
+
+#### Residuals
+```{r}
+# Get the fitted value for each observation
+refugia$fit3 = fitted(fit3)
+# Get the residuals of the model
+refugia$res3 = residuals(fit3)
+```
+
+```{r}
+qplot(x = fit3, y = res3, data = refugia,
+main = "Residuals vs Fitted Values")
+```
+
+```{r}
+qplot(x = Logarea_mn, y = res3, data = refugia,
+xlab = "Patch area (log transformed",
+ylab = "Residuals",
+main = "Residuals vs burn/unburn")
+```
+
+```{r}
+uppersize = with(log.model, fit + 2*se.fit) 
+lowersize = with(log.model, fit - 2*se.fit)
+```
+```{r}
+log.model.df <- data.frame(x = refugia$area_mn,
+                           y = exp(fitted(log.model)))
+                          
+
+log.model.df
+```
+
+```{r}
+ggplot(refugia, aes(x=area_mn, y=pd)) + 
+  geom_point() +
+  geom_smooth(method="lm", aes(color="Exp Model"), formula= (y ~ exp(x)), se=FALSE, linetype = 1) +
+  geom_line(data = log.model.df, aes(x, y, color = "Log Model"), size = 1, linetype = 2) + 
+  guides(color = guide_legend("Model Type"))
+```
+### Patch Density by mean patch size*
+```{r fig.height=4, fig.width=6}
+plot2 = ggplot(refugia, aes(x=area_mn, y=pd)) + 
+    geom_point(size=1.5, shape=1, color= "grey50")  +
+  geom_line(data = log.model.df, aes(x, y),color = "#006CD1", size = 1, linetype = 1) + 
+    xlab("Patch Size in ha") +
+      ylab("Patch Density\n(count per 100 ha)") +
+  reg_theme+
+  theme(legend.position = "none",
+        legend.key.height = unit(.25, 'in'), 
+        legend.key.width = unit(.25, 'in'),
+        legend.background = element_rect(fill='white')) + 
+  theme(legend.text = element_text(size = 8)) 
+
+plot2
+```
+
+```{r}
+ggsave("../figures/PatchDensityPatchSize.png", plot = plot2, width = 6, height = 4, units = c("in"), dpi = 600)
+```

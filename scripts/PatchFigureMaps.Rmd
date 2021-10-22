@@ -1,0 +1,315 @@
+---
+title: "Patch Figure"
+author: "Anna Talucci"
+date: "10/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Fire IDObj
+601
+673
+872
+885
+
+1166
+1327
+
+
+#Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(dplyr)
+library(ggspatial)
+```
+
+# Data
+
+## Refugia
+```{r}
+refugia = read.csv("../data/ClassPatchSummary/Refugia.csv") 
+```
+
+## Rasters
+```{r}
+r601 <- raster("../data/UTMImagery/BinaryImg_601.tif")
+r673 <- raster("../data/UTMImagery/BinaryImg_673.tif")
+r872 <- raster("../data/UTMImagery/BinaryImg_872.tif")
+r885 <- raster("../data/UTMImagery/BinaryImg_885.tif")
+r1166 <- raster("../data/UTMImagery/BinaryImg_1166.tif")
+r1327 <- raster("../data/UTMImagery/BinaryImg_1327.tif")
+```
+
+```{r}
+r601
+```
+## Perimeters
+```{r}
+fires51 = st_read("../data/FiresUTM/FiresUTM51.shp", "FiresUTM51") 
+fires52 = st_read("../data/FiresUTM/FiresUTM52.shp", "FiresUTM52") 
+fires53 = st_read("../data/FiresUTM/FiresUTM53.shp", "FiresUTM53") 
+fires54 = st_read("../data/FiresUTM/FiresUTM54.shp", "FiresUTM54") 
+fires55 = st_read("../data/FiresUTM/FiresUTM55.shp", "FiresUTM55") 
+fires56 = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56") 
+fires57 = st_read("../data/FiresUTM/FiresUTM57.shp", "FiresUTM57") 
+fires58 = st_read("../data/FiresUTM/FiresUTM58.shp", "FiresUTM58") 
+```
+
+# Select Perimeters
+```{r}
+target = c(601, 673, 872, 885, 1166, 1327)
+target2 = c(601, 673)
+```
+
+```{r}
+refugTar = refugia %>%
+  filter(IDobj %in% target)
+```
+
+```{r}
+legItems = refugia %>%
+  filter(IDobj %in% target2)
+```
+
+```{r}
+fire885 = fires58 %>% filter(IDobj ==885)
+```
+
+
+```{r}
+fire601 = fires57 %>% filter(IDobj ==601)
+```
+
+```{r}
+fire673 = fires55 %>% filter(IDobj ==673)
+fire872 = fires55 %>% filter(IDobj ==872)
+fire1327 = fires55 %>% filter(IDobj ==1327)
+```
+
+```{r}
+fire1166 = fires54 %>% filter(IDobj ==1166)
+```
+
+
+# Limit Raster to Fire perimeter
+```{r}
+crop_r601 = mask(r601, fire601)
+crop_r673 = mask(r673, fire673)
+crop_r872 = mask(r872, fire872)
+crop_r885 = mask(r885, fire885)
+crop_r1166 = mask(r1166, fire1166)
+crop_r1327 = mask(r1327, fire1327)
+```
+
+# Plot
+```{r}
+plot(crop_r601)
+plot(st_geometry(fire601), add=TRUE)
+```
+
+# Palette
+(#dfc27d, #018571)
+```{r}
+Palette2 <- c('#E1BE6A','#40B0A6')
+```
+
+# Plots
+```{r}
+
+fig_legend = ggplot() +
+ geom_sf(data = fire601, aes(fill = 'Burned' )) + 
+ geom_sf(data = fire872, aes(fill = 'Fire Refugia' )) + 
+  scale_fill_manual(values = c("Burned" = '#E1BE6A', "Fire Refugia"='#40B0A6'), 
+                    guide = guide_legend(override.aes = list(linetype = "blank", shape = NA))) +
+  theme(legend.title = element_blank(), legend.position= "bottom", legend.box="horizontal", legend.margin=margin(t=.3, b=.4, r=.3, l=.3, unit="cm")) 
+
+fig_legend
+```
+
+```{r}
+
+ggplot() +
+ layer_spatial(data=crop_r601) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "right", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+
+```
+
+
+```{r}
+
+plot601 = ggplot() +
+ layer_spatial(data=crop_r601) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+plot601
+```
+
+```{r}
+
+plot673 = ggplot() +
+ layer_spatial(data=crop_r673) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+  theme(legend.title = element_blank(), legend.position= "right", legend.box="vertical", legend.margin=margin(t=.3, b=.4, r=.3, l=.3, unit="cm")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  annotation_scale(location = "br", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+plot673
+```
+
+```{r}
+
+plot872 = ggplot() +
+ layer_spatial(data=crop_r872) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+plot872
+```
+
+```{r}
+
+plot885 = ggplot() +
+ layer_spatial(data=crop_r885) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+plot885
+```
+
+```{r}
+
+plot1166 = ggplot() +
+ layer_spatial(data=crop_r1166) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+plot1166
+```
+
+```{r}
+
+plot1327 = ggplot() +
+ layer_spatial(data=crop_r1327) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = 'white', linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "none",
+       axis.text.x=element_blank(),
+       axis.ticks.x=element_blank(), 
+       axis.text.y=element_blank(), 
+       axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+plot1327
+```
+
+
+```{r}
+refugTar %>% dplyr::select(IDobj, SizeHa:SizeCl)
+```
+
+# Combine Plots
+
+```{r}
+
+legendplot = get_legend(fig_legend)
+```
+
+```{r fig.height=7, fig.width=6}
+
+plot1 = cowplot::plot_grid(plot885, plot673, plot872, plot601,  plot1166, plot1327, ncol=2)
+plot1
+```
+
+
+```{r fig.height=7, fig.width=6}
+
+plot2 = cowplot::plot_grid(plot1, legendplot, ncol = 1, rel_heights = c(1, .1)) +
+  draw_label("(a)", x = 0.04, y = .95, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+   draw_label("(b)", x = 0.55, y = .95, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(c)", x = 0.04, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(d)", x = 0.55, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(e)", x = 0.04, y = .35, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(f)", x = 0.55, y = .35, fontfamily = "sans", fontface = "bold", color = "black", size = 12)
+
+plot2
+```
+
+```{r}
+ggsave("../figures/PatchMapsExample.png", plot = plot2, width = 6, height = 7, units = c("in"), dpi = 600)
+```
+
+
+# Distance to unburned
+
+```{r}
+
+g1166 = ggplot() +
+ layer_spatial(data=crop_r1166) + 
+  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+g1166
+```
+
+```{r}
+refugia %>% filter(IDobj==1166)
+```
+
+
+**THE END**

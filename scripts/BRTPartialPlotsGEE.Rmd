@@ -1,0 +1,270 @@
+---
+title: "BRT Plots GEE"
+author: "Anna Talucci"
+date: "10/13/2021"
+output: html_document
+---
+
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+Script adapted from Areil Muldoon and Garrett Meigs
+
+September 2019: Extra fun with partial plots.  This script is designed to use brt model runs saved as .Rdas.
+
+Data from BRTAnalysis-SubsetData
+
+# Goal: Overlay partial-dependence plots from multiple models.
+
+NOte: the y-axis of the BRT model are referred to as the fitted function, for a binomial distribtuion this fitted function is the loggit scale. To convert back to a probability we can use the plogis() function. We will leave the y-axix on the logit scale but also add a line for a high probability
+
+setwd("K:/Papers/Meigs_Refugia2_LateSuccessionalForests/r_files_brt")   ### Change to wherever you put the code files sourced below
+
+# Load packages
+```{r message=FALSE, warning=FALSE}
+library(gbm)
+library(dismo)
+library(purrr) # for looping
+library(ggplot2)
+library(scales)
+library(dplyr) # for data manip
+library(cowplot)
+```
+
+# BRT Models
+
+
+# Load BRT Models 
+Load BRT models that are saved during the model as .Rda files in the working directory. Models are assembled and run in the script 'BRTAnalyses'
+```{r}
+load(file = "../outputs/BRTmodelsGEE/BRT1_model.rda")
+brt.model1 = brt.model1
+```
+
+# Plot Themes
+```{r}
+bar_theme = theme_bw() + 
+  theme(legend.position = "none", legend.title = element_blank()) +
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black")) 
+```
+
+
+# Data
+
+```{r}
+data = read.csv("../data/CombinedSampledPoints/SampledPointsInGEE.csv") 
+```
+
+```{r}
+head(data)
+```
+
+```{r}
+varImp = read.csv("../outputs/BRTmodelsGEE/BRT1_relinf.csv") 
+```
+
+```{r}
+varImp
+```
+
+# Manuscript figure
+
+## models 
+Make list of models and variables
+mods4 = list(Hi_4var = brt.model1, Mod_4var = brt.model2, Full_4var = brt.model6)
+vars4 = c("dndmi", "elevation", "fwi", "ndviprefire")
+names(vars4) = vars4
+vars4
+
+classes, latitude, TPI450, SLPPCT, aspect, ASPTR, elevation, ruggedness, treecover2000, FireYr
+```{r}
+mods4 = list(full_mod= brt.model1)
+vars4 = c("latitude", "TPI450", "TPI150", "ruggedness", "SLPPCT", "aspect", "ASPTR", "elevation", "treecover2000")
+names(vars4) = vars4
+vars4
+```
+
+latitude
+TPI450
+elevation
+treecover2000
+SLPPCT
+aspect
+ruggedness
+ASPTR
+
+Nicer variable names for x axis labels Must be in same order as vars
+```{r}
+x_names4 = c("Latitude", "TPI 450m", "TPI 150m", "Rugged", "Slope (%)", "Aspect", "Beer's Aspect", "Elevation (m)", "Tree Cover (%)")
+```
+
+### Predicted dataset 
+Use nested loops for each variable and then each model within each variable
+
+ For outer loop use map() or lapply()
+ For the inner loop use imap_dfr() to use models and model names and bind together
+
+ Work out approach with a single variable
+ Goal is to get a dataset with predictions from all models stacked together for one x variable
+
+### Loop through single varible
+```{r}
+pred_test4 = map(vars4[[1]], function(variable) {
+     imap_dfr(mods4, function(Model, mod.name) {
+          preddat = plot.gbm(Model, i.var = variable, return.grid = TRUE)
+          preddat$center_y = scale(preddat$y, scale = FALSE)
+          preddat$x = preddat[, 1]
+          preddat$Model = mod.name
+          preddat
+     })
+})
+
+pred_test4
+```
+
+### Loop through all Varaibles 
+If that worked, loop through all variables
+```{r}
+pred_mods4 = map(vars4, function(variable) {
+     imap_dfr(mods4, function(model, mod.name) {
+          preddat = plot.gbm(model, i.var = variable, return.grid = TRUE)
+          preddat$center_y = scale(preddat$y, scale = FALSE)
+          preddat$x = preddat[, 1]
+          preddat$model = mod.name
+          preddat
+     })
+})
+```
+
+Figure out plot limits (if want all the same) by binding all groups together and calculating min and max center_y
+```{r}
+range(bind_rows(pred_mods4)$center_y)
+```
+
+### Plot with improved x axis names ----
+```{r}
+model_id <- ggplot(data = pred_mods4[[1]], aes(x = x, y = center_y, linetype = model, color = model) ) +
+        geom_smooth(span = 0.5, se = FALSE) + # choose span? 
+        scale_color_manual(values = c("blue","red", "orange"), name = "Fire weather", guide = guide_legend(reverse=TRUE)) +
+        scale_linetype_manual(values = c("solid", "longdash", "twodash"), name = "Fire weather", guide = guide_legend(reverse=TRUE)) +
+        labs(x = x_names4[[1]]) +
+        theme_bw(base_size = 12) +
+        theme(axis.text.x = element_text(size = 10, color = "black"),
+              axis.text.y = element_text(size = 10, color = "black"),
+              panel.border = element_rect(color = "black", size = 1.25),
+              panel.grid.major = element_line(color = 'white', linetype = 'dashed'), panel.grid.minor = element_blank(),
+              legend.position = "bottom",
+              legend.title = element_text(size = 14),
+              legend.text = element_text(size = 14)) +
+        scale_x_continuous(labels = scales::format_format(scientific = FALSE)) +
+        #scale_x_continuous(labels = comma) +
+        #ylim(-1.55, 1.55) +
+        geom_hline(yintercept=0)+
+        scale_y_continuous(limits=c(-2.2,2.2), breaks=c(-2.197225,-0.8472979, 0, 0.8472979, 2.197225), labels = c("0.1", "0.3", "0.5", "0.7", "0.9"), name="Probability")
+
+model_id
+```
+Leaving legend to indicate multiple models plotted.
+
+
+
+### Plotting function ----
+Note: plot.margin - t,r,b,l
+
+Adjust plot margins for compiling a panel figure with cowplot.
+
+```{r}
+pardep_plot_mods4 = function(data, x_var) {
+     ggplot(data = data, aes(x = x, y = center_y, linetype = model, color = model) ) +
+    geom_smooth(span = 0.5, se = FALSE) + # choose span? 
+    scale_color_manual(values = c("blue","red", "orange")) +
+                labs(x = x_var) +
+                theme_bw(base_size = 12) +
+                theme(plot.margin = unit(c(0.05, 0.2, 0.05, 0.5), "cm")) +
+                theme(axis.text.x = element_text(size = 10, color = "black"),
+                      axis.text.y = element_text(size = 10, color = "black"),
+                      panel.border = element_rect(color = "black", size = 1.25),
+                      panel.grid.major = element_line(color = 'white', linetype = 'dashed'), panel.grid.minor = element_blank(),
+                      legend.position = "none") +
+                scale_x_continuous(labels = scales::format_format(scientific = FALSE)) +
+                scale_x_continuous(labels = comma) +
+                #ylim(-1.55, 1.55) +
+                geom_hline(yintercept=0)+
+                scale_y_continuous(limits=c(-2.2,2.2), breaks=c(-2.197225,-0.8472979, 0, 0.8472979, 2.197225), labels = c("0.1", "0.3", "0.5", "0.7", "0.9"), name="Probability")
+}
+
+pardep_plot_mods4(data = pred_mods4[[1]], x_var = x_names4[[1]])
+```
+
+### Loop through the models and the x variable names
+    simultaneously with map2()
+```{r}
+all_mod_plots4 = map2(pred_mods4, x_names4, pardep_plot_mods4)
+all_mod_plots4
+```
+
+
+# Variabile Influence 
++
+    geom_text(aes(label = var), vjust = .5, hjust = 1.1, colour = "white")
+
+```{r}
+varInfPlot = varImp %>% ggplot(aes(x = forcats::fct_reorder(.f = var, 
+                                      .x = rel.inf), 
+             y = rel.inf, 
+             fill = rel.inf)) +
+  geom_col() +
+  # flip
+  coord_flip() +
+  # format
+  scale_color_brewer(palette = "Dark2") +
+   bar_theme +
+    scale_x_discrete(breaks=NULL) +
+  theme(axis.ticks.x = element_blank(), axis.title = element_text()) + 
+  xlab('Variables') +
+  ylab('Relative Influence') 
+varInfPlot
+```
+# Manuscript Figure
+
+
+```{r fig.height=7, fig.width=6}
+msplot1 = cowplot::plot_grid(varInfPlot, all_mod_plots4$TPI450, all_mod_plots4$SLPPCT, all_mod_plots4$elevation, all_mod_plots4$latitude, all_mod_plots4$treecover2000,  ncol = 2) +
+    
+    draw_label("TPI 450m", x = .4, y = .975, size = 9, color ="white" ) +
+    draw_label("Slope", x = .38, y = .945, size = 9, color ="white" ) +
+    draw_label("Elevation", x = .29, y = .92, size = 9, color ="white" ) +
+    draw_label("Latitude", x = .29, y = .89, size = 9, color ="white" ) +
+    draw_label("Tree Cover", x = .125, y = .865, size = 9, color ="white" ) +
+    draw_label("Aspect", x = .12, y = .835, size = 9, color ="white" ) +
+    draw_label("TPI 150m", x = .18, y = .81, size = 9) +
+    draw_label("Ruggedness", x = .18, y = .78, size = 9) +
+    draw_label("Beer's Aspect", x = .17, y = .75, size = 9) +
+    draw_label("lowland", x = .66, y = .76, size = 9) +
+   draw_label("upland", x = .94, y = .76, size = 9) +
+   draw_label("(a)", x = .02, y = .98, size = 10) +
+   draw_label("(b)", x = .53, y = .98, size = 10) +
+   draw_label("(c)", x = .02, y = .64, size = 10) +
+   draw_label("(d)", x = .53, y = .64, size = 10) +
+   draw_label("(e)", x = .02, y = .32, size = 10) +
+   draw_label("(f)", x = .53, y = .32, size = 10)
+
+msplot1
+```
+
+
+
+```{r eval=FALSE, include=FALSE}
+ggsave("../figures/PartialPlot.tiff", plot = msplot1, width = 6, height =7, units = c("in"), dpi=600 )
+```
+**THE END**

@@ -1,0 +1,46 @@
+---
+title: "Add Utm code to new list of IDObj sampled"
+author: "Anna Talucci"
+date: "10/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+# Packages
+```{r}
+library(tidyverse)
+```
+
+# Data
+```{r}
+df_id = read.csv(file = "../data/CombinedSampledPoints/SampledFireIDObj.csv")
+```
+
+```{r}
+utm = read.csv(file = "../data/UTMZone/IDobjUTMZone.csv")
+```
+
+```{r}
+utm
+df_id
+```
+```{r}
+df_id1 = df_id %>% rename(IDobj = unique.df3.IDobj.)
+```
+
+# Combine
+```{r}
+df1 = merge(df_id1, utm, by="IDobj")
+df1
+```
+
+# Write to file
+```{r}
+ write.csv(df1, '../outputs/CombinedSampledPoints/SampledFireIDObjUTM.csv',  row.names = FALSE)
+
+```

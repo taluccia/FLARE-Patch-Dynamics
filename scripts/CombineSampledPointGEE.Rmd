@@ -1,0 +1,64 @@
+---
+title: "GEE Point Sampling"
+author: "Anna Talucci"
+date: "10/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+# Packages
+
+```{r}
+library(tidyverse)
+```
+
+
+# Data
+
+```{r}
+csv_gee = list.files(path = '../data/GeeSampledPoints/SampleGEE2001-2020', pattern = "csv$", full.names = TRUE) %>%
+  map_df(function(x) read_csv(x, col_types = cols(.default = "c")) %>% mutate(filename=gsub(".csv","",basename(x)))) 
+```
+
+```{r eval=FALSE, include=FALSE}
+stacked_gee <- map_dfr(csv_gee, read_csv) %>% mutate(filename=gsub(".csv","", basename(x)))
+```
+```{r eval=FALSE, include=FALSE}
+map_df(function(x) read_csv(x, col_types = cols(.default = "c")) %>% mutate(filename=gsub(".csv","",basename(x)))) 
+```
+
+```{r}
+csv_gee
+```
+
+```{r}
+df = csv_gee %>%
+  rename(ptID = "system:index") %>%
+  mutate(Refugia = ifelse(between(dnbr, -100, 0), "1", 
+                      ifelse(between(dnbr,0, 100), "1", "0"))) %>%
+  mutate(Rugged = ifelse(between(ruggedness, 200, 400), "moderate", "flat")) %>%
+  mutate(FireYr = readr::parse_number(as.character(filename))) %>%
+  dplyr::select(ptID:treecover2000, Refugia:FireYr) 
+
+df
+```
+
+```{r}
+tail(df)
+```
+
+
+
+```{r eval=FALSE, include=FALSE}
+write.csv(df, '../outputs/CombinedSampledPoints/SampledGEE2001-2020.csv',  row.names = FALSE)
+```
+
