@@ -1,0 +1,161 @@
+---
+title: "Linear modesl Maybe"
+author: "Anna Talucci"
+date: "10/24/2021"
+output: html_document
+---
+
+# Overview
+
+
+# Pakcages
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(lme4)
+library(cowplot)
+library(lme4)
+library(lsmeans)
+library(DHARMa)
+library(multcomp)
+library(car)
+library(grid)
+library(gtable)
+library(gridExtra)
+library(gmodels)
+```
+
+
+# Data
+
+```{r}
+refugia = read.csv("../data/ClassPatchSummary/Refugia.csv") 
+```
+
+
+# Define graph Theme and color Palette 
+
+```{r}
+comp_theme = theme_bw() + theme(legend.position = "none") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+ 
+```{r}
+
+reg_theme = theme_bw() + theme(legend.position = "none") +
+  theme(plot.margin = unit(c(t = 0.3, r = 0.3, b = 0.3, l = 0.1), "cm")) +
+  theme(axis.title.x = element_text(size = 11, hjust = 0.5, vjust = -0.1),
+        axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+
+```
+
+```{r}
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```
+
+# Summary stats
+```{r}
+refugia %>% 
+  group_by(ArcSub, FireSize) %>% 
+  summarise(n = n(),
+            mean=mean(area_mn), 
+            sd=sd(area_mn), 
+            min=min(area_mn), 
+            max=max(area_mn))
+```
+
+```{r}
+refugia = refugia %>%
+  mutate(FireSize2 = factor(FireSize, levels = c("small", "moderate", "large")))
+```
+
+```{r}
+refugia
+
+```
+
+# Analysis
+
+## Fire Size
+### Mean Patch Size
+```{r}
+fit1a = lm(area_mn ~ SizeHa, data = refugia)
+```
+
+#### Residuals
+```{r}
+# Get the fitted value for each observation
+refugia$fit1a = fitted(fit1a)
+# Get the residuals of the model
+refugia$res1a = residuals(fit1a)
+```
+
+```{r}
+qplot(x = fit1a, y = res1a, data = refugia,
+main = "Residuals vs Fitted Values")
+```
+
+```{r}
+qplot(x = SizeHa, y = res1a, data = refugia,
+xlab = "fire Size",
+ylab = "Residuals",
+main = "Residuals vs burn/unburn")
+```
+```{r}
+qplot(x = factor(1), y = res1a, data = refugia, geom = "boxplot")
+```
+
+```{r}
+qqnorm(refugia$res1a, main = "Normal QQ Plot of Residuals")
+qqline(refugia$res1a) # add reference line to the qq plot
+```
+
+```{r}
+plot(fit1a, which = 1) # residual vs fitted values
+```
+
+```{r}
+plot(fit1a, which = 2) # qqnorm plot of residuals
+```
+
+#### Summary
+```{r}
+summary(fit1a)
+```
+
+
+```{r}
+# All the coefficients
+coef(fit1a)
+```
+
+```{r}
+# All the confidence intervals for the coefficients
+confint(fit1a)
+```
+
+```{r}
+g1a = ggplot(refugia, aes(x=log(SizeHa), y=log(area_mn))) + 
+    geom_point(size=1.5, shape=1, color= "grey50")  +
+  
+    xlab("Fire Size (Ha)") +
+      ylab("Mean Patch size (Ha)") +
+  reg_theme+
+  theme(legend.position = "none",
+        legend.key.height = unit(.25, 'in'), 
+        legend.key.width = unit(.25, 'in'),
+        legend.background = element_rect(fill='white')) + 
+  theme(legend.text = element_text(size = 8)) 
+
+g1a
+```
