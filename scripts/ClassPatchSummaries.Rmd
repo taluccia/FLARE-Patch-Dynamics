@@ -69,36 +69,27 @@ fires = read.csv("../data/NESiberiaFires/NESiberiaFires2020.csv")
 ```
 
 ## Class patch summaries
-```{r}
-data_dir <- "../data/PatchSummary/"
-```
-
-```{r eval=FALSE, include=FALSE}
-fs::dir_ls(data_dir)
-```
-
-```{r}
-csv_files = fs::dir_ls(data_dir, regexp = "\\.csv$")
-csv_files
-```
 
 
 ```{r}
-df = csv_files %>% 
-  map_dfr(read_csv)
+csv_patch = list.files(path = '../data/PatchSummaryUTM', pattern = "csv$", full.names = TRUE)
+```
+
+```{r include=FALSE}
+stacked_patch <- map_dfr(csv_patch, read_csv)
 ```
 
 # Organize Patch Class Data 
 1. Filter - remove fires with scanline error
 2. Pivot Wider so each patch metric is a column
 ```{r}
-df1 = df %>% 
+df1 = stacked_patch %>% 
   filter(!IDobj %in% target) %>%
   pivot_wider(id_cols =  c(IDobj, class), names_from = metric, values_from = value)
 
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 unique(df1$IDobj)
 ```
 
@@ -116,6 +107,30 @@ data2 = data1 %>%
   mutate(Logarea_mn = log(area_mn))  %>%
   dplyr::select(IDobj:class, area_mn, ca,np, enn_mn, para_mn, pd, pland, tca, SizeHa, EcoCode, ArcSub, SizeCl, LogHa, Logarea_mn) 
   
+data2
+```
+
+```{r}
+refugia = data2 %>% 
+  filter(class==1) %>%
+  mutate(Logca = log(ca))  %>%
+  mutate(Logtca = log(tca)) %>%
+  mutate(FireSize = ifelse((SizeCl %in% 1:3), "small", 
+                      ifelse((SizeCl %in% 4:6), "moderate", "large"))) 
+
+refugia
+```
+Write refugia data to file
+```{r eval=FALSE, include=FALSE}
+write.csv(refugia, '../outputs/ClassPatchSummary/Refugia.csv',  row.names = FALSE)
+```
+
+```{r}
+burnt = data2 %>% 
+  filter(class==0) %>%
+  mutate(Logca = log(ca))  
+
+burnt
 ```
 
 # Summaries patch data
@@ -140,8 +155,143 @@ Metric
 7. pland
 8. tca
 
+```{r}
+
+refugia %>%
+  group_by(as.factor(SizeCl)) %>%
+  summarise(n=n())
+```
 ## Tables
 
+
+```{r}
+refugia %>% 
+  group_by(EcoCode, ArcSub) %>%
+  summarise(mean_area = mean(area_mn),
+            sd_area = sd(area_mn),
+            mean_ca = mean(ca),
+            sd_ca = sd(ca),
+            mean_enn = mean(enn_mn),
+            sd_enn = sd(enn_mn),
+            mean_pd= mean(pd),
+            sd_pd= sd(pd),
+            mean_pland = mean(pland),
+            sd_pland = sd(pland),
+            mean_tca = mean(tca),
+            sd_tca = sd(tca)) %>%
+   write.csv(., '../outputs/ClassPatchSummary/Table1.csv',  row.names = FALSE)
+
+
+```
+
+```{r}
+refugia %>%
+  group_by(as.factor(SizeCl)) %>%
+  summarise(sum = sum(SizeHa))
+  
+
+```
+
+ifelse(SizeHa %in% 200:499, "1",
+                  ifelse(SizeHa %in% 500:999, "2",
+                   ifelse(SizeHa %in% 1000:1999, "3",
+                       ifelse(SizeHa %in% 2000:4999, "4",
+                         ifelse(SizeHa %in% 5000:9999, "5",
+                            ifelse(SizeHa %in% 10000:19999, "6",
+                              ifelse(SizeHa %in% 20000:49999, "7",
+                                ifelse(SizeHa %in% 50000:99999, "8", "9")))))))))
+                                
+Small 200-1999 ha
+Moderate 2000-19,999 ha
+Large 20,000-
+```{r}
+refugia %>%
+  group_by(FireSize) %>%
+  summarise(sum = sum(SizeHa)) %>%
+  write.csv(., '../outputs/ClassPatchSummary/Table14.csv',  row.names = FALSE)
+
+
+```
+
+```{r}
+refugia %>% 
+  group_by(ArcSub, FireSize) %>% 
+  summarise(mean=mean(area_mn), 
+            sd=sd(area_mn), 
+            min=min(area_mn), 
+            max=max(area_mn))
+```
+
+### Fires Patch Figure
+
+```{r}
+target_patch = c(601, 673, 872, 885, 1166, 1327)
+```
+
+```{r}
+
+data2 %>% 
+  filter(IDobj %in% target_patch) %>%
+   mutate(mean_tca_patch = tca/np) %>%
+  mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
+  dplyr::select(IDobj:area_mn, enn_mn, tca, mean_tca_patch, radiusTca, np, SizeHa:SizeCl) %>%
+  write.csv(., '../outputs/ClassPatchSummary/PatchFigEnnTca.csv',  row.names = FALSE)
+
+
+ 
+```
+
+```{r}
+
+data2 %>% 
+  filter(IDobj %in% target_patch) %>%
+   mutate(mean_tca_patch = tca/np) %>%
+  mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
+  group_by(class) %>%
+  dplyr::select(class, enn_mn, tca, mean_tca_patch, radiusTca) %>%
+ summarise(across(everything(), list(mean=mean, sd=sd, min = min, max = max))) %>%
+ 
+  write.csv(., '../outputs/ClassPatchSummary/PatchFigSum.csv',  row.names = FALSE)
+
+
+ 
+```
+
+```{r}
+
+data2 %>% 
+   mutate(mean_tca_patch = tca/np) %>%
+  mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
+  group_by(class, EcoCode, ArcSub) %>%
+  dplyr::select(class, EcoCode, ArcSub, enn_mn, tca, mean_tca_patch, radiusTca) %>%
+ summarise(across(everything(), list(mean=mean, sd=sd, min = min, max = max))) %>%
+ 
+  write.csv(., '../outputs/ClassPatchSummary/PatchDisEcoArcSum.csv',  row.names = FALSE)
+
+
+ 
+```
+
+```{r}
+
+data2 %>% 
+   mutate(mean_tca_patch = tca/np) %>%
+  mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
+  dplyr::select(IDobj:area_mn, enn_mn, tca, mean_tca_patch, radiusTca, np, SizeHa:SizeCl) 
+
+
+ 
+```
+
+```{r}
+data2 %>% 
+   mutate(mean_tca_patch = tca/np) %>%
+  mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
+  group_by(class) %>%
+  dplyr::select(class, enn_mn, tca, mean_tca_patch, radiusTca) %>%
+ summarise(across(everything(), list(mean=mean, sd=sd, min = min, max = max))) %>%
+  write.csv(., '../outputs/ClassPatchSummary/EnnTcaRadiusSumAll.csv',  row.names = FALSE)
+```
 ### Summary Means by EcoCode and Class
 ```{r}
 data2 %>% 
@@ -191,12 +341,38 @@ data2 %>%
 
 ```
 
+### Refugia
+```{r}
+sum1 = refugia %>%
+  dplyr::select(IDobj, tca, SizeHa, EcoCode) %>%
+  group_by(EcoCode) %>%
+  summarise(sum_tca = sum(tca),
+            sum_SizeHa = sum(SizeHa)) %>%
+  mutate(percentCoreArea = (sum_tca/sum_SizeHa)*100)
+
+sum1
+```
+Area For NST
+```{r}
+sum1 %>% filter(EcoCode=="NST") %>%
+  mutate(percentBurned = sum_SizeHa/(1133262*100)*100)
+
+```
+
+Area for CKMT
+```{r}
+sum1 %>% filter(EcoCode=="CKMT") %>%
+  mutate(percentBurned = sum_SizeHa/(560461*100)*100)
+
+```
+
+
 # Graphs
 ```{r}
 data2
 ```
-## Graphs
 
+## Mean patch area by class
 ```{r}
 ggplot(data2, aes(x=as.factor(class), y=Logarea_mn, fill=EcoCode)) + 
     geom_boxplot() + 
@@ -215,10 +391,10 @@ ggplot(data2, aes(x=as.factor(class), y=Logarea_mn, fill=EcoCode)) +
 ```
 
 ```{r}
-ggplot(data2, aes(x=as.factor(class), y=Logarea_mn, fill=as.factor(SizeCl))) + 
+ggplot(refugia, aes(x=as.factor(class), y=Logarea_mn, fill=as.factor(SizeCl))) + 
     geom_boxplot() + 
     xlab("Fire Size Class") +
-      ylab("Mean percent ") +
+      ylab("Mean patch size ") +
   bar_theme +
   theme(legend.position = c(.5, .05),
         legend.key.height = unit(.1, 'in'), 
@@ -229,4 +405,356 @@ ggplot(data2, aes(x=as.factor(class), y=Logarea_mn, fill=as.factor(SizeCl))) +
          color = guide_legend(override.aes = list(size = 0.4))) + 
   theme(legend.text = element_text(size = 8)) 
 ```
+`
+
+```{r}
+ggplot(refugia, aes(x=as.factor(class), y=pd, fill=as.factor(SizeCl))) + 
+    geom_boxplot() + 
+    xlab("Fire Size Class") +
+      ylab("patch density") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+```{r}
+data2
+```
+# Refugia Graphs
+## Boxplots
+
+### Patch Density
+```{r}
+density_plot = ggplot(refugia, aes(x=ArcSub, y=pd, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette) +
+    xlab("") +
+      ylab("Patch density per 100 ha per fire") +
+  bar_theme +
+  theme(legend.position = c(.15, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=1), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+
+density_plot
+```
+
+
+### Percent Landscape
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=pland, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("ecozones") +
+      ylab("percent landscape") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+### Percent Landscape (Arctic/Sub)
+```{r}
+ggplot(refugia, aes(x=ArcSub, y=pland, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("ecozones") +
+      ylab("percent landscape") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+### Patch Size
+```{r}
+size_plot = ggplot(refugia, aes(x=ArcSub, y=Logarea_mn, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette) +
+    xlab("") +
+      ylab("Mean patch size in ha per fire\n(log transformed)") +
+  bar_theme +
+  theme(legend.position = c(.15, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=1), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+
+size_plot
+```
+
+### Class area
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=Logca, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("ecozones") +
+      ylab("class area (Log transformed)") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+### Number of Patches
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=np, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("ecozones") +
+      ylab("number of patches") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+### Patch Density
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=para_mn, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("ecozones") +
+      ylab("perimeter-area ratio") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+### Total Core Area
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=tca, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("ecozones") +
+      ylab("class area (Log transformed)") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+## Scatter Plots
+### Fire Size by class area (log transformed)*
+```{r fig.height=4, fig.width=6}
+plot1 = ggplot(refugia, aes(x=LogHa, y=Logca, color=as.factor(EcoCode))) + 
+    geom_point() + 
+  scale_color_manual(values = ecoPalette, name="Ecozone") +
+    xlab("Total fire area\n(log transformed)") +
+      ylab("Total Fire refugia area in ha\n(Log Transformed)") +
+  theme(legend.position = c(.9, .15),
+        legend.key.height = unit(.25, 'in'), 
+        legend.key.width = unit(.25, 'in'),
+        legend.background = element_rect(fill='white')) + 
+  theme(legend.text = element_text(size = 8)) 
+
+plot1
+```
+```{r}
+ggsave("../figures/Plot1.png", plot = plot1, width = 6, height = 4, units = c("in"), dpi = 600)
+```
+
+### Patch Density by mean patch size*
+```{r fig.height=4, fig.width=6}
+plot2 = ggplot(refugia, aes(x=Logarea_mn, y=pd, color=as.factor(EcoCode))) + 
+    geom_point() + 
+  
+  scale_color_manual(values = ecoPalette, name="Ecozone") +
+    xlab("Patch Size in ha\n(log transformed)") +
+      ylab("Patch Density\n(count per 100 ha)") +
+  theme(legend.position = c(.9, .9),
+        legend.key.height = unit(.25, 'in'), 
+        legend.key.width = unit(.25, 'in'),
+        legend.background = element_rect(fill='white')) + 
+  theme(legend.text = element_text(size = 8)) 
+
+plot2
+```
+```{r}
+ggsave("../figures/plot2.png", plot = plot2, width = 6, height = 4, units = c("in"), dpi = 600)
+```
+### Patch Density by mean patch size
+```{r}
+ggplot(refugia, aes(x=Logarea_mn, y=para_mn, color=as.factor(EcoCode))) + 
+    geom_point() + 
+  
+  scale_color_manual(values = ecoPalette, name="Ecozone") +
+    xlab("Patch Size (ha; log transformed)") +
+      ylab("Perimeter area ratio") +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+## Class area and Fire Size*
+```{r fig.height=4, fig.width=6}
+plot3 = ggplot(burnt, aes(x=pland, y=Logarea_mn, color=as.factor(EcoCode))) + 
+    geom_point() + 
+  scale_color_manual(values = ecoPalette, name="Ecozone") +
+    xlab("Percent area of fire refugia") +
+      ylab("Patch size in ha\n(log transformed)") +
+  theme(legend.position = c(.9, .15),
+        legend.key.height = unit(.25, 'in'), 
+        legend.key.width = unit(.25, 'in'),
+        legend.background = element_rect(fill='white')) +  
+  theme(legend.text = element_text(size = 8)) 
+
+plot3
+```
+```{r}
+ggsave("../figures/Plot3.png", plot = plot3, width = 6, height = 4, units = c("in"), dpi = 600)
+```
+### Patch Size by Total Core Area
+```{r}
+ggplot(refugia, aes(x=enn_mn, y=Logarea_mn, color=as.factor(EcoCode))) + 
+    geom_point() + 
+  
+  scale_color_manual(values = ecoPalette, name="Ecozone") +
+    xlab("Total core area") +
+      ylab("Patch Size (ha; log transformed)") +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+## Others
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=pd, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette, name="Ecozone") +
+    xlab("ecozones") +
+      ylab("patch density") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=Logarea_mn, fill=as.factor(SizeCl))) + 
+    geom_boxplot() + 
+    xlab("Fire Size Class") +
+      ylab("Mean patch Size ") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+```{r}
+ggplot(refugia, aes(x=EcoCode, y=Logca, fill=as.factor(SizeCl))) + 
+    geom_boxplot() + 
+    xlab("Fire Size Class") +
+      ylab("Unburned area") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+```{r}
+ggplot(burnt, aes(x=EcoCode, y=Logca, fill=as.factor(SizeCl))) + 
+    geom_boxplot() + 
+    xlab("Fire Size Class") +
+      ylab("burnt area") +
+  bar_theme +
+  theme(legend.position = c(.5, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=2), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+```
+
+## Subset of fires
+```{r}
+target = c(1327, 1042, 2833, 1692, 1062, 2334, 1693, 1166, 1559, 958, 885,977, 1704, 1322, 601, 872, 894, 673)
+
+```
+
+```{r}
+refugia %>% filter(IDobj %in% target)
+```
+
+# Combined Plots
+
+```{r fig.height=4, fig.width=6}
+fig1 = cowplot::plot_grid(size_plot, density_plot)
+fig1
+```
+```{r eval=FALSE, include=FALSE}
+ggsave("../figures/PatchSizeDensity.tiff", plot = fig1, width = 6, height =4, units = c("in"), dpi=600 )
+```
+
 **THE END**
+

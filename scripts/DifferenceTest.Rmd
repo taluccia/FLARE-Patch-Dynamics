@@ -83,7 +83,12 @@ refugia = refugia %>%
   mutate(FireSize2 = factor(FireSize, levels = c("small", "moderate", "large")))
 ```
 
+```{r}
+refugia
+
+```
 # Analysis
+
 
 ## Patch Size Large vs medium, vs small fires
 ```{r}
@@ -222,7 +227,7 @@ fit3 = lm(pd ~ Logarea_mn, data = refugia)
 
 ```{r}
 linear.model <-lm(pd ~ area_mn, data = refugia)
-log.model <-lm(log(pd) ~ Logarea_mn, data = refugia)
+log.model <-lm(log(pd) ~ area_mn, data = refugia)
 exp.model <-lm(pd ~ exp(area_mn), data = refugia)
 ```
 

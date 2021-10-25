@@ -22,7 +22,7 @@ This script process landscape/patch statistics by class burned/unburned for the 
 ## Fire IDobj
 Change for each iteration 
 
-IDobj=944
+IDobj=1327
 
 #Packages
 ```{r}
@@ -37,15 +37,17 @@ library(dplyr)
 
 # Data
 ```{r}
-r1 <- raster("../data/dNBRSingleFireBinary/IMG_Binary944.tif")
+r1 <- raster("../data/UTMImagery/BinaryImg_1327.tif")
 ```
 
 ```{r}
 r1
 ```
 
+## Fire perimeters 
+
 ```{r}
-fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020")
+fires = st_read("../data/FiresUTM/FiresUTM55.shp", "FiresUTM55")
 ```
 
 
@@ -53,7 +55,7 @@ fires = st_read("../data/NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires
 # Select fire perimeter
 ```{r}
 fire1 = fires %>%
-  filter(IDobj==944)
+  filter(IDobj==1327)
 
 fire1
 ```
@@ -90,6 +92,7 @@ show_cores(landscape)
 ```{r}
 landscape %>% 
   calculate_lsm(., level = "class", full_name = TRUE) %>% 
-  mutate(IDobj = 944) %>% 
-  write.csv(., '../outputs/PatchSummary/ClassFire944.csv',  row.names = FALSE)
+  mutate(IDobj = 1327) %>% 
+  mutate(UTMZone = 57) %>%
+  write.csv(., '../outputs/PatchSummaryUTM/ClassFire_1327.csv',  row.names = FALSE)
 ```

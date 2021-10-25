@@ -34,6 +34,23 @@ head(stacked_terrain)
 tail(stacked_terrain)
 ```
 
+
+
+
+## Terrain 3
+```{r}
+csv_terrain3 = list.files(path = '../data/GeeSampledPoints/terrain3', pattern = "csv$", full.names = TRUE)
+```
+
+```{r}
+stacked_terrain3 <- map_dfr(csv_terrain3, read_csv)
+```
+
+```{r}
+head(stacked_terrain3)
+tail(stacked_terrain3)
+```
+
 ## yedoma
 ```{r}
 csv_yedoma = list.files(path = '../data/GeeSampledPoints/yedoma', pattern = "csv$", full.names = TRUE)
@@ -62,13 +79,26 @@ stacked_trees <- map_dfr(csv_trees, read_csv)
 head(stacked_trees)
 tail(stacked_trees)
 ```
+## Fires 
+```{r}
+fires = read.csv("../data/NESiberiaFires/NESiberiaFires2020.csv") 
+```
 
 # Remove unneeded colums
 ```{r}
 df_terrain = stacked_terrain %>%
-  dplyr::select(BurnUnburn:dnbrs)
+  dplyr::select(ASPTR, BurnUnburn:dnbrs, elevation)
 
 df_terrain
+```
+
+
+
+```{r}
+df_terrain3 = stacked_terrain3 %>%
+  dplyr::select(ID:UTMZone, dnbr, ruggedness)
+
+df_terrain3
 ```
 
 ```{r}
@@ -89,27 +119,91 @@ df_trees
 
 ```{r}
 
-df1 = merge(df_terrain, df_trees, by=c("ID", "IDobj", "UTMZone", "dnbr"))
+df1 = merge(df_terrain, df_terrain3, by=c("ID", "IDobj", "UTMZone", "dnbr"))
 df1
 ```
 
 ```{r}
-df2 = merge(df1, df_yedoma, by=c("ID", "IDobj", "UTMZone", "dnbr"), all.x = TRUE, all.y = TRUE)
+
+df2 = merge(df1, df_trees, by=c("ID", "IDobj", "UTMZone", "dnbr"))
 df2
+```
+
+```{r}
+df3 = merge(df2, df_yedoma, by=c("ID", "IDobj", "UTMZone", "dnbr"), all.x = TRUE, all.y = TRUE)
+df3
 ```
 
 # Replace NA for Yedoma
 ```{r}
 
-df3 = df2 %>%  
+df4 = df3 %>%  
   mutate(across(yedoma, ~replace_na(.x, 0))) %>%
-  mutate(across(yedoma, ~1 * (. > 0)))
+  mutate(across(yedoma, ~1 * (. > 0))) %>%
+  mutate(across(c(dnbr, ASPTR, dnbrs, elevation, TPI450, TPI150, ruggedness), round, 2)) %>%
+  mutate(Refugia = ifelse(between(dnbr, -100, 0), "1", 
+                      ifelse(between(dnbr,0, 100), "1", "0"))) %>%
+  mutate(Rugged = ifelse(between(ruggedness, 200, 400), "moderate", "flat"))
 
-df3
+df4
+```
+```{r}
+str(df4)
+```
+
+# Add Fire Data
+```{r}
+
+df5 = merge(df4, fires, by = "IDobj")
+
+df5
+```
+
+```{r}
+df5 %>%  group_by(EcoCode) %>%
+  summarise(across(c(ruggedness), ~max(.x, na.rm = TRUE)))
+
+```
+
+```{r}
+df5 %>%  filter(Rugged=="moderate")
+
+```
+
+
+# Write Unique IDs to csv
+```{r}
+data.frame(unique(df3$IDobj)) %>%
+  write.csv(., '../outputs/CombinedSampledPoints/SampledFireIDObj.csv',  row.names = FALSE)
+  
 ```
 
 # Write to csv
 
 ```{r}
-write.csv(df3, '../outputs/CombinedSampledPoints/SampledPoints.csv',  row.names = FALSE)
+write.csv(df5, '../outputs/CombinedSampledPoints/SampledPoints.csv',  row.names = FALSE)
+```
+
+# Split data by Eco and Arctic
+
+```{r}
+df6 = df5 %>% filter(EcoCode=="CKMT") 
+
+df6
+
+```
+
+```{r}
+df7 = df5 %>% filter(EcoCode=="NST") 
+
+df7
+
+```
+
+
+# Write to csv
+
+```{r}
+write.csv(df6, '../outputs/CombinedSampledPoints/SampledCKMT.csv',  row.names = FALSE)
+write.csv(df7, '../outputs/CombinedSampledPoints/SampledNST.csv',  row.names = FALSE)
 ```
