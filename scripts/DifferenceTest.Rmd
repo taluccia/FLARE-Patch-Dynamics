@@ -38,7 +38,9 @@ library(gmodels)
 refugia = read.csv("../data/ClassPatchSummary/Refugia.csv") 
 ```
 
-
+```{r}
+seed = read.csv("../data/ClassPatchSummary/DispersalEstimatesFire.csv") 
+```
 # Define graph Theme and color Palette 
 
 ```{r}
@@ -87,6 +89,50 @@ refugia = refugia %>%
 refugia
 
 ```
+## Box plots
+```{r fig.height=2.3, fig.width=3}
+size_plot = ggplot(refugia, aes(x=ArcSub, y=area_mn, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette) +
+  scale_y_continuous(trans='log10') +
+    xlab("") +
+      ylab("Mean patch size\nper fire in ha") +
+  bar_theme +
+  theme(legend.position = c(.15, .93),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=1), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+
+
+
+size_plot
+```
+## Density
+```{r fig.height=2.3, fig.width=3}
+density_plot = ggplot(refugia, aes(x=ArcSub, y=pd, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette) +
+    xlab("") +
+      ylab("Patch Density per fire\n(count per 100 ha)") +
+  bar_theme +
+  theme(legend.position = "none",
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=1), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+
+
+
+density_plot
+```
+
 # Analysis
 
 
@@ -180,6 +226,7 @@ labels = c("Small vs Large", "Medium vs Large", "Small vs Medium"))
 ```{r}
 write.csv(estdiffdate2, '../outputs/Analysis/FireSizeDifference.csv',  row.names = FALSE)
 ```
+### plots
 
 ```{r fig.height=4, fig.width=6}
 ( g1 = ggplot(estdiffdate2, aes(x = group, y = Estimate) ) + # Set axes
@@ -192,7 +239,7 @@ theme(panel.grid.major.x = element_blank() ) )
 
 ```
 
-```{r fig.height=4, fig.width=6}
+```{r fig.height=2.3, fig.width=3}
 (g2 = ggplot(estdiffdate2, aes(x = Estimate, y = group) ) +
 
    geom_errorbarh(height = .1, lwd = .75, aes(xmin = Lower.CI, xmax = Upper.CI)) + 
@@ -203,13 +250,13 @@ theme(panel.grid.major.x = element_blank() ) )
   geom_rect(alpha = .05, aes(xmin = -1, xmax = 1, ymin = 0, ymax = 4) ) +
 
 theme_bw() +
-ylab("") + xlab("Mean patch size (ha)") + 
+ylab("") + xlab("Difference in mean patch size (ha)") + 
 theme(axis.ticks.y = element_blank(),
 axis.text.y = element_blank() ) + 
   theme(panel.grid.major.y = element_blank() ) + 
-  geom_text(aes(x = Estimate, y = as.numeric(group) + .15,
-label = group), size = 5) + 
-  annotate("text", x = 0, y = .25, label = "Zone of\nno difference", size = 4) )
+  geom_text(aes(x = Estimate, y = as.numeric(group) + .3,
+label = group), size = 3) + 
+  annotate("text", x = 0, y = .3, label = "Zone of\nno difference", size = 2) )
 
 ```
 
@@ -218,6 +265,94 @@ label = group), size = 5) +
 ggsave("../figures/FireSizeDifference.png", plot = g2, width = 6, height = 4, units = c("in"), dpi = 600)
 ```
 
+## Density
+
+```{r}
+mod2 = lm(pd ~ FireSize2, data = refugia)
+```
+
+
+
+
+#### Summary
+```{r}
+summary(mod2)
+```
+```{r}
+anova(mod2)
+```
+
+```{r}
+small = c(1, 0, 0) 
+medium = c(1, 1, 0) 
+large = c(1, 0, 1)
+```
+
+```{r}
+# Create vectors for treatment comparisons with subtraction
+small_large = small-large
+medium_large = medium-large
+small_medium = small-medium
+```
+
+```{r}
+ # Stack the differences in means vectors together
+(diffestmod2 = rbind(small_large, medium_large, small_medium) )
+```
+
+```{r}
+( estdiffdatemod2 = estimable(mod2, diffestmod2, conf.int = .983) )
+```
+```{r}
+estdiffdatemod2$groupmod2 = factor(rownames(estdiffdatemod2),
+levels = c("small_large", "medium_large", "small_medium"),
+labels = c("Small vs Large", "Medium vs Large", "Small vs Medium"))
+```
+
+
+### plots
+```{r fig.height=4, fig.width=6}
+( f1 = ggplot(estdiffdatemod2, aes(x = groupmod2, y = Estimate) ) + # Set axes
+geom_errorbar(width = .1, lwd = .75, aes(ymin = Lower.CI, ymax = Upper.CI)) + # Add error bars geom_point(size = 3) + # Add point estimate, change point size
+geom_hline(yintercept = 0, color="grey34") + # Add horizontal line at 0
+geom_hline(yintercept = c(.25, -.25), color = "grey34", lty = 4) + # Add horiz line at +/-.25 theme_bw() + # change graph to black and white for printing
+xlab(NULL) + ylab("") + # Change axis labels
+theme(panel.grid.major.x = element_blank() ) )
+
+
+```
+
+```{r fig.height=2.3, fig.width=3}
+(f2 = ggplot(estdiffdatemod2, aes(x = Estimate, y = groupmod2) ) +
+
+   geom_errorbarh(height = .1, lwd = .75, aes(xmin = Lower.CI, xmax = Upper.CI)) + 
+  geom_point(size = 3) + 
+
+  geom_vline(xintercept = 0, lty = 2) + 
+
+  geom_rect(alpha = .05, aes(xmin = -1, xmax = 1, ymin = 0, ymax = 4) ) +
+
+theme_bw() +
+ylab("") + xlab("Difference in patch density") + 
+theme(axis.ticks.y = element_blank(),
+axis.text.y = element_blank() ) + 
+  theme(panel.grid.major.y = element_blank() ) + 
+  geom_text(aes(x = Estimate, y = as.numeric(groupmod2) + .3,
+label = groupmod2), size = 3) + 
+  annotate("text", x = 0, y = .3, label = "Zone of\nno difference", size = 2) )
+
+```
+
+
+
+```{r}
+mod1p = glm(pd ~ FireSize2, data = refugia, family = poisson(link = "log") )
+```
+mod1nb = glm.nb(numspp ~ size + dist, data = mangrove)
+
+sum(residuals(mod1p, type="pearson")^2)/mod1p$df.res
+
+qplot(fitted(mod1p), resid(mod1p)) + theme_bw()
 
 ## Linear modelPatch Density by mean patch size
 
@@ -278,13 +413,14 @@ ggplot(refugia, aes(x=area_mn, y=pd)) +
   guides(color = guide_legend("Model Type"))
 ```
 ### Patch Density by mean patch size*
-```{r fig.height=4, fig.width=6}
+
+  geom_line(data = log.model.df, aes(x, y),color = "#006CD1", size = 1, linetype = 1) +
+```{r fig.height=2.3, fig.width=3}
 plot2 = ggplot(refugia, aes(x=area_mn, y=pd)) + 
-    geom_point(size=1.5, shape=1, color= "grey50")  +
-  geom_line(data = log.model.df, aes(x, y),color = "#006CD1", size = 1, linetype = 1) + 
-    xlab("Patch Size in ha") +
+    geom_point(size=1.5, shape=1, color= "grey50")  + 
+    xlab("Patch Size (ha)") +
       ylab("Patch Density\n(count per 100 ha)") +
-  reg_theme+
+  reg_theme +
   theme(legend.position = "none",
         legend.key.height = unit(.25, 'in'), 
         legend.key.width = unit(.25, 'in'),
@@ -294,6 +430,111 @@ plot2 = ggplot(refugia, aes(x=area_mn, y=pd)) +
 plot2
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 ggsave("../figures/PatchDensityPatchSize.png", plot = plot2, width = 6, height = 4, units = c("in"), dpi = 600)
+```
+
+## Linear model Dispersal
+
+
+
+```{r}
+linear.model4 <-lm(radiusTca ~ area_mn, data = seed)
+log.model4 <-lm(log10(radiusTca) ~ area_mn, data = seed)
+exp.model4 <-lm(radiusTca ~ exp(area_mn), data = seed)
+```
+
+
+```{r}
+summary(linear.model4)
+summary(log.model4)
+summary(exp.model4)
+```
+
+
+#### Residuals
+```{r}
+# Get the fitted value for each observation
+seed$linear.model4 = fitted(linear.model4)
+# Get the residuals of the model
+seed$linear.model4 = residuals(linear.model4)
+```
+
+```{r}
+qplot(x = linear.model4, y = linear.model4, data = seed,
+main = "Residuals vs Fitted Values")
+```
+
+```{r}
+qplot(x = area_mn, y = linear.model4, data = seed,
+xlab = "Patch area",
+ylab = "Residuals",
+main = "Residuals vs burn/unburn")
+```
+
+```{r}
+uppersize = with(linear.model4, fit + 2*se.fit) 
+lowersize = with(linear.model4, fit - 2*se.fit)
+```
+```{r}
+linear.model4.df <- data.frame(x = seed$area_mn,
+                           y = (fitted(linear.model4)))
+                          
+
+linear.model4.df
+```
+
+```{r}
+ggplot(refugia, aes(x=area_mn, y=pd)) + 
+  geom_point() +
+  geom_smooth(method="lm", aes(color="Exp Model"), formula= (y ~ exp(x)), se=FALSE, linetype = 1) +
+  geom_line(data = log.model.df, aes(x, y, color = "Log Model"), size = 1, linetype = 2) + 
+  guides(color = guide_legend("Model Type"))
+```
+
+### Dispersal by mean patch size*
+```{r}
+seed
+```
+
+geom_line(data =linear.model4.df, aes(x, y),color = "#006CD1", size = 1, linetype = 1) + 
+
+```{r fig.height=2.3, fig.width=3}
+dis2 = ggplot(seed, aes(x=area_mn, y=radiusTca)) + 
+    geom_point(size=1.5, shape=1, color= "grey50")  +
+  
+    xlab("Patch size (ha)") +
+      ylab("Dispersal distance\n(m)") +
+  reg_theme+
+  theme(legend.position = "none",
+        legend.key.height = unit(.25, 'in'), 
+        legend.key.width = unit(.25, 'in'),
+        legend.background = element_rect(fill='white')) + 
+  theme(legend.text = element_text(size = 8)) 
+
+dis2
+```
+# Combine plots
+
+```{r fig.height=7, fig.width=6}
+
+fig1 = cowplot::plot_grid(size_plot, density_plot, g2, f2, plot2, dis2,   ncol=2)
+fig1
+```
+
+```{r fig.height=7, fig.width=6}
+
+fig2 = fig1 +
+  draw_label("(a)", x = 0.03, y = .99, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+   draw_label("(b)", x = 0.52, y = .99, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(c)", x = 0.03, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(d)", x = 0.52, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(e)", x = 0.03, y = .32, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(f)", x = 0.52, y = .32, fontfamily = "sans", fontface = "bold", color = "black", size = 12) 
+
+fig2
+```
+
+```{r eval=FALSE, include=FALSE}
+ggsave("../figures/ComboSizeDenistyPatchDiff.png", plot = fig2, width = 6, height = 7, units = c("in"), dpi = 600)
 ```

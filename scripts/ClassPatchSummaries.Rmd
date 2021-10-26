@@ -228,6 +228,7 @@ refugia %>%
 target_patch = c(601, 673, 872, 885, 1166, 1327)
 ```
 
+#### Dispersal Distance
 ```{r}
 
 data2 %>% 
@@ -275,9 +276,13 @@ data2 %>%
 ```{r}
 
 data2 %>% 
+  filter(class==0) %>%
    mutate(mean_tca_patch = tca/np) %>%
   mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
-  dplyr::select(IDobj:area_mn, enn_mn, tca, mean_tca_patch, radiusTca, np, SizeHa:SizeCl) 
+  dplyr::select(IDobj:area_mn, enn_mn, tca, mean_tca_patch, radiusTca, np, SizeHa:SizeCl) %>%
+ 
+  write.csv(., '../outputs/ClassPatchSummary/DispersalEstimatesFire.csv',  row.names = FALSE)
+
 
 
  
@@ -292,6 +297,17 @@ data2 %>%
  summarise(across(everything(), list(mean=mean, sd=sd, min = min, max = max))) %>%
   write.csv(., '../outputs/ClassPatchSummary/EnnTcaRadiusSumAll.csv',  row.names = FALSE)
 ```
+```{r}
+
+data2 %>% 
+   mutate(mean_tca_patch = tca/np) %>%
+  mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
+  group_by(class) %>%
+  dplyr::select(class, enn_mn, tca, mean_tca_patch, radiusTca) %>%
+ summarise(across(everything(), list(mean=mean, sd=sd, min = min, max = max)))
+
+```
+
 ### Summary Means by EcoCode and Class
 ```{r}
 data2 %>% 
@@ -505,6 +521,45 @@ size_plot = ggplot(refugia, aes(x=ArcSub, y=Logarea_mn, fill=EcoCode)) +
 size_plot
 ```
 
+```{r}
+ggplot(refugia, aes(x=ArcSub, y=area_mn, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette) +
+  scale_y_continuous(trans='log10') +
+    xlab("") +
+      ylab("Mean patch size per fire in ha") +
+  bar_theme +
+  theme(legend.position = c(.15, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=1), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+
+
+```
+
+```{r}
+ggplot(refugia, aes(x=ArcSub, y=area_mn, fill=EcoCode)) + 
+    geom_boxplot() + 
+   scale_fill_manual(values = ecoPalette) +
+    xlab("") +
+      ylab("Mean patch size in ha per fire\n(log transformed)") +
+  bar_theme +
+  theme(legend.position = c(.15, .05),
+        legend.key.height = unit(.1, 'in'), 
+        legend.key.width = unit(.1, 'in'),
+        legend.background = element_rect(fill=alpha('white', 0.0))) + 
+  guides(fill = guide_legend(ncol=1), 
+         shape = guide_legend(override.aes = list(size = 0.4)), 
+         color = guide_legend(override.aes = list(size = 0.4))) + 
+  theme(legend.text = element_text(size = 8)) 
+
+
+```
+
 ### Class area
 ```{r}
 ggplot(refugia, aes(x=EcoCode, y=Logca, fill=EcoCode)) + 
@@ -541,7 +596,7 @@ ggplot(refugia, aes(x=EcoCode, y=np, fill=EcoCode)) +
   theme(legend.text = element_text(size = 8)) 
 ```
 
-### Patch Density
+### perimeter area ratio
 ```{r}
 ggplot(refugia, aes(x=EcoCode, y=para_mn, fill=EcoCode)) + 
     geom_boxplot() + 
