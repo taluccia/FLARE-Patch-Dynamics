@@ -173,5 +173,102 @@ BRT.model1.relinf
 ```
 
 
+# Model 3
+```{r}
+data_top = model.data %>%
+  dplyr::select(classes, latitude, TPI450, SLPPCT, aspect, elevation, treecover2000, FireYr)
+data_top
+```
+
+```{r}
+set.seed(15) # Set random seed
+brt.model3 <- gbm.step(data=data_top,
+    gbm.x = c(2, 3, 4, 5, 6, 7, 8), 
+    gbm.y = 1,
+    family = "bernoulli",
+    tree.complexity = 5,
+    learning.rate = 0.001,
+    bag.fraction = 0.5)
+```
+
+### Get info in model output
+```{r}
+summary(brt.model3,
+        cBars=length(brt.model3$var.names),
+        n.trees=brt.model3$n.trees,
+        plotit=TRUE,
+        order=TRUE,
+        method=relative.influence,
+        normalize=FALSE)
+```
+
+### Save model outputs as external object for mapping later or posterity
+
+```{r}
+save(brt.model3, file = "../outputs/BRTModelsGEE/BRT3_model.rda")
+```
+
+```{r eval=FALSE, include=FALSE}
+load(file = "../outputs/BRTModelsGEE/BRT3_model.rda")
+```
+
+### Relative influence of predictors as part of summary gbm - for model assessment
+```{r}
+relative.influence(brt.model3, scale=TRUE, sort=TRUE)
+```
+
+Notes: permutation.test.gbm(brt.model, n.trees=brt.model$n.trees); This method randomly permutes each predictor variable at a time and computes the associated reduction in predictive performance, similar to random forests. gbm.loss(y,f,w,offset,dist,baseline, group, max.rank)
+
+### Plotting (Anna Added)
+```{r}
+gbm.plot(brt.model3, smooth=TRUE, write.title = TRUE, y.label="Fitted function", x.label="")
+dev.print(pdf, "../outputs/BRTModelsGEE/BRT3_plots.pdf")
+dev.off()
+```
+```{r}
+gbm.plot.fits(brt.model3)
+dev.print(pdf, "../outputs/BRTModelsGEE/BRT3_fits.pdf")
+dev.off()
+```
+
+```{r}
+find.int = gbm.interactions(brt.model3)
+find.int$rank.list
+find.int$interactions
+```
+
+## Calculate outputs stats 
+- Sandra Haire calculations and file export below from Krawchuk et al. (2016) Ecosphere
+Note that these calculatins are not the same as the default outputss from the BRT code.
+```{r}
+tot.n=nrow(data_top)
+y.perc=round(nrow(data_top[brt.model3$yvar==1,])/tot.n,2)
+vnames=row.names(brt.model3$contributions)
+rel.inf=round(brt.model3$contributions[,2],2) # variable num, from df and %contrib for each
+perc.dev.expl=round(1-(brt.model3$self.statistics$mean.resid/brt.model3$self.statistics$mean.null),2)
+roc.mean=round(mean(brt.model3$cv.roc.matrix),2)
+cv.dev.mean=round(brt.model3$cv.statistics$deviance.mean,2)
+cv.cor.mean=round(brt.model3$cv.statistics$correlation.mean,2)
+cv.discrim.mean=round(brt.model3$cv.statistics$discrimination.mean,2)
+```
+
+```{r}
+brt.model3.sum=data.frame(tot.n, y.perc, brt.model3$n.trees, perc.dev.expl, roc.mean, cv.dev.mean, cv.cor.mean, cv.discrim.mean)
+write.csv(brt.model3.sum, '../outputs/BRTModelsGEE/BRT3_sum.csv', row.names = F)
+brt.model3.relinf=data.frame(rel.inf, vnames)
+write.csv(brt.model3.relinf, '../outputs/BRTModelsGEE/BRT3_relinf.csv', row.names = F)
+```
+
+```{r}
+brt.model3.sum
+```
+
+```{r}
+brt.model3.relinf
+```
+
+
+
+
 
 
