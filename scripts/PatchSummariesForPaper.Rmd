@@ -1,0 +1,209 @@
+---
+title: "Patch Summaries For Paper"
+author: "Anna Talucci"
+date: "11/3/2021"
+output: html_document
+---
+
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Overview
+
+# Fires with Scanline Errors
+```{r}
+target = c(351, 361, 403, 422, 428, 434, 439, 498, 544, 550, 598, 636, 808, 892, 944, 1097, 1190, 1275, 1363, 1416, 1742, 1773, 2135, 2216, 2295,2322, 2346, 2350, 2351, 2358, 2367, 2383, 2466, 2491, 2514, 2722, 2757, 2833, 2905, 3008, 3213)
+```
+
+# Packages
+
+```{r}
+library(tidyverse)
+```
+
+# Define graph Theme and color Palette 
+
+##Themes
+```{r}
+lb_theme = theme_bw() + theme(legend.position = "bottom") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+
+```{r}
+comp_theme = theme_bw() + theme(legend.position = "none") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+
+```{r}
+bar_theme = theme_bw() + 
+  theme(legend.position = "none", legend.title = element_blank()) +
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black")) 
+```
+
+```{r}
+ecoPalette <- c("#b5b35c", "#556b2f")
+```
+
+
+# Data
+
+## Fire data
+
+```{r}
+fires = read.csv("../data/NESiberiaFires/NESiberiaFires2020.csv") 
+```
+
+## Class patch summaries
+
+
+```{r}
+csv_patch = list.files(path = '../data/PatchSummaryUTM', pattern = "csv$", full.names = TRUE)
+```
+
+```{r include=FALSE}
+stacked_patch <- map_dfr(csv_patch, read_csv)
+```
+
+# Organize Patch Class Data 
+1. Filter - remove fires with scanline error
+2. Pivot Wider so each patch metric is a column
+```{r}
+df1 = stacked_patch %>% 
+  filter(!IDobj %in% target) %>%
+  pivot_wider(id_cols =  c(IDobj, class), names_from = metric, values_from = value)
+
+```
+
+```{r eval=FALSE, include=FALSE}
+unique(df1$IDobj)
+```
+
+
+# Combine Fire data with Patch data
+
+```{r}
+data1 = merge(df1, fires, by = "IDobj")
+```
+
+```{r}
+data1
+```
+
+```{r}
+data2 = data1 %>% 
+  mutate(LogHa = log(SizeHa))  %>%
+  mutate(Logarea_mn = log(area_mn))  %>%
+  dplyr::select(IDobj:class, area_mn, ca,np, enn_mn, para_mn, pd, pland, tca, SizeHa, EcoCode, ArcSub, SizeCl, LogHa, Logarea_mn) 
+  
+data2
+```
+
+```{r}
+refugia = data2 %>% 
+  filter(class==1) %>%
+  mutate(Logca = log(ca))  %>%
+  mutate(Logtca = log(tca)) %>%
+  mutate(FireSize = ifelse((SizeCl %in% 1:3), "small", 
+                      ifelse((SizeCl %in% 4:6), "moderate", "large"))) 
+
+refugia
+```
+Write refugia data to file
+
+
+```{r}
+burnt = data2 %>% 
+  filter(class==0) %>%
+  mutate(Logca = log(ca))  
+
+burnt
+```
+
+# Summaries patch data
+
+Data of interest
+- Mean of patch area (Area and edge metric)
+- Perimeter-area ratio lsm_c_para_cv
+- Percentage of landscape
+- Total Core Area
+
+Class
+- 0 Burned
+- 1 Unburned
+
+```{r}
+refugia %>% 
+  group_by(EcoCode, ArcSub) %>%
+  summarise(mean = mean(area_mn),
+            sd = sd(area_mn),
+            n = n(),
+            se = sd / sqrt(n))
+
+
+```
+
+```{r}
+refugia %>% 
+  group_by(EcoCode, ArcSub) %>%
+  summarise(mean = mean(pd),
+            sd = sd(pd),
+            n = n(),
+            se = sd / sqrt(n))
+
+
+```
+
+```{r}
+target_patch = c(601, 673, 872, 885, 1166, 1327)
+```
+
+```{r}
+
+data2 %>% 
+  filter(IDobj %in% target_patch) %>%
+   mutate(mean_tca_patch = tca/np) %>%
+  mutate(radiusTca = sqrt(((mean_tca_patch*10000)/3.14))) %>%
+  dplyr::select(IDobj:area_mn, enn_mn, tca, mean_tca_patch, radiusTca, np, SizeHa:SizeCl) 
+```
+
+```{r}
+data1 %>%
+  dplyr::select(IDobj:class, EcoCode, ArcSub, core_mn, ) %>%
+  mutate(rad_core = sqrt(((core_mn*10000)/3.14))) %>%
+  group_by(class, EcoCode, ArcSub) %>%
+  summarise(mean = mean(rad_core),
+            min = min(rad_core),
+            max = max(rad_core),
+            sd = sd(rad_core),
+            n = n(),
+            se = sd / sqrt(n))
+
+
+
+```
+
+```{r}
+data1 %>%
+  filter(IDobj %in% target_patch) %>%
+  dplyr::select(IDobj:class, EcoCode, ArcSub, core_mn, ) %>%
+  mutate(rad_core = sqrt(((core_mn*10000)/3.14))) %>%
+  group_by(class, IDobj) 
+
+
+
+```
