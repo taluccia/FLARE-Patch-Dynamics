@@ -111,7 +111,7 @@ size_plot = ggplot(refugia, aes(x=ArcSub, y=area_mn, fill=EcoCode)) +
   scale_y_continuous(trans='log10') +
   scale_x_discrete(labels=c("arctic" = "Arctic", "subarctic" = "Subarctic")) +
     xlab("") +
-      ylab("Mean patch size\nper fire in ha") +
+      ylab("Mean fire refugia\nsize per fire in ha") +
   bar_theme +
   theme(legend.position = c(.15, .93),
         legend.key.height = unit(.1, 'in'), 
@@ -132,7 +132,7 @@ density_plot = ggplot(refugia, aes(x=ArcSub, y=pd, fill=EcoCode)) +
     geom_boxplot() + 
    scale_fill_manual(values = cbEcoPal) +
     xlab("") +
-      ylab("Patch Density per fire\n(count per 100 ha)") +
+      ylab("Fire refugia density per\nfire (count per 100 ha)") +
   scale_x_discrete(labels=c("arctic" = "Arctic", "subarctic" = "Subarctic")) +
   bar_theme +
   theme(legend.position = "none",
@@ -267,7 +267,7 @@ theme(panel.grid.major.x = element_blank() ) )
   geom_rect(alpha = .05, aes(xmin = -1, xmax = 1, ymin = 0, ymax = 4) ) +
 
 theme_bw() +
-ylab("") + xlab("Difference in mean patch size (ha)") + 
+ylab("") + xlab("Difference in mean fire refugia size (ha)") + 
 theme(axis.ticks.y = element_blank(),
 axis.text.y = element_blank(),
 axis.title.x = element_text(size = 11, hjust = 0.5, vjust = 1.1),
@@ -357,7 +357,7 @@ theme(panel.grid.major.x = element_blank() ) )
   geom_rect(alpha = .05, aes(xmin = -1, xmax = 1, ymin = 0, ymax = 4) ) +
 
 theme_bw() +
-ylab("") + xlab("Difference in patch density") + 
+ylab("") + xlab("Difference in fire refugia density") + 
 
 theme(axis.ticks.y = element_blank(),
 axis.text.y = element_blank(),
@@ -455,8 +455,8 @@ ggplot(refugia, aes(x=area_mn, y=pd)) +
 ```{r fig.height=2.3, fig.width=3}
 plot2 = ggplot(refugia, aes(x=area_mn, y=pd)) + 
     geom_point(size=1.5, shape=1, color= "grey50")  + 
-    xlab("Patch Size (ha)") +
-      ylab("Patch Density\n(count per 100 ha)") +
+    xlab("Fire refugia size (ha)") +
+      ylab("Fire refugia density\n(count per 100 ha)") +
   reg_theme 
   
 
@@ -537,8 +537,8 @@ geom_line(data =linear.model4.df, aes(x, y),color = "#006CD1", size = 1, linetyp
 dis2 = ggplot(seed, aes(x=area_mn, y=radiusTca)) + 
     geom_point(size=1.5, shape=1, color= "grey50")  +
   
-    xlab("Patch size (ha)") +
-      ylab("Dispersal distance\n(m)") +
+    xlab("Fire refugia size (ha)") +
+      ylab("Distance to unburned\nacross burned area (m)") +
   reg_theme
 
 dis2
