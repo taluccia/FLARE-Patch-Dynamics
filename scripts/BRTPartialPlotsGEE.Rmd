@@ -122,7 +122,7 @@ Use nested loops for each variable and then each model within each variable
 pred_test4 = map(vars4[[1]], function(variable) {
      imap_dfr(mods4, function(Model, mod.name) {
           preddat = plot.gbm(Model, i.var = variable, return.grid = TRUE)
-          preddat$center_y = scale(preddat$y, scale = FALSE)
+          preddat$center_y = scale(preddat$y, scale = TRUE)
           preddat$x = preddat[, 1]
           preddat$Model = mod.name
           preddat
@@ -138,7 +138,7 @@ If that worked, loop through all variables
 pred_mods4 = map(vars4, function(variable) {
      imap_dfr(mods4, function(model, mod.name) {
           preddat = plot.gbm(model, i.var = variable, return.grid = TRUE)
-          preddat$center_y = scale(preddat$y, scale = FALSE)
+          preddat$center_y = scale(preddat$y, scale = TRUE)
           preddat$x = preddat[, 1]
           preddat$model = mod.name
           preddat
