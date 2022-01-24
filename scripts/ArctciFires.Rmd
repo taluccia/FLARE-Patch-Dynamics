@@ -1,0 +1,45 @@
+---
+title: "Untitled"
+author: "Anna Talucci"
+date: "1/24/2022"
+output: html_document
+---
+# Overview
+This script subsets fires by Arctic Subarctic
+
+# Library
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(purrr)
+library(readr)
+library(cowplot)
+library(ggcorrplot)
+library(sp)
+library(sf)
+library(rgdal) # geospatial data
+library(raster)
+library(rgeos) # GIS Geometry
+library(foreign) # deals with dbf files
+library(spatialEco)
+```
+
+# Data
+```{r}
+fires = st_read("../data//NESiberiaFires/NESiberiaFires2020.shp", "NESiberiaFires2020") 
+```
+
+## Apply filter
+
+Filter for all
+```{r}
+arctic = fires %>% 
+  filter(ArcSub == "arctic") 
+```
+
+
+```{r eval=FALSE, include=FALSE}
+st_write(arctic, "../outputs/NESiberiaFires/ArcticFires2020.shp", driver="ESRI Shapefile") 
+```
