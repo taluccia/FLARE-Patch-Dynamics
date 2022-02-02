@@ -9,14 +9,17 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Fire IDObj
-601
-673
-872
-885
+# Overview
 
-1166
-1327
+Highlighting some of the Arctic Fires from 2020
+
+
+Arctic fires IDObj:
+- 1327
+- 880
+- 800
+- 976?
+
 
 
 #Packages
@@ -28,6 +31,7 @@ library(ggplot2)
 library(sf)
 library(dplyr)
 library(ggspatial)
+library(cowplot)
 ```
 
 # Data
@@ -39,16 +43,29 @@ refugia = read.csv("../data/ClassPatchSummary/Refugia.csv")
 
 ## Rasters
 ```{r}
-r601 <- raster("../data/UTMImagery/BinaryImg_601.tif")
-r673 <- raster("../data/UTMImagery/BinaryImg_673.tif")
-r872 <- raster("../data/UTMImagery/BinaryImg_872.tif")
-r885 <- raster("../data/UTMImagery/BinaryImg_885.tif")
-r1166 <- raster("../data/UTMImagery/BinaryImg_1166.tif")
+r800 <- raster("../data/UTMImagery/BinaryImg_800.tif")
+r880 <- raster("../data/UTMImagery/BinaryImg_880.tif")
 r1327 <- raster("../data/UTMImagery/BinaryImg_1327.tif")
 ```
 
 ```{r}
-r601
+r800
+```
+
+```{r}
+
+dnbr800 <- raster("../data/UTMImagery/dNBRimg_800.tif")
+dnbr880 <- raster("../data/UTMImagery/dNBRimg_880.tif")
+dnbr1327 <- raster("../data/UTMImagery/dNBRimg_1327.tif")
+
+```
+
+```{r}
+dnbr800
+```
+
+```{r}
+plot(dnbr880)
 ```
 ## Perimeters
 ```{r}
@@ -66,6 +83,7 @@ fires58 = st_read("../data/FiresUTM/FiresUTM58.shp", "FiresUTM58")
 ```{r}
 target = c(601, 673, 872, 885, 1166, 1327)
 target2 = c(601, 673)
+target3 = c(800, 880, 1327)
 ```
 
 ```{r}
@@ -79,39 +97,61 @@ legItems = refugia %>%
 ```
 
 ```{r}
-fire885 = fires58 %>% filter(IDobj ==885)
+fire800 = fires58 %>% filter(IDobj ==800)
+```
+```{r}
+fire880 = fires58 %>% filter(IDobj ==880)
 ```
 
 
-```{r}
-fire601 = fires57 %>% filter(IDobj ==601)
-```
 
 ```{r}
-fire673 = fires55 %>% filter(IDobj ==673)
-fire872 = fires55 %>% filter(IDobj ==872)
 fire1327 = fires55 %>% filter(IDobj ==1327)
 ```
 
-```{r}
-fire1166 = fires54 %>% filter(IDobj ==1166)
-```
 
 
 # Limit Raster to Fire perimeter
 ```{r}
-crop_r601 = mask(r601, fire601)
-crop_r673 = mask(r673, fire673)
-crop_r872 = mask(r872, fire872)
-crop_r885 = mask(r885, fire885)
-crop_r1166 = mask(r1166, fire1166)
+crop_r800 = mask(r800, fire800)
+crop_r880 = mask(r880, fire880)
 crop_r1327 = mask(r1327, fire1327)
+```
+
+```{r}
+
+crop_dnbr800 = mask(dnbr800, fire800)
+crop_dnbr880 = mask(dnbr800, fire880)
+crop_dnbr1327 = mask(dnbr1327, fire1327)
+```
+# Reclassify 
+
+```{r}
+reclass_df <- c(-Inf, -101, 1,
+              -100, 100, 2,
+             101, 269, 3,
+             270, 439, 4,
+             440, 659, 5,
+             660, Inf, 6)
+reclass_df
+```
+
+```{r}
+reclass_m <- matrix(reclass_df,
+                ncol = 3,
+                byrow = TRUE)
+reclass_m
+```
+
+```{r}
+dnbr1327_classified <- reclassify(crop_dnbr1327,
+                     reclass_m)
 ```
 
 # Plot
 ```{r}
-plot(crop_r601)
-plot(st_geometry(fire601), add=TRUE)
+plot(crop_dnbr800)
+plot(st_geometry(fire800), add=TRUE)
 ```
 
 # Palette
@@ -120,6 +160,9 @@ plot(st_geometry(fire601), add=TRUE)
 Palette2 <- c('#E1BE6A','#40B0A6')
 ```
 
+```{r}
+dnbrPalette <- c("#2B83BA", "#ABDDA4","#FFFFBF", "#FDAE61","#D7191C" )
+```
 # Plots
 ```{r}
 
@@ -136,7 +179,7 @@ fig_legend
 ```{r}
 
 ggplot() +
- layer_spatial(data=crop_r601) + 
+ layer_spatial(data=crop_r800) + 
   scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
   theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
         size = 0.5), panel.background = element_rect(fill = "white")) +
@@ -151,43 +194,14 @@ ggplot() +
 ```
 
 
-```{r}
-
-plot601 = ggplot() +
- layer_spatial(data=crop_r601) + 
-  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
-  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
-        size = 0.5), panel.background = element_rect(fill = "white")) +
-
- theme(plot.margin=unit(c(0,0,0,0), "mm"), 
-        legend.title = element_blank(), 
-        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
-  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
 
 
-plot601
-```
+# Plot Binary
 
 ```{r}
 
-plot673 = ggplot() +
- layer_spatial(data=crop_r673) + 
-  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
-  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
-        size = 0.5), panel.background = element_rect(fill = "white")) +
-  theme(legend.title = element_blank(), legend.position= "right", legend.box="vertical", legend.margin=margin(t=.3, b=.4, r=.3, l=.3, unit="cm")) +
- theme(plot.margin=unit(c(0,0,0,0), "mm"), 
-        legend.title = element_blank(), 
-        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
-  annotation_scale(location = "br", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
-
-plot673
-```
-
-```{r}
-
-plot872 = ggplot() +
- layer_spatial(data=crop_r872) + 
+plot800 = ggplot() +
+ layer_spatial(data=crop_r800) + 
   scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
   theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
         size = 0.5), panel.background = element_rect(fill = "white")) +
@@ -197,13 +211,13 @@ plot872 = ggplot() +
   annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
 
 
-plot872
+plot800
 ```
 
 ```{r}
 
-plot885 = ggplot() +
- layer_spatial(data=crop_r885) + 
+plot880 = ggplot() +
+ layer_spatial(data=crop_r880) + 
   scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
   theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
         size = 0.5), panel.background = element_rect(fill = "white")) +
@@ -213,23 +227,7 @@ plot885 = ggplot() +
   annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
 
 
-plot885
-```
-
-```{r}
-
-plot1166 = ggplot() +
- layer_spatial(data=crop_r1166) + 
-  scale_fill_gradientn(colours=Palette2, breaks=c(0, 1),  na.value = "transparent") +
-  theme(panel.grid.major = element_line(color = "white", linetype = "dashed", 
-        size = 0.5), panel.background = element_rect(fill = "white")) +
- theme(plot.margin=unit(c(0,0,0,0), "mm"), 
-        legend.title = element_blank(), 
-        legend.position = "none", axis.text.x=element_blank(),axis.ticks.x=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
-  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
-
-
-plot1166
+plot880
 ```
 
 ```{r}
@@ -252,21 +250,47 @@ plot1327 = ggplot() +
 plot1327
 ```
 
-
+# dNBR plots
 ```{r}
-refugTar %>% dplyr::select(IDobj, SizeHa:SizeCl)
+hist(crop_dnbr1327)
 ```
+```{r}
+
+plot1327 = ggplot() +
+ layer_spatial(data=dnbr1327_classified) + 
+  scale_fill_gradientn(colours=dnbrPalette, limits=c(-500,1000), breaks=c( -100, 100, 270, 666, 1000),  na.value = "transparent") +
+  theme(panel.grid.major = element_line(color = 'white', linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+       axis.text.x=element_blank(),
+       axis.ticks.x=element_blank(), 
+       axis.text.y=element_blank(), 
+       axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+plot1327
+```
+# Fire details
+```{r}
+refugia %>% 
+  filter(IDobj %in% target3) %>%
+  dplyr::select(IDobj, SizeHa:SizeCl)
+```
+
+
 
 # Combine Plots
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 
 legendplot = get_legend(fig_legend)
 ```
 
 ```{r fig.height=7, fig.width=6}
 
-plot1 = cowplot::plot_grid(plot885, plot673, plot872, plot601,  plot1166, plot1327, ncol=2)
+plot1 = cowplot::plot_grid(plot800, plot880, plot1327, ncol=1)
 plot1
 ```
 
@@ -275,11 +299,11 @@ plot1
 
 plot2 = cowplot::plot_grid(plot1, legendplot, ncol = 1, rel_heights = c(1, .1)) +
   draw_label("(a)", x = 0.04, y = .95, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
-   draw_label("(b)", x = 0.55, y = .95, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
-  draw_label("(c)", x = 0.04, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
-  draw_label("(d)", x = 0.55, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
-  draw_label("(e)", x = 0.04, y = .35, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
-  draw_label("(f)", x = 0.55, y = .35, fontfamily = "sans", fontface = "bold", color = "black", size = 12)
+  draw_label("102,913 ha", x = 0.15, y = .9, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+   draw_label("(b)", x = 0.04, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("107,609 ha", x = 0.15, y = .55, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(c)", x = 0.04, y = .35, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("710,545 ha", x = 0.15, y = .25, fontfamily = "sans", fontface = "bold", color = "black", size = 12) 
 
 plot2
 ```
