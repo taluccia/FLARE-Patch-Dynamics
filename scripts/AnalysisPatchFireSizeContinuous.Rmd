@@ -1,0 +1,152 @@
+---
+title: "Fire size and mean patch size"
+author: "Anna Talucci"
+date: "1/19/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+fire refugia size ~ fire size
+
+fire refugia density ~ Fire size
+
+# Pakcages
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(lme4)
+library(cowplot)
+library(lme4)
+library(lsmeans)
+library(DHARMa)
+library(multcomp)
+library(car)
+library(grid)
+library(gtable)
+library(gridExtra)
+library(gmodels)
+```
+
+
+# Data
+
+```{r}
+refugia = read.csv("../data/ClassPatchSummary/Refugia.csv") 
+```
+
+```{r}
+seed = read.csv("../data/ClassPatchSummary/DispersalEstimatesFire.csv") 
+```
+# Define graph Theme and color Palette 
+
+```{r}
+comp_theme = theme_bw() + theme(legend.position = "none") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+
+```{r}
+
+reg_theme = theme_bw() + theme(legend.position = "none") +
+  theme(plot.margin = unit(c(t = 0.3, r = 0.3, b = 0.3, l = 0.1), "cm")) +
+  theme(axis.title.x = element_text(size = 11, hjust = 0.5, vjust = -0.1),
+        axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+
+```
+
+```{r}
+bar_theme = theme_bw() + 
+  theme(legend.position = "none", legend.title = element_blank()) +
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black")) 
+```
+
+```{r}
+ecoPalette <- c("#b5b35c", "#556b2f")
+```
+
+```{r}
+cbEcoPal = c("#E1BE6A", "#40B0A6")
+```
+
+
+
+
+# fire refugia size ~ fire size
+
+
+```{r}
+linear.model5 <-lm(area_mn ~ SizeHa, data = refugia)
+```
+```{r}
+log.model5 <-lm(log(area_mn) ~ SizeHa, data = refugia)
+```
+
+```{r}
+log10.model5 <-lm(area_mn ~ log10(SizeHa), data = refugia)
+```
+
+```{r}
+
+summary(log10.model5)
+```
+
+```{r}
+
+summary(log.model5)
+```
+#### Residuals
+```{r}
+# Get the fitted value for each observation
+refugia$fitted5 = fitted(log.model5)
+# Get the residuals of the model
+refugia$res5 = residuals(log.model5)
+```
+
+```{r}
+qplot(x = fitted5, y = res5, data = refugia,
+main = "Residuals vs Fitted Values")
+```
+
+```{r}
+summary(log.model5)$r.squared 
+```
+
+```{r}
+log10.model5.df <- data.frame(x = log10(refugia$SizeHa),
+                           y = fitted(log10.model5))
+                          
+
+log10.model5.df
+```
+### Data for figure
+```{r}
+ggplot(refugia, aes(x=log10(SizeHa), y=area_mn)) + 
+  geom_point() 
+```
+
+
+```{r}
+ggplot(refugia, aes(x=SizeHa, y=area_mn)) + 
+  geom_point() +
+  geom_smooth(method="lm", aes(color="Exp Model"), formula= (y ~ exp(x)), se=FALSE, linetype = 1) +
+  geom_line(data = log10.model5.df, aes(x, y, color = "Log Model"), size = 1, linetype = 2) + 
+  guides(color = guide_legend("Model Type"))
+```
