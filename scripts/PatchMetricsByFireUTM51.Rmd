@@ -1,0 +1,82 @@
+---
+title: "Patch Metric by Fire UTM 51"
+author: "Anna Talucci"
+date: "1/31/2022"
+output: html_document
+---
+# Overview
+
+This script process landscape/patch statistics by class burned/unburned **For Each patch** for the 2020 fires in Northeastern Siberia. Fires are processed individually.
+
+
+[Landscapemetrics package details](https://cran.r-project.org/web/packages/landscapemetrics/landscapemetrics.pdf)
+
+For UTM zone 51 fires
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_4049.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM51.shp", "FiresUTM51")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==4049)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r eval=FALSE, include=FALSE}
+landscape %>% 
+  calculate_lsm(., level = "patch", full_name = TRUE) %>% 
+  mutate(IDobj = 4049) %>% 
+  mutate(UTMZone = 51) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_4049-1.csv',  row.names = FALSE)
+```
+
+ what = c("patch", "lsm_c_te", "lsm_l_pr"))
+```{r eval=FALSE, include=FALSE}
+landscape %>% 
+  calculate_lsm(.,  what = c("patch", "lsm_p_area", "lsm_p_core")) %>% 
+  mutate(IDobj = 4049) %>% 
+  mutate(UTMZone = 51) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_4049-2.csv',  row.names = FALSE)
+```
+
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>% 
+  mutate(IDobj = 4049) %>% 
+  mutate(UTMZone = 51) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_4049.csv',  row.names = FALSE)
+```

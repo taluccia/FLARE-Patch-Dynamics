@@ -1,0 +1,3736 @@
+---
+title: "Patch Metrics By Fire UTM 56"
+author: "Anna Talucci"
+date: "1/31/2022"
+output: html_document
+---
+
+# Overview
+
+This script process landscape/patch statistics by class burned/unburned **For Each patch** for the 2020 fires in Northeastern Siberia. Fires are processed individually.
+
+
+[Landscapemetrics package details](https://cran.r-project.org/web/packages/landscapemetrics/landscapemetrics.pdf)
+
+For UTM zone 56 fire
+
+
+# 331
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_331.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==331)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 331) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_331.csv',  row.names = FALSE)
+```
+
+# 370
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_370.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==370)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 370) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_370.csv',  row.names = FALSE)
+```
+
+
+# 371
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_371.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==371)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 371) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_371.csv',  row.names = FALSE)
+```
+
+
+# 381
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_381.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==381)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 381) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_381.csv',  row.names = FALSE)
+```
+
+
+# 390
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_390.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==390)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 390) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_390.csv',  row.names = FALSE)
+```
+
+
+# 399
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_399.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==399)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 399) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_399.csv',  row.names = FALSE)
+```
+
+
+# 413
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_413.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==413)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 413) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_413.csv',  row.names = FALSE)
+```
+
+
+# 415
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_415.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==415)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 415) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_415.csv',  row.names = FALSE)
+```
+
+
+# 416
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_416.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==416)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 416) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_416.csv',  row.names = FALSE)
+```
+
+
+# 425
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_425.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==425)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 425) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_425.csv',  row.names = FALSE)
+```
+
+
+# 431
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_431.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==431)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 431) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_431.csv',  row.names = FALSE)
+```
+
+
+# 450
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_450.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==450)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 450) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_450.csv',  row.names = FALSE)
+```
+
+
+# 454
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_454.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==454)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 454) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_454.csv',  row.names = FALSE)
+```
+
+
+# 459
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_459.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==459)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 459) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_459.csv',  row.names = FALSE)
+```
+
+
+# 462
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_462.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==462)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 462) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_462.csv',  row.names = FALSE)
+```
+
+
+# 474
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_474.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==474)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 474) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_474.csv',  row.names = FALSE)
+```
+
+
+# 476
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_476.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==476)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 476) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_476.csv',  row.names = FALSE)
+```
+
+
+# 478
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_478.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==478)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 478) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_478.csv',  row.names = FALSE)
+```
+
+
+# 479
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_479.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==479)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 479) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_479.csv',  row.names = FALSE)
+```
+
+
+# 483
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_483.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==483)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 483) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_483.csv',  row.names = FALSE)
+```
+
+
+# 485
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_485.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==485)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 485) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_485.csv',  row.names = FALSE)
+```
+
+# 500
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_500.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==500)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 500) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_500.csv',  row.names = FALSE)
+```
+
+# 519
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_519.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==519)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 519) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_519.csv',  row.names = FALSE)
+```
+
+# 523
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_523.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==523)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 523) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_523.csv',  row.names = FALSE)
+```
+
+# 532
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_532.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==532)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 532) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_532.csv',  row.names = FALSE)
+```
+
+# 548
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_548.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==548)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 548) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_548.csv',  row.names = FALSE)
+```
+
+# 555
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_555.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==555)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 555) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_555.csv',  row.names = FALSE)
+```
+
+# 563
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_563.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==563)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 563) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_563.csv',  row.names = FALSE)
+```
+
+# 580
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_580.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==580)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 580) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_580.csv',  row.names = FALSE)
+```
+
+# 589
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_589.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==589)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 589) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_589.csv',  row.names = FALSE)
+```
+
+# 605
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_605.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==605)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 605) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_605.csv',  row.names = FALSE)
+```
+
+# 610
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_610.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==610)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 610) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_610.csv',  row.names = FALSE)
+```
+
+# 644
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_644.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==644)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 644) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_644.csv',  row.names = FALSE)
+```
+
+# 653
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_653.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==653)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 653) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_653.csv',  row.names = FALSE)
+```
+
+# 657
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_657.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==657)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 657) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_657.csv',  row.names = FALSE)
+```
+
+# 661
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_661.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==661)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 661) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_661.csv',  row.names = FALSE)
+```
+
+# 666
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_666.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==666)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 666) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_666.csv',  row.names = FALSE)
+```
+
+# 674
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_674.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==674)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 674) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_674.csv',  row.names = FALSE)
+```
+
+# 688
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_688.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==688)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 688) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_688.csv',  row.names = FALSE)
+```
+
+# 695
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_695.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==695)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 695) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_695.csv',  row.names = FALSE)
+```
+
+# 713
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_713.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==713)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 713) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_713.csv',  row.names = FALSE)
+```
+
+# 729
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_729.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==729)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 729) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_729.csv',  row.names = FALSE)
+```
+
+# 772
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_772.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==772)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 772) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_772.csv',  row.names = FALSE)
+```
+
+
+# 816
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_816.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==816)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 816) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_816.csv',  row.names = FALSE)
+```
+
+
+# 825
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_825.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==825)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 825) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_825.csv',  row.names = FALSE)
+```
+
+
+# 828
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_828.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==828)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 828) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_828.csv',  row.names = FALSE)
+```
+
+# 835
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_835.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==835)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 835) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_835.csv',  row.names = FALSE)
+```
+
+# 843
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_843.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==843)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 843) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_843.csv',  row.names = FALSE)
+```
+
+
+# 847
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_847.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==847)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 847) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_847.csv',  row.names = FALSE)
+```
+
+# 863
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_863.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==863)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 863) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_863.csv',  row.names = FALSE)
+```
+
+
+# 864
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_864.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==864)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 864) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_864.csv',  row.names = FALSE)
+```
+
+# 890
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_890.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==890)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 890) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_890.csv',  row.names = FALSE)
+```
+
+# 903
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_903.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==903)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 903) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_903.csv',  row.names = FALSE)
+```
+
+# 906
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_906.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==906)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 906) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_906.csv',  row.names = FALSE)
+```
+
+# 936
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_936.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==936)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 936) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_936.csv',  row.names = FALSE)
+```
+
+# 981
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_981.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==981)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 981) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_981.csv',  row.names = FALSE)
+```
+
+# 982
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_982.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==982)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 982) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_982.csv',  row.names = FALSE)
+```
+
+# 988
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_988.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==988)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 988) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_988.csv',  row.names = FALSE)
+```
+
+
+# 990
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_990.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==990)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 990) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_990.csv',  row.names = FALSE)
+```
+
+# 1002
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1002.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1002)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1002) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1002.csv',  row.names = FALSE)
+```
+
+# 1048
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1048.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1048)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1048) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1048.csv',  row.names = FALSE)
+```
+
+# 1075
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1075.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1075)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1075) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1075.csv',  row.names = FALSE)
+```
+
+# 1093
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1093.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1093)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1093) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1093.csv',  row.names = FALSE)
+```
+
+
+# 1139
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1139.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1139)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1139) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1139.csv',  row.names = FALSE)
+```
+
+
+# 1150
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1150.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1150)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1150) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1150.csv',  row.names = FALSE)
+```
+
+
+
+# 1155
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1155.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1155)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1155) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1155.csv',  row.names = FALSE)
+```
+
+# 1157
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1157.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1157)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>% 
+  mutate(IDobj = 1157) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1157.csv',  row.names = FALSE)
+```
+# 1168
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1168.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1168)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>% 
+  mutate(IDobj = 1168) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1168.csv',  row.names = FALSE)
+```
+
+# 1199
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1199.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1199)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1199) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1199.csv',  row.names = FALSE)
+```
+
+# 1419
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1419.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1419)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1419) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1419.csv',  row.names = FALSE)
+```
+
+# 1545
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/UTMImagery/BinaryImg_1545.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/FiresUTM/FiresUTM56.shp", "FiresUTM56")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(IDobj==1545)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>% 
+  mutate(IDobj = 1545) %>% 
+  mutate(UTMZone = 56) %>%
+  write.csv(., '../outputs/SummarizePatchesUTM/patchFire_1545.csv',  row.names = FALSE)
+```
