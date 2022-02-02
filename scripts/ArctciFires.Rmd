@@ -38,8 +38,26 @@ Filter for all
 arctic = fires %>% 
   filter(ArcSub == "arctic") 
 ```
+```{r}
+NST_arctic = fires %>% 
+  filter(ArcSub == "arctic") %>%
+  filter(EcoCode == "NST")
+
+NST_arctic
+```
+```{r}
+unique(NST_arctic$IDobj)
+```
 
 
 ```{r eval=FALSE, include=FALSE}
 st_write(arctic, "../outputs/NESiberiaFires/ArcticFires2020.shp", driver="ESRI Shapefile") 
+```
+
+```{r eval=FALSE, include=FALSE}
+st_write(NST_arctic, "../outputs/NESiberiaFires/NSTArcticFires2020.shp", driver="ESRI Shapefile") 
+```
+
+```{r}
+arctic
 ```
