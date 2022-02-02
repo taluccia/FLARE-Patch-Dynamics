@@ -150,8 +150,108 @@ density_plot
 ```
 
 # Analysis
+## Fire refugia size ~ fire size
 
 
+```{r}
+linear.model5 <-lm(area_mn ~ SizeHa, data = refugia)
+```
+```{r}
+log.model5 <-lm(log(area_mn) ~ SizeHa, data = refugia)
+```
+
+```{r}
+log10.model5 <-lm(area_mn ~ log10(SizeHa), data = refugia)
+```
+
+```{r}
+
+summary(log10.model5)
+```
+
+```{r}
+
+summary(log.model5)
+```
+#### Residuals
+```{r}
+# Get the fitted value for each observation
+refugia$fitted5 = fitted(log10.model5)
+# Get the residuals of the model
+refugia$res5 = residuals(log10.model5)
+```
+
+```{r}
+qplot(x = fitted5, y = res5, data = refugia,
+main = "Residuals vs Fitted Values")
+```
+
+```{r}
+summary(log.model5)$r.squared 
+```
+
+### Figure
+```{r}
+fig5 = ggplot(refugia, aes(x=log10(SizeHa), y=area_mn)) + 
+    geom_point(size=1.5, shape=1, color= "grey50")  +
+  
+    xlab("Fire size (ha)") +
+      ylab("Fire refugia size (ha)") +
+  reg_theme
+
+fig5 
+```
+
+## Fire refugia density ~ Fire size
+
+```{r}
+linear.model6 <-lm(pd ~ SizeHa, data = refugia)
+```
+```{r}
+log.model6 <-lm(log(pd) ~ SizeHa, data = refugia)
+```
+
+```{r}
+log10.model6 <-lm(pd ~ log10(SizeHa), data = refugia)
+```
+
+```{r}
+
+summary(log10.model6)
+```
+
+```{r}
+
+summary(log.model6)
+```
+#### Residuals
+```{r}
+# Get the fitted value for each observation
+refugia$fitted6 = fitted(log10.model6)
+# Get the residuals of the model
+refugia$res6 = residuals(log10.model6)
+```
+
+```{r}
+qplot(x = fitted6, y = res6, data = refugia,
+main = "Residuals vs Fitted Values")
+```
+
+```{r}
+summary(log.model6)$r.squared 
+```
+
+### Figure
+```{r}
+fig6 = ggplot(refugia, aes(x=log10(SizeHa), y=pd)) + 
+    geom_point(size=1.5, shape=1, color= "grey50")  +
+  
+    xlab("Fire size (ha)") +
+      ylab("Fire refugia density\n(count per 100 ha)") +
+  reg_theme
+
+fig6
+```
 ## Patch Size Large vs medium, vs small fires
 ```{r}
 fit2 = lm(area_mn ~ FireSize2, data = refugia)
@@ -547,7 +647,7 @@ dis2
 
 ```{r fig.height=7, fig.width=6}
 
-fig1 = cowplot::plot_grid(size_plot, density_plot, g2, f2, plot2, dis2,   ncol=2)
+fig1 = cowplot::plot_grid(size_plot, density_plot, fig5, fig6, plot2, dis2,   ncol=2)
 fig1
 ```
 
