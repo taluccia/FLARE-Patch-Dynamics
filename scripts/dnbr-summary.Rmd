@@ -1,0 +1,67 @@
+---
+title: "dnbr summary"
+author: "Anna Talucci"
+date: "2/6/2022"
+output: html_document
+---
+
+
+# Overview
+
+# Packages
+
+```{r include=FALSE}
+
+
+library(dplyr)
+
+library(ggplot2)
+
+```
+
+# Data
+```{r}
+maxdf = read.csv("../data/dnbr-summary/dNBR_max.csv", header=TRUE, sep = ",", strip.white = TRUE)
+mindf = read.csv("../data/dnbr-summary/dNBR_min.csv", header=TRUE, sep = ",", strip.white = TRUE)
+meandf = read.csv("../data/dnbr-summary/dNBR_mean.csv", header=TRUE, sep = ",", strip.white = TRUE)
+meddf = read.csv("../data/dnbr-summary/dNBR_median.csv", header=TRUE, sep = ",", strip.white = TRUE)
+```
+
+```{r}
+head(maxdf)
+head(mindf)
+head(meandf)
+head(meddf)
+```
+
+```{r}
+maxdf1 = maxdf %>% dplyr::select(IDobj, ArcSub, EcoCode, SIZEha, max)
+mindf1 = mindf %>% dplyr::select(IDobj, ArcSub, EcoCode, SIZEha, min)
+meandf1 = meandf %>% dplyr::select(IDobj, ArcSub, EcoCode, SIZEha, mean)
+meddf1 = meddf %>% dplyr::select(IDobj, ArcSub, EcoCode, SIZEha, median)
+```
+
+```{r}
+head(meddf1)
+```
+
+```{r}
+mergecol = c("IDobj", "ArcSub", "EcoCode", "SIZEha")
+dataframe = maxdf1 %>% left_join(mindf1, by = mergecol) %>%
+  left_join(meandf1, by = mergecol) %>%
+  left_join(meddf1, by=mergecol) %>%
+    pivot_longer(
+    cols = starts_with("m"),
+    names_to = "sumStat",
+    values_to = "values",
+    values_drop_na = TRUE
+  )
+
+dataframe
+```
+
+
+```{r}
+ggplot(data = dataframe, aes(x=sumStat, y=values))+
+  geom_boxplot()
+```
