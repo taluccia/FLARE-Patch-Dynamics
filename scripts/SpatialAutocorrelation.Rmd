@@ -1,0 +1,28 @@
+---
+title: "Spatial Autocorrelation"
+author: "Anna Talucci"
+date: "2/5/2022"
+output: html_document
+---
+
+```{r include=FALSE}
+
+library(devtools)
+
+library(foreign)
+
+library(dplyr)
+library(splines)
+library(ggplot2)
+library(gstat)
+```
+
+# Data
+```{r}
+model.data = read.csv("../data/CombinedSampledPoints/SampledPoints.csv", header=TRUE, sep = ",", strip.white = TRUE)
+```
+
+spdf <- SpatialPointsDataFrame(xy, data=xyz)
+vario <- variogram(resp~1, data=xyz, locations= ~x+y, 
+                   cutoff=0.5*gridDim)
+plot(vario$dist, vario$gamma)
