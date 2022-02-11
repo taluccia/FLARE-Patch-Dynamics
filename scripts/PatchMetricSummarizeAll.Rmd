@@ -1,0 +1,136 @@
+---
+title: "Patch Metric Summary"
+author: "Anna Talucci"
+date: "2/4/2022"
+output: html_document
+---
+
+
+# Clear workspace
+
+```{r}
+rm(list=ls()) 
+```
+
+# Overview
+
+# Fires with Scanline Errors
+```{r}
+target = c(351, 361, 403, 422, 428, 434, 439, 498, 544, 550, 598, 636, 808, 892, 944, 1097, 1190, 1275, 1363, 1416, 1742, 1773, 2135, 2216, 2295,2322, 2346, 2350, 2351, 2358, 2367, 2383, 2466, 2491, 2514, 2722, 2757, 2833, 2905, 3008, 3213)
+```
+
+# Packages
+
+```{r}
+library(tidyverse)
+```
+
+# Define graph Theme and color Palette 
+
+##Themes
+```{r}
+lb_theme = theme_bw() + theme(legend.position = "bottom") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+
+```{r}
+comp_theme = theme_bw() + theme(legend.position = "none") +  
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black"))
+```
+
+```{r}
+bar_theme = theme_bw() + 
+  theme(legend.position = "none", legend.title = element_blank()) +
+  theme(panel.grid.major = element_blank()) +
+    theme(axis.title.y = element_text(size = 11, hjust = 0.5, vjust = 1.1),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.y = element_text(size = 10, color = "black"),
+        axis.line = element_line(colour = "black")) 
+```
+
+```{r}
+ecoPalette <- c("#b5b35c", "#556b2f")
+```
+
+
+# Data
+
+## Fire data
+
+```{r}
+fires = read.csv("../data/NESiberiaFires/NESiberiaFires2020.csv") 
+```
+
+## Class patch summaries
+
+
+```{r}
+csv_patch = list.files(path = '../data/SummarizePatchesUTM', pattern = "csv$", full.names = TRUE)
+```
+
+```{r include=FALSE}
+stacked_patch <- map_dfr(csv_patch, read_csv)
+```
+
+```{r}
+head(stacked_patch)
+```
+
+# Organize Patch Class Data 
+1. Filter - remove fires with scanline error
+2. Pivot Wider so each patch metric is a column
+```{r}
+df1 = stacked_patch %>% 
+  filter(!IDobj %in% target) 
+
+```
+
+```{r}
+head(df1)
+```
+%>%
+  pivot_wider(id_cols =  c(IDobj, class), names_from = metric, values_from = value)
+  
+```{r}
+df_sum = df1 %>% filter(class==1) %>% 
+  group_by(metric) %>%
+  summarise(minimum = min(value),
+            maximum = max(value),
+            mean = mean(value),
+            median = median(value))
+
+df_sum
+```
+
+  
+```{r}
+df1 %>% filter(class==1) %>% 
+  group_by(metric) %>%
+             filter(value == max(value))
+```
+
+```{r}
+df_sum1 = df1 %>% filter(class==1) %>% 
+  filter(!id==50811) %>%
+  group_by(metric) %>%
+  summarise(minimum = min(value),
+            maximum = max(value),
+            mean = mean(value),
+            median = median(value))
+
+df_sum1
+```
+
+```{r}
+df1 %>% filter(class==1) %>% 
+  group_by(metric) %>%
+             filter(value > 10000)
+```
