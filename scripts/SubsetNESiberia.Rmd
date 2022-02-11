@@ -95,6 +95,25 @@ st_write(ne_fires_all, "../outputs/NESiberiaFires/NESiberiaFires2001-2020.shp", 
 ```{r eval=FALSE, include=FALSE}
 st_write(ne_fires2020, "../outputs/NESiberiaFires/NESiberiaFires2020.shp", driver="ESRI Shapefile") 
 ```
+# Cherskiy fires
+
+```{r}
+target_id = c("977", "880", "800", "931")
+
+```
+
+```{r}
+ch_fires = ne_fires_all %>%
+  filter(FireYr =="2020") %>%
+  filter(IDobj %in% target_id)
+
+ch_fires
+
+```
+
+```{r eval=FALSE, include=FALSE}
+st_write(ch_fires, "../outputs/NESiberiaFires/Chersky2020.shp", driver="ESRI Shapefile") 
+```
 
 # Write to CSV
 
