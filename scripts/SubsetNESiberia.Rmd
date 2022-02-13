@@ -43,6 +43,12 @@ fires
 target_eco = c("NST", "CKMT")
 ```
 
+```{r}
+fires %>%
+  filter(EcoCode %in% target_eco) %>%
+  group_by(FireYr) %>%
+  summarise(count = n())
+```
 
 ```{r}
 ne_fires2020 = fires %>%
