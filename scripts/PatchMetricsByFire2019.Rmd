@@ -5,15 +5,6 @@ date: "2/13/2022"
 output: html_document
 ---
 
-## Fire perimeters 
-```{r}
-fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
-```
-
-```{r}
-firesx = fires %>% filter(FireYr=="2019") 
-unique(firesx$IDobj)
-```
 # Overview
 
 This script process landscape/patch statistics by class burned/unburned **For Each patch** for the 2020 fires in Northeastern Siberia. Fires are processed individually.
