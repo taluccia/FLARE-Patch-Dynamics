@@ -6698,7 +6698,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_781tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_781.tif")
 ```
 
 ## Fire perimeters 
@@ -6752,7 +6752,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_788tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_788.tif")
 ```
 
 ## Fire perimeters 
@@ -6806,7 +6806,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_789tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_789.tif")
 ```
 
 ## Fire perimeters 
@@ -6860,7 +6860,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_800tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_800.tif")
 ```
 
 ## Fire perimeters 
@@ -6914,7 +6914,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_801tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_801.tif")
 ```
 
 ## Fire perimeters 
@@ -6968,7 +6968,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_806tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_806.tif")
 ```
 
 ## Fire perimeters 
@@ -7022,7 +7022,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_807tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_807.tif")
 ```
 
 ## Fire perimeters 
@@ -7076,7 +7076,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_808tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_808.tif")
 ```
 
 ## Fire perimeters 
@@ -7130,7 +7130,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_812tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_812.tif")
 ```
 
 ## Fire perimeters 
@@ -7184,7 +7184,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_814tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_814.tif")
 ```
 
 ## Fire perimeters 
@@ -7238,7 +7238,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_834tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_834.tif")
 ```
 
 ## Fire perimeters 
@@ -7292,7 +7292,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_844tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_844.tif")
 ```
 
 ## Fire perimeters 
@@ -7346,7 +7346,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_854tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_854.tif")
 ```
 
 ## Fire perimeters 
@@ -7400,7 +7400,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_855tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_855.tif")
 ```
 
 ## Fire perimeters 
@@ -7454,7 +7454,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_906tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_906.tif")
 ```
 
 ## Fire perimeters 
@@ -7508,7 +7508,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_908tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_908.tif")
 ```
 
 ## Fire perimeters 
@@ -7562,7 +7562,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_919tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_919.tif")
 ```
 
 ## Fire perimeters 
@@ -7616,7 +7616,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_924tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_924.tif")
 ```
 
 ## Fire perimeters 
@@ -7670,7 +7670,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_929tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_929.tif")
 ```
 
 ## Fire perimeters 
@@ -7725,7 +7725,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_943tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_943.tif")
 ```
 
 ## Fire perimeters 
@@ -7779,7 +7779,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_969tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_969.tif")
 ```
 
 ## Fire perimeters 
@@ -7833,7 +7833,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_979tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_979.tif")
 ```
 
 ## Fire perimeters 
@@ -7887,7 +7887,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_986tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_986.tif")
 ```
 
 ## Fire perimeters 
@@ -7941,7 +7941,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_999tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_999.tif")
 ```
 
 ## Fire perimeters 
@@ -7995,7 +7995,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1000tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1000.tif")
 ```
 
 ## Fire perimeters 
@@ -8049,7 +8049,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1016tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1016.tif")
 ```
 
 ## Fire perimeters 
@@ -8103,7 +8103,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1018tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1018.tif")
 ```
 
 ## Fire perimeters 
@@ -8157,7 +8157,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1019tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1019.tif")
 ```
 
 ## Fire perimeters 
@@ -8211,7 +8211,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1025tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1025.tif")
 ```
 
 ## Fire perimeters 
@@ -8265,7 +8265,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1033tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1033.tif")
 ```
 
 ## Fire perimeters 
@@ -8319,7 +8319,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1044tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1044.tif")
 ```
 
 ## Fire perimeters 
@@ -8373,7 +8373,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1047tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1047.tif")
 ```
 
 ## Fire perimeters 
@@ -8427,7 +8427,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1050tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1050.tif")
 ```
 
 ## Fire perimeters 
@@ -8481,7 +8481,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1052tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1052.tif")
 ```
 
 ## Fire perimeters 
@@ -8535,7 +8535,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1054tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1054.tif")
 ```
 
 ## Fire perimeters 
@@ -8589,7 +8589,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1095tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1095.tif")
 ```
 
 ## Fire perimeters 
@@ -8643,7 +8643,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1104tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1104.tif")
 ```
 
 ## Fire perimeters 
@@ -8697,7 +8697,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1112tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1112.tif")
 ```
 
 ## Fire perimeters 
@@ -8751,7 +8751,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1113tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1113.tif")
 ```
 
 ## Fire perimeters 
@@ -8805,7 +8805,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1120tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1120.tif")
 ```
 
 ## Fire perimeters 
@@ -8859,7 +8859,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1128tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1128.tif")
 ```
 
 ## Fire perimeters 
@@ -8913,7 +8913,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1130tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1130.tif")
 ```
 
 ## Fire perimeters 
@@ -8967,7 +8967,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1153tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1153.tif")
 ```
 
 ## Fire perimeters 
@@ -9021,7 +9021,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1157tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1157.tif")
 ```
 
 ## Fire perimeters 
@@ -9075,7 +9075,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1161tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1161.tif")
 ```
 
 ## Fire perimeters 
@@ -9129,7 +9129,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1163tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1163.tif")
 ```
 
 ## Fire perimeters 
@@ -9183,7 +9183,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1170tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1170.tif")
 ```
 
 ## Fire perimeters 
@@ -9237,7 +9237,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1179tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1179.tif")
 ```
 
 ## Fire perimeters 
@@ -9291,7 +9291,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1181tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1181.tif")
 ```
 
 ## Fire perimeters 
@@ -9345,7 +9345,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1186tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1186.tif")
 ```
 
 ## Fire perimeters 
@@ -9399,7 +9399,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1200tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1200.tif")
 ```
 
 ## Fire perimeters 
@@ -9453,7 +9453,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1206tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1206.tif")
 ```
 
 ## Fire perimeters 
@@ -9507,7 +9507,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1211tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1211.tif")
 ```
 
 ## Fire perimeters 
@@ -9561,7 +9561,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1230tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1230.tif")
 ```
 
 ## Fire perimeters 
@@ -9615,7 +9615,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1236tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1236.tif")
 ```
 
 ## Fire perimeters 
@@ -9669,7 +9669,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1245tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1245.tif")
 ```
 
 ## Fire perimeters 
@@ -9723,7 +9723,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1266tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1266.tif")
 ```
 
 ## Fire perimeters 
@@ -9777,7 +9777,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1266tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1266.tif")
 ```
 
 ## Fire perimeters 
@@ -9831,7 +9831,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1301tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1301.tif")
 ```
 
 ## Fire perimeters 
@@ -9885,7 +9885,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1304tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1304.tif")
 ```
 
 ## Fire perimeters 
@@ -9940,7 +9940,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1305tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1305.tif")
 ```
 
 ## Fire perimeters 
@@ -9994,7 +9994,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1332tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1332.tif")
 ```
 
 ## Fire perimeters 
@@ -10049,7 +10049,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1354tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1354.tif")
 ```
 
 ## Fire perimeters 
@@ -10104,7 +10104,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1368tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1368.tif")
 ```
 
 ## Fire perimeters 
@@ -10159,7 +10159,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1373tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1373.tif")
 ```
 
 ## Fire perimeters 
@@ -10214,7 +10214,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1384tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1384.tif")
 ```
 
 ## Fire perimeters 
@@ -10269,7 +10269,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1389tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1389.tif")
 ```
 
 ## Fire perimeters 
@@ -10325,7 +10325,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1393tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1393.tif")
 ```
 
 ## Fire perimeters 
@@ -10380,7 +10380,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1398tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1398.tif")
 ```
 
 ## Fire perimeters 
@@ -10435,7 +10435,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1421tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1421.tif")
 ```
 
 ## Fire perimeters 
@@ -10489,7 +10489,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1444tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1444.tif")
 ```
 
 ## Fire perimeters 
@@ -10543,7 +10543,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1451tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1451.tif")
 ```
 
 ## Fire perimeters 
@@ -10597,7 +10597,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1472tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1472.tif")
 ```
 
 ## Fire perimeters 
@@ -10651,7 +10651,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1478tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1478.tif")
 ```
 
 ## Fire perimeters 
@@ -10705,7 +10705,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1479tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1479.tif")
 ```
 
 ## Fire perimeters 
@@ -10759,7 +10759,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1484tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1484.tif")
 ```
 
 ## Fire perimeters 
@@ -10813,7 +10813,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1500tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1500.tif")
 ```
 
 ## Fire perimeters 
@@ -10868,7 +10868,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1501tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1501.tif")
 ```
 
 ## Fire perimeters 
@@ -10922,7 +10922,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1509tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1509.tif")
 ```
 
 ## Fire perimeters 
@@ -10976,7 +10976,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1512tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1512.tif")
 ```
 
 ## Fire perimeters 
@@ -11030,7 +11030,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1520tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1520.tif")
 ```
 
 ## Fire perimeters 
@@ -11084,7 +11084,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1528tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1528.tif")
 ```
 
 ## Fire perimeters 
@@ -11138,7 +11138,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1533tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1533.tif")
 ```
 
 ## Fire perimeters 
@@ -11192,7 +11192,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1536tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1536.tif")
 ```
 
 ## Fire perimeters 
@@ -11246,7 +11246,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1537tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1537.tif")
 ```
 
 ## Fire perimeters 
@@ -11300,7 +11300,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1549tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1549.tif")
 ```
 
 ## Fire perimeters 
@@ -11354,7 +11354,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1551tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1551.tif")
 ```
 
 ## Fire perimeters 
@@ -11408,7 +11408,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1552tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1552.tif")
 ```
 
 ## Fire perimeters 
@@ -11462,7 +11462,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1556tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1556.tif")
 ```
 
 ## Fire perimeters 
@@ -11516,7 +11516,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1564tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1564.tif")
 ```
 
 ## Fire perimeters 
@@ -11570,7 +11570,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1568tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1568.tif")
 ```
 
 ## Fire perimeters 
@@ -11624,7 +11624,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1571tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1571.tif")
 ```
 
 ## Fire perimeters 
@@ -11678,7 +11678,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1579tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1579.tif")
 ```
 
 ## Fire perimeters 
@@ -11732,7 +11732,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1581tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1581.tif")
 ```
 
 ## Fire perimeters 
@@ -11786,7 +11786,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1590tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1590.tif")
 ```
 
 ## Fire perimeters 
@@ -11840,7 +11840,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1591tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1591.tif")
 ```
 
 ## Fire perimeters 
@@ -11895,7 +11895,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1601tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1601.tif")
 ```
 
 ## Fire perimeters 
@@ -11949,7 +11949,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1604tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1604.tif")
 ```
 
 ## Fire perimeters 
@@ -12004,7 +12004,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1607tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1607.tif")
 ```
 
 ## Fire perimeters 
@@ -12059,7 +12059,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1612tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1612.tif")
 ```
 
 ## Fire perimeters 
@@ -12114,7 +12114,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1621tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1621.tif")
 ```
 
 ## Fire perimeters 
@@ -12169,7 +12169,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1624tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1624.tif")
 ```
 
 ## Fire perimeters 
@@ -12224,7 +12224,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1629tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1629.tif")
 ```
 
 ## Fire perimeters 
@@ -12279,7 +12279,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1631tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1631.tif")
 ```
 
 ## Fire perimeters 
@@ -12334,7 +12334,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1640tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1640.tif")
 ```
 
 ## Fire perimeters 
@@ -12389,7 +12389,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1645tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1645.tif")
 ```
 
 ## Fire perimeters 
@@ -12444,7 +12444,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1647tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1647.tif")
 ```
 
 ## Fire perimeters 
@@ -12499,7 +12499,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1650tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1650.tif")
 ```
 
 ## Fire perimeters 
@@ -12554,7 +12554,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1654tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1654.tif")
 ```
 
 ## Fire perimeters 
@@ -12609,7 +12609,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1662tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1662.tif")
 ```
 
 ## Fire perimeters 
@@ -12664,7 +12664,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1665tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1665.tif")
 ```
 
 ## Fire perimeters 
@@ -12719,7 +12719,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1666tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1666.tif")
 ```
 
 ## Fire perimeters 
@@ -12774,7 +12774,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1678tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1678.tif")
 ```
 
 ## Fire perimeters 
@@ -12829,7 +12829,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1683tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1683.tif")
 ```
 
 ## Fire perimeters 
@@ -12884,7 +12884,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1684tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1684.tif")
 ```
 
 ## Fire perimeters 
@@ -12939,7 +12939,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1685tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1685.tif")
 ```
 
 ## Fire perimeters 
@@ -12994,7 +12994,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1688tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1688.tif")
 ```
 
 ## Fire perimeters 
@@ -13049,7 +13049,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1690tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1690.tif")
 ```
 
 ## Fire perimeters 
@@ -13104,7 +13104,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1694tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1694.tif")
 ```
 
 ## Fire perimeters 
@@ -13159,7 +13159,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1698tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1698.tif")
 ```
 
 ## Fire perimeters 
@@ -13214,7 +13214,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1708tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1708.tif")
 ```
 
 ## Fire perimeters 
@@ -13268,7 +13268,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1710tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1710.tif")
 ```
 
 ## Fire perimeters 
@@ -13322,7 +13322,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1724tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1724.tif")
 ```
 
 ## Fire perimeters 
@@ -13376,7 +13376,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1736tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1736.tif")
 ```
 
 ## Fire perimeters 
@@ -13430,7 +13430,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1741tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1741.tif")
 ```
 
 ## Fire perimeters 
@@ -13484,7 +13484,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1749tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1749.tif")
 ```
 
 ## Fire perimeters 
@@ -13538,7 +13538,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1759tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1759.tif")
 ```
 
 ## Fire perimeters 
@@ -13593,7 +13593,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1765tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1765.tif")
 ```
 
 ## Fire perimeters 
@@ -13647,7 +13647,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1780tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1780.tif")
 ```
 
 ## Fire perimeters 
@@ -13701,7 +13701,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2019Binary/2019BinaryImg_1785tif")
+r1 <- raster("../data/2019Binary/2019BinaryImg_1785.tif")
 ```
 
 ## Fire perimeters 
@@ -13733,5 +13733,1249 @@ landscape %>%
   calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
   mutate(IDobj = 1785) %>% 
   write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1785.csv',  row.names = FALSE)
+```
+
+# 1792
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1792.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1792)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1792) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1792.csv',  row.names = FALSE)
+```
+
+# 1814
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1814.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1814)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1814) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1814.csv',  row.names = FALSE)
+```
+
+
+# 1817
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1817.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1817)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1817) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1817.csv',  row.names = FALSE)
+```
+
+# 1819
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1819.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1819)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1819) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1819.csv',  row.names = FALSE)
+```
+
+# 1840
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1840.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1840)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1840) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1840.csv',  row.names = FALSE)
+```
+
+# 1842
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1842.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1842)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1842) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1842.csv',  row.names = FALSE)
+```
+
+# 1852
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1852.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1852)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1852) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1852.csv',  row.names = FALSE)
+```
+
+# 1852
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1852.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1852)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1852) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1852.csv',  row.names = FALSE)
+```
+
+# 1861
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1861.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1861)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1861) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1861.csv',  row.names = FALSE)
+```
+
+# 1866
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1866.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1866)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1866) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1866.csv',  row.names = FALSE)
+```
+
+
+# 1868
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1868.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1868)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1868) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1868.csv',  row.names = FALSE)
+```
+
+# 1888
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1888.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1888)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1888) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1888.csv',  row.names = FALSE)
+```
+
+# 1896
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1896.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1896)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1896) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1896.csv',  row.names = FALSE)
+```
+
+# 1906
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1906.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1906)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1906) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1906.csv',  row.names = FALSE)
+```
+
+# 1909
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1909.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1909)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1909) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1909.csv',  row.names = FALSE)
+```
+
+# 1919
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1919.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1919)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1919) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1919.csv',  row.names = FALSE)
+```
+
+# 1932
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1932.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1932)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1932) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1932.csv',  row.names = FALSE)
+```
+
+# 1937
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1937.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1937)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1937) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1937.csv',  row.names = FALSE)
+```
+
+# 1979
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1979.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1979)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1979) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1979.csv',  row.names = FALSE)
+```
+
+# 1987
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1987.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1987)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1987) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1987.csv',  row.names = FALSE)
+```
+
+# 1988
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1988.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1988)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1988) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1988.csv',  row.names = FALSE)
+```
+
+# 1999
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_1999.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==1999)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1999) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_1999.csv',  row.names = FALSE)
+```
+
+# 2000
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2019Binary/2019BinaryImg_2000.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2019") %>%
+  filter(IDobj==2000)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2000) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2019patchFire_2000.csv',  row.names = FALSE)
 ```
 
