@@ -1,0 +1,6026 @@
+---
+title: "Patch Metrics by Fire 2018"
+author: "Anna Talucci"
+date: "2/15/2022"
+output: html_document
+---
+
+
+
+# Overview
+
+This script process landscape/patch statistics by class burned/unburned **For Each patch** for the 2020 fires in Northeastern Siberia. Fires are processed individually.
+
+
+[Landscapemetrics package details](https://cran.r-project.org/web/packages/landscapemetrics/landscapemetrics.pdf)
+
+
+
+# 39
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_39.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==39)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 39) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_39.csv',  row.names = FALSE)
+```
+
+
+# 46
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_46.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==46)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 46) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_46.csv',  row.names = FALSE)
+```
+
+# 47
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_47.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==47)
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 47) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_47.csv',  row.names = FALSE)
+```
+
+
+# 48
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_48.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==48)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 48) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_48.csv',  row.names = FALSE)
+```
+
+# 53
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_53.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==53)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 53) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_53.csv',  row.names = FALSE)
+```
+
+# 55
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_55.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==55)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 55) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_55.csv',  row.names = FALSE)
+```
+
+
+# 59
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_59.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==59)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 59) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_59.csv',  row.names = FALSE)
+```
+
+
+# 63
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_63.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==63)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 63) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_63.csv',  row.names = FALSE)
+```
+
+# 64
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_64.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==64)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 64) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_64.csv',  row.names = FALSE)
+```
+
+# 65
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_65.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==65)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 65) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_65.csv',  row.names = FALSE)
+```
+
+# 71
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_71.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==71)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 71) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_71.csv',  row.names = FALSE)
+```
+
+# 74
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_74.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==74)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 74) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_74.csv',  row.names = FALSE)
+```
+
+
+# 77
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_77.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==77)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 77) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_77.csv',  row.names = FALSE)
+```
+
+# 87
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_87.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==87)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 87) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_87.csv',  row.names = FALSE)
+```
+
+# 90
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_90.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==90)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 90) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_90.csv',  row.names = FALSE)
+```
+
+
+# 93
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_93.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==93)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 93) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_93.csv',  row.names = FALSE)
+```
+
+
+# 96
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_96.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==96)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 96) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_96.csv',  row.names = FALSE)
+```
+
+# 102
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_102.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==102)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 102) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_102.csv',  row.names = FALSE)
+```
+
+
+# 111
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_111.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==111)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 111) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_111.csv',  row.names = FALSE)
+```
+
+# 118
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_118.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==118)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 118) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_118.csv',  row.names = FALSE)
+```
+
+# 123
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_123.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==123)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 123) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_123.csv',  row.names = FALSE)
+```
+
+# 129
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_129.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==129)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 129) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_129.csv',  row.names = FALSE)
+```
+
+# 132
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_132.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==132)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 132) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_132.csv',  row.names = FALSE)
+```
+
+# 139
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_139.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==139)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 139) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_139.csv',  row.names = FALSE)
+```
+
+# 141
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_141.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==141)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 141) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_141.csv',  row.names = FALSE)
+```
+
+
+# 142
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_142.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==142)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 142) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_142.csv',  row.names = FALSE)
+```
+
+# 165
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_165.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==165)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 165) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_165.csv',  row.names = FALSE)
+```
+
+# 167
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_167.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==167)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 167) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_167.csv',  row.names = FALSE)
+```
+
+# 183
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_183.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==183)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 183) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_183.csv',  row.names = FALSE)
+```
+
+# 209
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_209.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==209)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 209) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_209.csv',  row.names = FALSE)
+```
+
+# 230
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_230.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==230)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 230) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_230.csv',  row.names = FALSE)
+```
+
+# 242
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_242.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==242)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 242) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_242.csv',  row.names = FALSE)
+```
+
+# 246
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_246.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==246)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 246) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_246.csv',  row.names = FALSE)
+```
+
+# 251
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_251.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==251)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 251) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_251.csv',  row.names = FALSE)
+```
+
+# 253
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_253.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==253)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 253) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_253.csv',  row.names = FALSE)
+```
+
+# 255
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_255.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==255)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 255) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_255.csv',  row.names = FALSE)
+```
+
+# 258
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_258.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==258)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 258) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_258.csv',  row.names = FALSE)
+```
+
+# 259
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_259.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==259)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 259) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_259.csv',  row.names = FALSE)
+```
+
+# 277
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_277.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==277)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 277) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_277.csv',  row.names = FALSE)
+```
+
+# 288
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_288.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==288)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 288) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_288.csv',  row.names = FALSE)
+```
+
+# 299
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_299.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==299)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 299) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_299.csv',  row.names = FALSE)
+```
+
+# 305
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_305.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==305)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 305) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_305.csv',  row.names = FALSE)
+```
+
+# 310
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_310.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==310)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 310) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_310.csv',  row.names = FALSE)
+```
+
+# 312
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_312.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==312)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 312) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_312.csv',  row.names = FALSE)
+```
+
+# 313
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_313.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==313)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 313) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_313.csv',  row.names = FALSE)
+```
+
+# 336
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_336.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==336)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 336) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_336.csv',  row.names = FALSE)
+```
+
+# 367
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_367.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==367)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 367) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_367.csv',  row.names = FALSE)
+```
+
+# 476
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_476.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==476)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 476) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_476.csv',  row.names = FALSE)
+```
+
+# 478
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_478.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==478)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 478) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_478.csv',  row.names = FALSE)
+```
+
+# 517
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_517.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==517)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 517) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_517.csv',  row.names = FALSE)
+```
+
+# 384
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_384.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==384)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 384) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_384.csv',  row.names = FALSE)
+```
+
+# 416
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_416.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==416)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 416) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_416.csv',  row.names = FALSE)
+```
+
+# 436
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_436.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==436)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 436) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_436.csv',  row.names = FALSE)
+```
+
+# 476
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_476.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==476)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 476) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_476.csv',  row.names = FALSE)
+```
+
+# 478
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_478.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==478)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 478) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_478.csv',  row.names = FALSE)
+```
+
+# 517
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_517.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==517)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 517) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_517.csv',  row.names = FALSE)
+```
+
+# 552
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_552.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==552)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 552) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_552.csv',  row.names = FALSE)
+```
+
+# 742
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_742.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==742)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 742) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_742.csv',  row.names = FALSE)
+```
+
+# 755
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_755.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==755)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 755) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_755.csv',  row.names = FALSE)
+```
+
+# 760
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_760.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==760)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 760) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_760.csv',  row.names = FALSE)
+```
+
+# 774
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_774.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==774)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 774) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_774.csv',  row.names = FALSE)
+```
+
+# 837
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_837.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==837)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 837) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_837.csv',  row.names = FALSE)
+```
+
+
+# 897
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_897.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==897)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 897) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_897.csv',  row.names = FALSE)
+```
+
+# 971
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_971.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==971)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 971) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_971.csv',  row.names = FALSE)
+```
+
+# 1040
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1040.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1040)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1040) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1040.csv',  row.names = FALSE)
+```
+
+# 1099
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1099.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1099)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1099) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1099.csv',  row.names = FALSE)
+```
+
+# 1208
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1208.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1208)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1208) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1208.csv',  row.names = FALSE)
+```
+
+
+# 1246
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1246.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1246)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1246) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1246.csv',  row.names = FALSE)
+```
+
+# 1257
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1257.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1257)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1257) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1257.csv',  row.names = FALSE)
+```
+
+# 1259
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1259.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1259)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1259) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1259.csv',  row.names = FALSE)
+```
+
+
+# 1272
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1272.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1272)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1272) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1272.csv',  row.names = FALSE)
+```
+
+# 1279
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1279.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1279)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1279) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1279.csv',  row.names = FALSE)
+```
+
+# 1282
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1282.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1282)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1282) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1282.csv',  row.names = FALSE)
+```
+
+# 1289
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1289.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1289)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1289) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1289.csv',  row.names = FALSE)
+```
+
+# 1296
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1296.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1296)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1296) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1296.csv',  row.names = FALSE)
+```
+
+# 1317
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1317.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1317)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1317) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1317.csv',  row.names = FALSE)
+```
+
+# 1430
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1430.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1430)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1430) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1430.csv',  row.names = FALSE)
+```
+
+
+# 1485
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1485.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1485)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1485) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1485.csv',  row.names = FALSE)
+```
+
+# 1492
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1492.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1492)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1492) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1492.csv',  row.names = FALSE)
+```
+
+# 1530
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1530.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1530)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1530) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1530.csv',  row.names = FALSE)
+```
+
+# 1552
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1552.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1552)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1552) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1552.csv',  row.names = FALSE)
+```
+
+
+# 1589
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1589.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1589)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1589) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1589.csv',  row.names = FALSE)
+```
+
+# 1652
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1652.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1652)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1652) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1652.csv',  row.names = FALSE)
+```
+
+# 1668
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1668.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1668)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1668) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1668.csv',  row.names = FALSE)
+```
+
+# 1684
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1684.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1684)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1684) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1684.csv',  row.names = FALSE)
+```
+
+# 1690
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1690.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1690)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1690) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1690.csv',  row.names = FALSE)
+```
+
+# 1695
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1695.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1695)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1695) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1695.csv',  row.names = FALSE)
+```
+
+# 1710
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1710.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1710)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1710) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1710.csv',  row.names = FALSE)
+```
+
+# 1720
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1720.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1720)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1720) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1720.csv',  row.names = FALSE)
+```
+
+# 1741
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1741.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1741)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1741) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1741.csv',  row.names = FALSE)
+```
+
+# 1784
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1784.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1784)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1784) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1784.csv',  row.names = FALSE)
+```
+
+# 1805
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1805.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1805)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1805) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1805.csv',  row.names = FALSE)
+```
+
+# 1831
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_1831.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==1831)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 1831) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_1831.csv',  row.names = FALSE)
+```
+
+# 2032
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2032.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2032)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2032) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2032.csv',  row.names = FALSE)
+```
+
+# 2047
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2047.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2047)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2047) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2047.csv',  row.names = FALSE)
+```
+
+# 2111
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2111.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2111)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2111) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2111.csv',  row.names = FALSE)
+```
+
+# 2149
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2149.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2149)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2149) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2149.csv',  row.names = FALSE)
+```
+
+# 2436
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2436.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2436)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2436) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2436.csv',  row.names = FALSE)
+```
+
+# 2451
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2451.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2451)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2451) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2451.csv',  row.names = FALSE)
+```
+
+# 2477
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2477.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2477)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2477) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2477.csv',  row.names = FALSE)
+```
+
+# 2496
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2496.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2496)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2496) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2496.csv',  row.names = FALSE)
+```
+
+# 2497
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2497.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2497)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2497) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2497.csv',  row.names = FALSE)
+```
+
+# 2545
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2545.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2545)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2545) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2545.csv',  row.names = FALSE)
+```
+
+# 2663
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2663.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2663)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2663) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2663.csv',  row.names = FALSE)
+```
+
+# 2700
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2700.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2700)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2700) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2700.csv',  row.names = FALSE)
+```
+
+# 2759
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2759.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2759)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2759) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2759.csv',  row.names = FALSE)
+```
+
+# 2860
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2860.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2860)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2860) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2860.csv',  row.names = FALSE)
+```
+
+# 2864
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_2864.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==2864)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 2864) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_2864.csv',  row.names = FALSE)
+```
+
+# 3003
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_3003.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==3003)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 3003) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_3003.csv',  row.names = FALSE)
+```
+
+# 3090
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_3090.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==3090)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 3090) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_3090.csv',  row.names = FALSE)
+```
+
+# 3153
+
+## Clear workspace
+```{r}
+rm(list=ls()) 
+```
+
+## Packages
+```{r}
+library(raster)
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(sf)
+library(landscapemetrics)
+library(dplyr)
+```
+
+## Raster
+```{r}
+r1 <- raster("../data/2018Binary/2018BinaryImg_3153.tif")
+```
+
+## Fire perimeters 
+```{r}
+fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberiaFires2001-2020")
+```
+
+## Select fire perimeter
+```{r}
+fire1 = fires %>%
+  filter(FireYr=="2018") %>%
+  filter(IDobj==3153)
+
+```
+
+## Limit Raster to Fire perimeter
+```{r}
+crop_r1 = mask(r1, fire1)
+```
+
+## Define Landscape
+```{r}
+landscape = crop_r1
+```
+
+## Calculate Landscape metrics and export to csv
+```{r}
+landscape %>% 
+  calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
+  mutate(IDobj = 3153) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2018patchFire_3153.csv',  row.names = FALSE)
+```
+
+
