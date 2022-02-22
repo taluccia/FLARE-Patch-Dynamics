@@ -21,10 +21,11 @@ library(tidyverse)
 ```
 
 
-## Class patch summaries
+# Data
 
 
 ```{r}
+patch2001 = list.files(path = '../data/PatchSummaryEqualArea/2001Patch', pattern = "csv$", full.names = TRUE)
 patch2015 = list.files(path = '../data/PatchSummaryEqualArea/2015Patch', pattern = "csv$", full.names = TRUE)
 patch2016 = list.files(path = '../data/PatchSummaryEqualArea/2016Patch', pattern = "csv$", full.names = TRUE)
 patch2017 = list.files(path = '../data/PatchSummaryEqualArea/2017Patch', pattern = "csv$", full.names = TRUE)
@@ -33,6 +34,7 @@ patch2019 = list.files(path = '../data/PatchSummaryEqualArea/2019Patch', pattern
 ```
 
 ```{r include=FALSE}
+stacked_patch2001 <- map_dfr(patch2001, read_csv)
 stacked_patch2015 <- map_dfr(patch2015, read_csv)
 stacked_patch2016 <- map_dfr(patch2016, read_csv)
 stacked_patch2017 <- map_dfr(patch2017, read_csv)
@@ -44,6 +46,7 @@ stacked_patch2019 <- map_dfr(patch2019, read_csv)
 1. Filter - remove fires with scanline error
 2. Pivot Wider so each patch metric is a column
 ```{r}
+stacked2001 = stacked_patch2001 %>% mutate(FireYr = "2001")
 stacked2015 = stacked_patch2015 %>% mutate(FireYr = "2015")
 stacked2016 = stacked_patch2016 %>% mutate(FireYr = "2016")
 stacked2017 = stacked_patch2017 %>% mutate(FireYr = "2017")
@@ -52,6 +55,7 @@ stacked2019 = stacked_patch2019 %>% mutate(FireYr = "2019")
 ```
 
 ```{r}
+head(stacked2001)
 head(stacked2015)
 head(stacked2016)
 head(stacked2017)
@@ -60,7 +64,7 @@ head(stacked2019)
 ```
 
 ```{r}
-df1 = bind_rows(stacked2015, stacked2016, stacked2017, stacked2018, stacked2019)
+df1 = bind_rows(stacked2001, stacked2015, stacked2016, stacked2017, stacked2018, stacked2019)
 ```
 
 ```{r}
