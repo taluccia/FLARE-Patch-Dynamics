@@ -3321,7 +3321,7 @@ landscape %>%
 ```
 
 
-# 2569
+# 2596
 
 ## Clear workspace
 ```{r}
@@ -3341,7 +3341,7 @@ library(dplyr)
 
 ## Raster
 ```{r}
-r1 <- raster("../data/2014Binary/2014BinaryImg_2569.tif")
+r1 <- raster("../data/2014Binary/2014BinaryImg_2596.tif")
 ```
 
 ## Fire perimeters 
@@ -3353,7 +3353,7 @@ fires = st_read("../data/NESiberiaFires/NESiberiaFires2001-2020.shp", "NESiberia
 ```{r}
 fire1 = fires %>%
   filter(FireYr=="2014") %>%
-  filter(IDobj==2569)
+  filter(IDobj==2596)
 
 ```
 
@@ -3371,6 +3371,6 @@ landscape = crop_r1
 ```{r}
 landscape %>% 
   calculate_lsm(.,  what = c("lsm_p_area", "lsm_p_core")) %>%  
-  mutate(IDobj = 2569) %>% 
-  write.csv(., '../outputs/PatchSummaryEqualArea/2014patchFire_2569.csv',  row.names = FALSE)
+  mutate(IDobj = 2596) %>% 
+  write.csv(., '../outputs/PatchSummaryEqualArea/2014patchFire_2596.csv',  row.names = FALSE)
 ```
