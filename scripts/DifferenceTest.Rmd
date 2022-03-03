@@ -189,14 +189,16 @@ main = "Residuals vs Fitted Values")
 ```{r}
 summary(log.model5)$r.squared 
 ```
-
+```{r}
+refugia
+```
 ### Figure
 ```{r}
 fig5 = ggplot(refugia, aes(x=log10(SizeHa), y=area_mn)) + 
     geom_point(size=1.5, shape=1, color= "grey50")  +
   
     xlab("Fire size (ha)") +
-      ylab("Fire refugia size (ha)") +
+      ylab("Fire refugia size\n(ha)") +
   reg_theme
 
 fig5 
@@ -638,8 +640,10 @@ dis2 = ggplot(seed, aes(x=area_mn, y=radiusTca)) +
     geom_point(size=1.5, shape=1, color= "grey50")  +
   
     xlab("Fire refugia size (ha)") +
-      ylab("Distance to unburned\nacross burned area (m)") +
-  reg_theme
+      ylab("Distance to unburned\n(m)") +
+  reg_theme +
+  geom_hline(yintercept = 56, color="blue")
+
 
 dis2
 ```
