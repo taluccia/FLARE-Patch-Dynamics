@@ -1,0 +1,58 @@
+---
+title: "Spatial Autocorrelation"
+author: "Anna Talucci"
+date: "2/27/2022"
+output: html_document
+---
+
+# Load packages
+```{r message=FALSE, warning=FALSE}
+library(sp)
+library(gstat)
+library(purrr) # for looping
+library(ggplot2)
+library(dplyr) 
+library(ape)
+```
+
+# Data
+
+```{r}
+data(meuse)
+```
+
+```{r}
+head(meuse)
+```
+```{r}
+data = read.csv("../data/CombinedSampledPoints/SampledGEE2001-2020.csv", header=TRUE, sep = ",", strip.white = TRUE)
+```
+
+```{r}
+head(data)
+```
+
+```{r}
+df2001 = data %>% filter(FireYr==2001)
+```
+
+```{r}
+variogram(classes~ASPTR+SLPPCT+TPI450+elevation+Rugged, locations = ~longitude+latitude, data = data)
+
+```
+
+```{r}
+variogram2001 = variogram(classes~ASPTR+SLPPCT+TPI450+elevation+Rugged, locations = ~longitude+latitude, data = data)
+
+```
+
+```{r}
+TheVariogramModel <- vgm(psill=50000, model="Gau", nugget=0.001, range=2000)
+```
+
+
+```{r}
+
+FittedModel <- fit.variogram(variogram2001, model=TheVariogramModel)    
+plot(variogram2001, model=FittedModel)
+```
