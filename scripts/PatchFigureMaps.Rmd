@@ -121,7 +121,7 @@ crop_r1327 = mask(r1327, fire1327)
 ```{r}
 
 crop_dnbr800 = mask(dnbr800, fire800)
-crop_dnbr880 = mask(dnbr800, fire880)
+crop_dnbr880 = mask(dnbr880, fire880)
 crop_dnbr1327 = mask(dnbr1327, fire1327)
 ```
 # Reclassify 
@@ -163,12 +163,16 @@ Palette2 <- c('#E1BE6A','#40B0A6')
 ```{r}
 dnbrPalette <- c("#2B83BA", "#ABDDA4","#FFFFBF", "#FDAE61","#D7191C" )
 ```
-# Plots
+['#d7191c','#fdae61','#ffffbf','#abd9e9','#2c7bb6']
 ```{r}
+dnbrPalette1 <- c('#2c7bb6', '#abd9e9', '#ffffbf', '#fdae61', '#d7191c')
+```
+# Plots
+```{r eval=FALSE, include=FALSE}
 
 fig_legend = ggplot() +
- geom_sf(data = fire601, aes(fill = 'Burned' )) + 
- geom_sf(data = fire872, aes(fill = 'Fire Refugia' )) + 
+ geom_sf(data = fire800, aes(fill = 'Burned' )) + 
+ geom_sf(data = fire880, aes(fill = 'Fire Refugia' )) + 
   scale_fill_manual(values = c("Burned" = '#E1BE6A', "Fire Refugia"='#40B0A6'), 
                     guide = guide_legend(override.aes = list(linetype = "blank", shape = NA))) +
   theme(legend.title = element_blank(), legend.position= "bottom", legend.box="horizontal", legend.margin=margin(t=.3, b=.4, r=.3, l=.3, unit="cm")) 
@@ -198,6 +202,7 @@ ggplot() +
 
 # Plot Binary
 
+## 800
 ```{r}
 
 plot800 = ggplot() +
@@ -255,14 +260,20 @@ plot1327
 hist(crop_dnbr1327)
 ```
 ```{r}
+plot(crop_dnbr1327)
+```
+## dNBR Plot 1327
 
-plot1327 = ggplot() +
- layer_spatial(data=dnbr1327_classified) + 
-  scale_fill_gradientn(colours=dnbrPalette, limits=c(-500,1000), breaks=c( -100, 100, 270, 666, 1000),  na.value = "transparent") +
+```{r}
+
+dnbrplot1327 = ggplot() +
+ layer_spatial(data=crop_dnbr1327) + 
+  scale_fill_gradientn(colours=dnbrPalette1, limits=c(-200,500),  na.value = "transparent", breaks=c(-200,0,200, 400), labels=c("Unburned", '',"", "High severity"),) +
   theme(panel.grid.major = element_line(color = 'white', linetype = "dashed", 
         size = 0.5), panel.background = element_rect(fill = "white")) +
  theme(plot.margin=unit(c(0,0,0,0), "mm"), 
         legend.title = element_blank(), 
+       legend.position = "none",
        axis.text.x=element_blank(),
        axis.ticks.x=element_blank(), 
        axis.text.y=element_blank(), 
@@ -270,8 +281,80 @@ plot1327 = ggplot() +
   annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
 
 
-plot1327
+dnbrplot1327
 ```
+
+```{r}
+
+dnbrlegend = ggplot() +
+ layer_spatial(data=crop_dnbr1327) + 
+  scale_fill_gradientn(colours=dnbrPalette1, limits=c(-200,500),  na.value = "transparent", breaks=c(-200,0,200, 400), labels=c("Unburned", '',"", "High severity"),) +
+  theme(panel.grid.major = element_line(color = 'white', linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(),
+       legend.position = "bottom",
+       axis.text.x=element_blank(),
+       axis.ticks.x=element_blank(), 
+       axis.text.y=element_blank(), 
+       axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+dnbrlegend
+```
+
+## Dnbr 800
+```{r}
+hist(crop_dnbr800)
+```
+
+```{r}
+
+dnbrplot800 = ggplot() +
+ layer_spatial(data=crop_dnbr800) + 
+  scale_fill_gradientn(colours=dnbrPalette1, limits=c(-200,700),  na.value = "transparent", breaks=c(-200,0,200, 400), labels=c("Unburned", '',"", "High severity"),) +
+  theme(panel.grid.major = element_line(color = 'white', linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+       legend.position = "none",
+       axis.text.x=element_blank(),
+       axis.ticks.x=element_blank(), 
+       axis.text.y=element_blank(), 
+       axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+dnbrplot800
+```
+
+## Dnbr 880
+```{r}
+hist(crop_dnbr880)
+```
+
+```{r}
+
+dnbrplot880 = ggplot() +
+ layer_spatial(data=crop_dnbr880) + 
+  scale_fill_gradientn(colours=dnbrPalette1, limits=c(-200,700),  na.value = "transparent", breaks=c(-200,0,200, 400), labels=c("Unburned", '',"", "High severity"),) +
+  theme(panel.grid.major = element_line(color = 'white', linetype = "dashed", 
+        size = 0.5), panel.background = element_rect(fill = "white")) +
+ theme(plot.margin=unit(c(0,0,0,0), "mm"), 
+        legend.title = element_blank(), 
+       legend.position = "none",
+       axis.text.x=element_blank(),
+       axis.ticks.x=element_blank(), 
+       axis.text.y=element_blank(), 
+       axis.ticks.y=element_blank()) +
+  annotation_scale(location = "bl", width_hint = 0.25, text_size = 12, text_face = "bold", text_family = "sans", text_col = "black") 
+
+
+dnbrplot880
+```
+
+
 # Fire details
 ```{r}
 refugia %>% 
@@ -286,6 +369,7 @@ refugia %>%
 ```{r eval=FALSE, include=FALSE}
 
 legendplot = get_legend(fig_legend)
+legend_dnbr = get_legend(dnbrlegend)
 ```
 
 ```{r fig.height=7, fig.width=6}
@@ -294,6 +378,12 @@ plot1 = cowplot::plot_grid(plot800, plot880, plot1327, ncol=1)
 plot1
 ```
 
+```{r fig.height=7, fig.width=6}
+
+plot1.1 = cowplot::plot_grid(plot800, dnbrplot800, plot880, dnbrplot880, plot1327,   dnbrplot1327,ncol=2)
+
+plot1.1
+```
 
 ```{r fig.height=7, fig.width=6}
 
@@ -312,6 +402,32 @@ plot2
 ggsave("../figures/PatchMapsExample.png", plot = plot2, width = 6, height = 7, units = c("in"), dpi = 600)
 ```
 
+```{r}
+combine_legend = cowplot::plot_grid(legendplot, legend_dnbr, ncol=2)
+combine_legend
+```
+
+```{r fig.height=7, fig.width=6}
+
+plot2.1 = cowplot::plot_grid(plot1.1, combine_legend, ncol = 1, rel_heights = c(1, .1)) +
+  draw_label("(a)", x = 0.04, y = .95, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(b)", x = 0.04, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(c)", x = 0.04, y = .35, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(d)", x = 0.54, y = .95, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(e)", x = 0.54, y = .65, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("(f)", x = 0.54, y = .35, fontfamily = "sans", fontface = "bold", color = "black", size = 12) +
+  draw_label("102,913 ha", x = 0.5, y = .85, fontfamily = "sans", fontface = "plain", color = "black", size = 12) +
+   
+  draw_label("107,609 ha", x = 0.5, y = .55, fontfamily = "sans", fontface = "plain", color = "black", size = 12) +
+  
+  draw_label("710,545 ha", x = 0.5, y = .25, fontfamily = "sans", fontface = "plain", color = "black", size = 12) 
+
+plot2.1
+```
+
+```{r}
+ggsave("../figures/PatchBinaryDNBRMapsExample.png", plot = plot2.1, width = 6, height = 7, units = c("in"), dpi = 600)
+```
 
 # Distance to unburned
 
