@@ -89,7 +89,19 @@ df1 %>% filter(class==0) %>%
 
 
 ```
+```{r}
+df1
+```
 
+```{r}
+df1 %>%
+  filter(class==0) %>%
+  filter(metric=="area") %>%
+  group_by(FireYr, IDobj) %>%
+  summarise(mean = mean(value)) %>%
+  ggplot(., aes(x = FireYr, y = mean)) +
+  geom_boxplot() 
+```
 
 ```{r}
 df1 %>% filter(FireYr==2019) %>%
