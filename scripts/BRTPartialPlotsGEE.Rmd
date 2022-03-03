@@ -70,6 +70,12 @@ head(data)
 ```
 
 ```{r}
+df = data %>% dplyr::select(ASPTR:classes, elevation:treecover2000)
+cor(df, method = "pearson", use = "complete.obs")
+
+```
+
+```{r}
 varImp = read.csv("../outputs/BRTmodelsGEE/BRT1_relinf.csv") 
 ```
 
@@ -252,12 +258,12 @@ msplot1 = cowplot::plot_grid(varInfPlot, all_mod_plots4$TPI450, all_mod_plots4$S
     draw_label("Beer's Aspect", x = .17, y = .75, size = 9) +
     draw_label("lowland", x = .66, y = .76, size = 9) +
    draw_label("upland", x = .94, y = .76, size = 9) +
-   draw_label("(a)", x = .02, y = .98, size = 10) +
-   draw_label("(b)", x = .53, y = .98, size = 10) +
-   draw_label("(c)", x = .02, y = .64, size = 10) +
-   draw_label("(d)", x = .53, y = .64, size = 10) +
-   draw_label("(e)", x = .02, y = .32, size = 10) +
-   draw_label("(f)", x = .53, y = .32, size = 10)
+   draw_label("(a)", x = .02, y = .98, fontface = "bold", color = "black", size = 10) +
+   draw_label("(b)", x = .53, y = .98, fontface = "bold", color = "black", size = 10) +
+   draw_label("(c)", x = .02, y = .64, fontface = "bold", color = "black", size = 10) +
+   draw_label("(d)", x = .53, y = .64, fontface = "bold", color = "black", size = 10) +
+   draw_label("(e)", x = .02, y = .32, fontface = "bold", color = "black", size = 10) +
+   draw_label("(f)", x = .53, y = .32, fontface = "bold", color = "black", size = 10)
 
 msplot1
 ```
