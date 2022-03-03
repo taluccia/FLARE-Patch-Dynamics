@@ -116,7 +116,12 @@ save(brt.model1, file = "../outputs/BRTModelsGEE/BRT1_model.rda")
 ```{r eval=FALSE, include=FALSE}
 load(file = "../outputs/BRTModelsGEE/BRT1_model.rda")
 ```
-
+write.csv(BRT.model1.relinf, '../outputs/BRTModelsGEE/BRT1_relinf.csv', row.names = F)
+```{r}
+data_full %>% 
+  mutate(residuals = brt.model1$residuals) %>% 
+  write.csv(., '../outputs/BRTModelsGEE/BRT1_Residuals.csv', row.names = F)
+```
 ### Relative influence of predictors as part of summary gbm - for model assessment
 ```{r}
 relative.influence(brt.model1, scale=TRUE, sort=TRUE)
