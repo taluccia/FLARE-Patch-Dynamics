@@ -1,0 +1,30 @@
+---
+title: "dNBR Visualize"
+author: "Anna Talucci"
+date: "3/3/2022"
+output: html_document
+---
+
+
+```{r}
+
+dnbr1099 <- raster("../data/UTMImagery/dNBRimg_1099.tif")
+dnbr1250 <- raster("../data/UTMImagery/dNBRimg_1250.tif")
+dnbr1327 <- raster("../data/UTMImagery/dNBRimg_1327.tif")
+
+```
+
+
+# Plot
+```{r}
+plot(dnbr1099)
+```
+
+```{r}
+plot(dnbr1250)
+```
+
+```{r}
+plot(dnbr1327)
+```
+
