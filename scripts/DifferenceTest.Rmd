@@ -632,6 +632,17 @@ ggplot(refugia, aes(x=area_mn, y=pd)) +
 seed
 ```
 
+```{r}
+seed %>% dplyr::select(radiusTca) %>%
+  filter(radiusTca <= 56)
+```
+
+```{r}
+496/550*100
+
+54/550*100
+```
+
 geom_line(data =linear.model4.df, aes(x, y),color = "#006CD1", size = 1, linetype = 1) + 
 
 ### Figure
