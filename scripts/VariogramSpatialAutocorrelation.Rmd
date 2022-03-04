@@ -29,7 +29,20 @@ data = read.csv("../data/CombinedSampledPoints/SampledGEE2001-2020.csv", header=
 ```
 
 ```{r}
-head(data)
+data_resid = read.csv("../data/ModelResiduals/BRT1_Residuals.csv", header=TRUE, sep = ",", strip.white = TRUE)
+```
+
+```{r}
+data
+```
+
+```{r}
+head(data_resid)
+```
+
+```{r}
+data1 = data %>% drop_na()
+data1
 ```
 
 ```{r}
@@ -41,18 +54,46 @@ variogram(classes~ASPTR+SLPPCT+TPI450+elevation+Rugged, locations = ~longitude+l
 
 ```
 
+## Residuals
 ```{r}
-variogram2001 = variogram(classes~ASPTR+SLPPCT+TPI450+elevation+Rugged, locations = ~longitude+latitude, data = data)
+variogram1 = variogram(residuals~ASPTR+SLPPCT+TPI450+elevation+Rugged, locations = ~longitude+latitude, data = data_resid)
+
+
+variogram1
+```
+
+
+```{r}
+TheVariogramModel1 <- vgm(psill=50000, model="Gau", nugget=0.001, range=2000)
+```
+
+
+```{r}
+
+FittedModel1 <- fit.variogram(variogram1, model=TheVariogramModel1)    
+plot(variogram1, model=FittedModel1)
+```
+
+# Raw Data
+```{r}
+variogram2 = variogram(dnbr~ASPTR+SLPPCT+TPI450+elevation+Rugged, locations = ~longitude+latitude, data = data1, alpha = c(0, 45, 90, 135))
 
 ```
 
 ```{r}
-TheVariogramModel <- vgm(psill=50000, model="Gau", nugget=0.001, range=2000)
+TheVariogramModel2 <- vgm(psill=70000, model="Gau", nugget=0.001, range=2000)
 ```
 
 
 ```{r}
 
-FittedModel <- fit.variogram(variogram2001, model=TheVariogramModel)    
-plot(variogram2001, model=FittedModel)
+FittedModel2 <- fit.variogram(variogram2, model=TheVariogramModel2)    
+plot(variogram2, model=FittedModel2)
+```
+
+
+```{r}
+lznr.dir = variogram(log(zinc)~sqrt(dist), meuse, alpha = c(0, 45, 90, 135))
+plot(lznr.dir, lznr.fit, as.table = TRUE)
+
 ```
