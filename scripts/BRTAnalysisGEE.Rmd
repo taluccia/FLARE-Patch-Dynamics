@@ -118,7 +118,7 @@ load(file = "../outputs/BRTModelsGEE/BRT1_model.rda")
 ```
 write.csv(BRT.model1.relinf, '../outputs/BRTModelsGEE/BRT1_relinf.csv', row.names = F)
 ```{r}
-data_full %>% 
+model.data %>% 
   mutate(residuals = brt.model1$residuals) %>% 
   write.csv(., '../outputs/BRTModelsGEE/BRT1_Residuals.csv', row.names = F)
 ```
