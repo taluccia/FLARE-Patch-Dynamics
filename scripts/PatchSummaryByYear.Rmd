@@ -23,6 +23,17 @@ library(tidyverse)
 
 # Data
 
+## Fire data
+
+```{r}
+fires = read.csv("../data/NESiberiaFires/NESiberiaFires2020.csv") 
+```
+
+## Patches
+```{r}
+patches2020 = read.csv("../data/2020Patches/Patches2020AreaCore.csv") 
+```
+
 
 ```{r}
 patch2001 = list.files(path = '../data/PatchSummaryEqualArea/2001Patch', pattern = "csv$", full.names = TRUE)
@@ -76,8 +87,95 @@ df1 = bind_rows(stacked2001, stacked2014, stacked2015, stacked2016, stacked2017,
 df1
 ```
 
+# Fire refugia 2020 data
 ```{r}
-df1 %>% filter(class==0) %>%
+patches2020
+```
+```{r}
+
+fires1 = fires %>% dplyr::select(IDobj, FireYr, EcoCode, ArcSub)
+```
+
+```{r}
+fire_patch = merge(fires1, patches2020, by=c("IDobj"))
+fire_patch
+
+```
+
+
+```{r}
+patches2020_1 = patches2020 %>% mutate(FireYr = "2020") %>%
+  filter(class ==1) %>%
+  filter(metric=="area") %>%
+  group_by(IDobj, FireYr, class) %>% 
+  summarise(area_mn = mean(value))
+
+patches2020_1 
+
+```
+
+```{r}
+patches2020_1.1 = patches2020 %>% mutate(FireYr = "2020") %>%
+  filter(class ==1) %>%
+  filter(metric=="area") %>%
+  group_by(IDobj, FireYr, class) 
+
+patches2020_1.1 
+
+```
+```{r}
+eco_arc_sum = fire_patch %>% filter(class==1) %>%
+  filter(metric=="area") %>%
+  group_by(EcoCode, ArcSub) %>%
+  summarise(mean = mean(value),
+            min = min(value),
+            max = max(value),
+            median = median(value),
+            sd = sd(value),
+            n = n(),
+            se = sd / sqrt(n))
+
+eco_arc_sum
+```
+
+```{r}
+write.csv(eco_arc_sum, '../outputs/SummaryStats/Summary2020EcoArc.csv',  row.names = FALSE)
+```
+
+
+```{r}
+df2 = df1 %>% 
+  filter(class ==1) %>%
+  filter(metric=="area") %>%
+  group_by(IDobj, FireYr, class) %>% 
+  summarise(area_mn = mean(value))
+
+df2
+```
+
+```{r}
+df2.1 = df1 %>% 
+  filter(class ==1) %>%
+  filter(metric=="area") %>%
+  group_by(IDobj, FireYr, class) 
+
+df2.1
+```
+# Combine 2020 with other
+
+```{r}
+df3 = bind_rows(patches2020_1, df2)
+df3
+```
+
+```{r}
+df3.1 = bind_rows(patches2020_1.1, df2.1)
+df3.1
+```
+
+# Summary Stats
+```{r}
+df1 %>% filter(class==1) %>%
   group_by(FireYr, class, metric) %>%
   summarise(mean = mean(value),
             min = min(value),
@@ -90,17 +188,58 @@ df1 %>% filter(class==0) %>%
 
 ```
 ```{r}
-df1
+df3
+```
+
+
+
+
+
+
+```{r}
+df3.1
+```
+
+```{r}
+sum_refugia_yr1 = df3.1 %>% 
+  filter(class==1) %>%
+  filter(metric=="area") %>%
+  group_by(FireYr) %>%
+  summarise(mean = mean(value),
+            min = min(value),
+            max = max(value),
+            median = median(value),
+            sd = sd(value),
+            n = n(),
+            se = sd / sqrt(n))
+
+sum_refugia_yr1
+```
+
+
+```{r}
+write.csv(sum_refugia_yr1, '../outputs/SummaryStats/SummaryStatesRefugiaAreaYear.csv',  row.names = FALSE)
+```
+
+
+```{r}
+df3 %>%
+  filter(class==1) %>%
+  group_by(FireYr) %>%
+  ggplot(., aes(x = FireYr, y = area_mn)) +
+  geom_boxplot() +
+  scale_y_continuous(trans='log10') 
 ```
 
 ```{r}
 df1 %>%
-  filter(class==0) %>%
+  filter(class==1) %>%
   filter(metric=="area") %>%
   group_by(FireYr, IDobj) %>%
   summarise(mean = mean(value)) %>%
   ggplot(., aes(x = FireYr, y = mean)) +
-  geom_boxplot() 
+  geom_boxplot() +
+  scale_y_continuous(trans='log10') 
 ```
 
 ```{r}

@@ -96,6 +96,12 @@ df1 = stacked_patch %>%
 ```{r}
 head(df1)
 ```
+
+```{r}
+write.csv(df1, '../outputs/2020Patches/Patches2020AreaCore.csv',  row.names = FALSE)
+
+```
+
 %>%
   pivot_wider(id_cols =  c(IDobj, class), names_from = metric, values_from = value)
   
